@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Configurar TRT</title>
+		<link rel="stylesheet" href="../css/animacoes.css" />
+		<link rel="stylesheet" href="../css/ativador.css" />
+		<link rel="stylesheet" href="../css/cores.css" />
+		<link rel="stylesheet" href="../css/icones.css" />
+		<link rel="stylesheet" href="../css/legenda.css" />
+		<link rel="stylesheet" href="../css/navegador.css" />
+		<script src="../publicas/definicoes.js"></script>
+		<script src="../publicas/gerais.js"></script>
+		<script src="../publicas/navegador.js"></script>
+		<script src="../publicas/dom.js"></script>
+		<script src="cabecalho.js"></script>
+		<script src="rodape.js"></script>
+		<script src="tribunal.js"></script>
+		<style>
+
+			main{
+				height:calc(100vh - 70px);
+				margin:40px 0 30px 0;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+
+		<header>
+			<h1></h1>
+		</header>
+
+		<main>
+
+			<section id="links-uteis">
+				<h2>Configurações Iniciais</h2>
+				<h3>Qual o seu Tribunal?</h3>
+				<input type="number" class="configuracao" id="tribunal" min="0" max="24" value="15" title="Responda 0 para TST">
+				<h3>Em qual Instância esta extensão será usada?</h3>
+				<input type="number" class="configuracao" id="instancia" min="1" max="3" value="1" title="Responda 3 para TST">
+			</section>
+
+			<section>
+				<input type="submit" id="salvar" value="Salvar" title="Salvar" autofocus>
+			</section>
+
+		</main>
+
+		<footer></footer>
+
+	</body>
+
+</html>

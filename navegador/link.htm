@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/animacoes.css" />
+		<link rel="stylesheet" href="../css/ativador.css" />
+		<link rel="stylesheet" href="../css/cores.css" />
+		<link rel="stylesheet" href="../css/icones.css" />
+		<link rel="stylesheet" href="../css/legenda.css" />
+		<link rel="stylesheet" href="../css/navegador.css" />
+		<script src="../publicas/definicoes.js"></script>
+		<script src="../publicas/gerais.js"></script>
+		<script src="../publicas/navegador.js"></script>
+		<script src="../publicas/dom.js"></script>
+		<script src="cabecalho.js"></script>
+		<script src="rodape.js"></script>
+		<script src="link.js"></script>
+		<style>
+
+			main{
+				height:calc(100vh - 70px);
+				margin:40px 0 30px 0;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+
+		<header>
+			<h1></h1>
+		</header>
+
+		<main>
+
+			<section id="links-uteis">
+				<h2></h2>
+				<h3>Largura:</h3>
+				<input type="number" class="configuracao" id="largura" min="460" max="7680 " value="1200" title="Largura da Janela">
+				<h3>Altura:</h3>
+				<input type="number" class="configuracao" id="altura" min="460" max="7680" value="900" title="Altura da Janela">
+				<h3>Posição Horizontal:</h3>
+				<input type="number" class="configuracao" id="horizontal" min="0" max="7680" value="0" title="Posição Horizontal da Janela">
+				<h3>Posição Vertical:</h3>
+				<input type="number" class="configuracao" id="vertical" min="0" max="7680" value="0" title="Posição Vertical da Janela">
+			</section>
+
+			<section>
+				<input type="button" id="salvar" value="Salvar" title="Salvar">
+			</section>
+
+		</main>
+
+		<footer></footer>
+
+	</body>
+
+</html>

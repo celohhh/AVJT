@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Termos de Uso</title>
+		<link rel="stylesheet" href="../css/animacoes.css" />
+		<link rel="stylesheet" href="../css/ativador.css" />
+		<link rel="stylesheet" href="../css/cores.css" />
+		<link rel="stylesheet" href="../css/icones.css" />
+		<link rel="stylesheet" href="../css/legenda.css" />
+		<link rel="stylesheet" href="../css/navegador.css" />
+		<script src="../publicas/definicoes.js"></script>
+		<script src="../publicas/gerais.js"></script>
+		<script src="../publicas/navegador.js"></script>
+		<script src="../publicas/dom.js"></script>
+		<script src="cabecalho.js"></script>
+		<script src="rodape.js"></script>
+		<script src="termos.js"></script>
+		<style>
+
+			main{
+				color:rgba(var(--extensao-cor-branco),1);
+				height:calc(100vh - 96px);
+				margin:66px 0 30px 0;
+				padding:1rem;
+			}
+
+			main section{
+				animation:crescer 1s ease-out 1s 1 both;
+				background:rgba(var(--extensao-cor-preto),0.4);
+				border-radius:0.5rem 0.5rem 1rem 1rem;
+				height:calc(100vh - 66px - 30px - 2rem);
+				margin:0 auto;
+				overflow-y:scroll;
+				padding:0;
+				width:100%;
+			}
+
+			main h2
+			{
+				background:
+					var(--extensao-gradiente-branco-preto),
+					linear-gradient(
+						rgba(var(--extensao-cor-preto),0.8)   0%,
+						rgba(var(--extensao-cor-preto),0.8) 100%
+					),
+					rgba(var(--extensao-cor-primaria),1)
+				;
+				box-shadow:0px 3px 3px 2px rgba(var(--extensao-cor-preto), 0.5);
+				padding:0.5rem 0 2.5rem 0;
+				position:sticky;
+				top:0px;
+				z-index: 1;
+			}
+
+			main p,
+			main li
+			{
+				animation:aparecer 1s ease-out 2s 1 both;
+				font-size:1.2rem;
+				font-weight:500;
+				line-height:1.5rem;
+				text-align:left;
+			}
+
+			main p
+			{
+				padding:1rem 2rem;
+				width:100%;
+				position:sticky;
+				top:1.8rem;
+				z-index: 1;
+			}
+
+			main ul{
+				margin:0 3rem;
+				padding:0 0 2rem 0;
+			}
+
+			main ul li{
+				margin-left:4rem;
+				padding:0.5rem 0;
+				list-style:disc outside;
+			}
+
+			#termos
+			{
+				display:none;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+
+		<header>
+			<h1></h1>
+			<section>
+				<label id="extensao-ativador-rotulo" tabindex="0" class="ativador">
+				<input autofocus id="ativador" type="checkbox" />
+					<span
+						aria-live				= "assertive"
+						data-ativado		= "EXTENSÃO ATIVADA"
+						data-desativado	= "EXTENSÃO DESATIVADA"
+					></span>
+				</label>
+			</section>
+		</header>
+
+		<main>
+
+			<section>
+				<h2>TERMOS DE USO</h2>
+				<img src="../imagens/icones/extensao/branco.svg">
+					<style scoped>
+						img{
+							animation:aparecer 1s ease-in 2s 1 both;
+							display:block;
+							height:70px;
+							width:70px;
+						}
+					</style>
+
+				</img>
+				<p>Ao ativar esta extensão, você concorda com os seguintes termos:</p>
+				<ul>
+					<li>as permissões dadas no momento da instalação referem-se unicamente ao software, para fins exclusivamente técnicos;</li>
+					<li>esta extensão não pertence ao PJe, nem o compõe de qualquer forma;</li>
+					<li>os dados fornecidos a título de configurações da extensão são armazenados localmente, no computador do utilizador;</li>
+					<li>esta extensão utilizará os dados carregados nas páginas por ela abrangidas, tais como número do processo, nomes e documentos das partes, datas, valores, apenas para agregar funcionalidades que facilitem e otimizem os procedimentos relativos à tramitação processual;</li>
+					<li>embora esta extensão não colete ou capture qualquer dado do utilizador para outros fins, nem permita ou facilite qualquer tipo de acesso de terceiros a esses dados, vulnerabilidades hipotéticas no computador, no sistema operacional ou no navegador poderiam permitir que referidos dados escapassem de seu escopo;</li>
+					<li>não é recomendável armazenar dados sensíveis nas configurações da extensão, se você não tiver absoluta certeza de que está em um ambiente seguro.</li>
+					<li>é permitido o uso deste software, para os fins a que se destina, individual ou institucionalmente, livre de ônus;</li>
+					<li>software é fornecido no estado em que se encontra, sem qualquer tipo de garantia, expressa ou implícita, exceto a de que se destina a fins lícitos e aquela constante de sua política de privacidade;</li>
+					<li>nenhuma atualização do software será feita no sentido de contrariar sua política de privacidade;</li>
+					<li>em nenhuma hipótese, o desenvolvedor será responsável, sob qualquer teoria de responsabilidade, por quaisquer danos diretos, indiretos, incidentais, especiais, exemplares ou consequenciais, eventualmente causados, decorrentes de qualquer forma do uso deste software, mesmo se avisado da possibilidade.</li>
+				</ul>
+			</section>
+
+		</main>
+
+		<footer></footer>
+		<seta>
+			<style scoped>
+				seta{
+					animation:aparecer 1s ease-in 0.2s 1 both;
+					background:rgba(var(--extensao-cor-verde));
+					mask:url(../imagens/icones/seta.svg) center center no-repeat;
+					display:block;
+					height:70px;
+					left:50px;
+					position:fixed;
+					top:55px;
+					z-index:1;
+					width:70px;
+				}
+
+			</style>
+
+		</seta>
+
+	</body>
+
+</html>

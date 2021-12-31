@@ -1,0 +1,81 @@
+{
+	"name":							"Assistente Virtual da Justiça do Trabalho",
+	"short_name":				"AVJT",
+	"description":			"Otimiza as rotinas de tarefas inerentes aos sistemas da Justiça do Trabalho",
+	"manifest_version":	2,
+	"version":					"59.2",
+	"author":						"Sisenando Calixto",
+
+	"applications":{
+		"gecko":{
+			"id":						"{4cd60070-3471-47c9-8234-8fdaea0f3934}"
+		}
+	},
+
+	"developer":{
+		"name":						"Sisenando Gomes Calixto de Sousa",
+		"url":						"https://melhor.pro"
+	},
+
+  "icons":{
+    "16":		"imagens/icones/extensao/colorido.svg",
+    "24":		"imagens/icones/extensao/colorido.svg",
+    "32":		"imagens/icones/extensao/colorido.svg",
+    "48":		"imagens/icones/extensao/colorido.svg",
+    "128":	"imagens/icones/extensao/colorido.svg"
+  },
+
+  "background":{
+    "scripts":[
+      "publicas/definicoes.js",
+      "publicas/gerais.js",
+      "publicas/dom.js",
+      "publicas/esforcos.js",
+      "publicas/navegador.js",
+      "navegador/navegador.js"
+    ]
+  },
+
+  "content_scripts":[
+    {
+      "matches":[
+        "<all_urls>"
+      ],
+      "css":[
+        "css/cores.css",
+        "css/selecao.css",
+        "css/icones.css"
+      ],
+      "js":[
+        "publicas/definicoes.js",
+        "publicas/gerais.js",
+        "publicas/dom.js",
+        "publicas/esforcos.js",
+        "iniciar.js",
+        "selecao.js",
+        "whatsapp.js"
+      ],
+      "all_frames":					true,
+      "match_about_blank":	true,
+      "run_at":							"document_end"
+    }
+  ],
+  "permissions":[
+    "<all_urls>",
+    "activeTab",
+    "clipboardRead",
+    "clipboardWrite",
+    "contextMenus",
+    "storage",
+    "tabs",
+    "unlimitedStorage"
+  ],
+  "options_ui":{
+		"page": "navegador/configuracoes.htm",
+		"open_in_tab": false
+	},
+  "browser_action":{
+    "browser_style":	true,
+    "default_popup": 	"navegador/menu.htm"
+  }
+}
