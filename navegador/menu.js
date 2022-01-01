@@ -364,17 +364,14 @@ function obterConfiguracoesDaExtensao(){
 		configuracoes => {
 
 			let destino = definirDestinoDasConfiguracoes(configuracoes)
-
+			
 			configuracoes.querySelectorAll('input').forEach(
 				configuracao => {
 
 					let chave = configuracao.className
-
 					let dados = CONFIGURACAO[destino]
-
 					if(configuracao.type === 'checkbox')
 						configuracao.checked = dados[chave] || false
-
 
 				}
 			)

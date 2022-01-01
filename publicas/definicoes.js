@@ -245,7 +245,7 @@ function definirLinks(){
 
 		let url				= {}
 		url.dominio		= 'google.com'
-		url.raiz			= montarUrl()
+		url.raiz			= montarUrl(url)
 		url.agenda		= montarUrl(url,'calendar')
 		url.drive			= montarUrl(url,'drive')
 		url.mail			= montarUrl(url,'mail')
