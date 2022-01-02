@@ -9,27 +9,17 @@ function contadorDeEsforcosRepetitivos(){
 			EXTENSAO.ativada	= armazenamento.ativada
 			CONFIGURACAO			= armazenamento
 
+			console.debug('CONFIGURACAO',CONFIGURACAO)
+			
 			definicoesGlobais()
 			criarCabecalhoDePaginaDaExtensao()
 			criarRodapeDePaginaDaExtensao()
+			obterConfiguracoesDaExtensao()
+			selecionar('#salvar').addEventListener('click',salvarConfiguracoesDaExtensao)
 
 		}
 	)
 
-	let salvar = selecionar('#salvar')
-	if(!salvar)
-		return
-
-	salvar.addEventListener('click',salvarConfiguracoes)
-
-	function salvarConfiguracoes(){
-
-		let configuracoes = selecionar('.configuracao','',true)
-
-		configuracoes.forEach(
-			elemento => browser.storage.local.set({[elemento.id]: elemento.value})
-		)
-
-	}
-
 }
+
+

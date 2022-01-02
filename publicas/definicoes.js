@@ -168,7 +168,7 @@ function definirLinks(){
 				link.eCarta		= armazenamento?.janela?.eCarta?.url		|| obterLinkDaMemoria('eCarta',		'https://ecarta.'			+ dominioTribunal)
 				link.garimpo	= armazenamento?.janela?.garimpo?.url		|| obterLinkDaMemoria('garimpo',	'https://deposito.'		+ dominioTribunal)
 				link.intranet	= armazenamento?.janela?.intranet?.url	|| obterLinkDaMemoria('intranet',	'https://satelites.'	+ dominioTribunal + '/aplicacoesExtranet')
-				link.siscondj	= CONFIGURACAO?.janela?.siscondj?.url		|| obterLinkDaMemoria('siscondj',	'https://siscondj.'		+ dominioTribunal)
+				link.siscondj	= armazenamento?.janela?.siscondj?.url	|| obterLinkDaMemoria('siscondj',	'https://siscondj.'		+ dominioTribunal)
 				link.tribunal	= dominioTribunal
 				link.pje			= obterLinkPje()
 
@@ -193,18 +193,12 @@ function definirLinks(){
 
 	function obterDominioTribunal(){
 
-		if(CONFIGURACAO?.tribunal == undefined)
+		if(CONFIGURACAO?.instituicao?.tribunal == undefined)
 			return ''
 
-		let sigla = 't'
+		let sigla = obterSiglaTribunal()
 
-		if(CONFIGURACAO.tribunal == '0')
-			sigla = sigla + 'st'
-
-		else
-			sigla = sigla + 'rt'
-
-		return sigla + CONFIGURACAO.tribunal + '.jus.br'
+		return minusculas(sigla) + '.jus.br'
 
 	}
 
@@ -230,7 +224,7 @@ function definirLinks(){
 		url.chat			= montarUrl(url,'chat')
 		url.grupo			= montarUrl(url,'chat')
 
-		if(CONFIGURACAO?.tribunal?.includes('15'))
+		if(CONFIGURACAO?.instituicao?.tribunal?.includes('15'))
 			url.grupo += 'DKcc9eecyAXBwzfgxOe1AI'
 		else
 			url.grupo += 'FSBJFsBEX8y2YmGGIqM35A'
@@ -311,7 +305,7 @@ function definirLinks(){
 
 	function obterLinkPje(){
 
-		if(!CONFIGURACAO?.tribunal)
+		if(!CONFIGURACAO?.instituicao?.tribunal)
 			return ''
 
 		let pje									= {}
@@ -366,5 +360,22 @@ function definirLinks(){
 	function aoFalhar(erro){
 		console.debug('Erro:',erro)
 	}
+
+}
+
+
+function obterSiglaTribunal(){
+
+	if(CONFIGURACAO?.instituicao?.tribunal == undefined)
+		return ''
+
+	let sigla = 'T'
+
+	if(CONFIGURACAO.instituicao?.tribunal == '0')
+		sigla += 'ST'
+	else
+		sigla += 'RT' + CONFIGURACAO.instituicao?.tribunal
+
+	return sigla
 
 }

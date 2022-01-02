@@ -95,6 +95,21 @@ function abrirPaginaTermosDeUso(){
 }
 
 
+function abrirPaginaDesenvolvimento(){
+
+	criarJanela(
+		caminho('navegador/desenvolvimento.htm'),
+		'',
+		700,
+		800,
+		0,
+		0,
+		'detached_panel'
+	)
+
+}
+
+
 function abrirPaginaContadorDeEsforcosRepetitivos(){
 
 	criarJanela(
@@ -200,5 +215,92 @@ function recarregar(){
 
 	relatar('Recarregando a extensão...')
 	browser.runtime.reload()
+
+}
+
+
+function obterConfiguracoesDaExtensao(){
+
+	console.debug('CONFIGURACAO',CONFIGURACAO)
+
+	document.querySelectorAll('configuracoes').forEach(
+		configuracoes => {
+
+			let destino = definirDestinoDasConfiguracoes(configuracoes)
+			
+			configuracoes.querySelectorAll('input').forEach(
+				configuracao => {
+
+					let chave = configuracao.className
+					let dados = CONFIGURACAO[destino]
+					if(configuracao.type === 'checkbox')
+						configuracao.checked = dados[chave] || false
+					if(configuracao.type === 'number')
+						configuracao.value = dados[chave] || 0
+					if(
+						configuracao.type === 'email'
+						||
+						configuracao.type === 'text'
+					)
+						configuracao.value = dados[chave] || ''
+
+				}
+			)
+		}
+	)
+
+}
+
+
+function salvarConfiguracoesDaExtensao(){
+
+	setTimeout(salvar,50)
+
+	function salvar(){
+
+		document.querySelectorAll('configuracoes').forEach(
+			configuracoes => {
+				
+
+				let destino	= definirDestinoDasConfiguracoes(configuracoes)
+				let dados		= CONFIGURACAO[destino]
+
+				configuracoes.querySelectorAll('input').forEach(
+					configuracao => {
+
+						let chave = configuracao.className
+
+						if(configuracao.type === 'checkbox')
+							dados[chave] = configuracao.checked || false
+						if(configuracao.type === 'number')
+							dados[chave] = configuracao.value || 0
+						if(
+							configuracao.type === 'email'
+							||
+							configuracao.type === 'text'
+						)
+							dados[chave] = configuracao.value || ''
+
+					}
+				)
+
+				browser.storage.local.set({[destino]:dados})
+
+			}
+		)
+
+	}
+
+}
+
+
+function definirDestinoDasConfiguracoes(configuracoes){
+
+	let destino = configuracoes.className
+
+	if(CONFIGURACAO[destino] == undefined)
+		CONFIGURACAO[destino] = {}
+
+	return destino
 
 }

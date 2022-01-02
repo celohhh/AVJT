@@ -102,7 +102,7 @@ function criarRodapeDePaginaDaExtensao(){
 				}
 
 				.icone:hover::before{
-					border-radius:15px;
+					border-radius:15px 15px 0 0;
 					box-shadow:0px 2px 2px 2px rgba(var(--extensao-cor-preto), 0.3);
 					content:attr(aria-label);
 					background-color:rgba(var(--extensao-cor-preto),0.9);

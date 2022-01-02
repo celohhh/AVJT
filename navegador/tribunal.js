@@ -1,6 +1,6 @@
-window.addEventListener('load',contadorDeEsforcosRepetitivos)
+window.addEventListener('load',definirTribunal)
 
-function contadorDeEsforcosRepetitivos(){
+function definirTribunal(){
 
 	browser.storage.local.get(
 		null,
@@ -13,31 +13,25 @@ function contadorDeEsforcosRepetitivos(){
 			criarCabecalhoDePaginaDaExtensao()
 			criarRodapeDePaginaDaExtensao()
 
+			selecionar('#salvar').addEventListener(
+				'click',
+				() => {
+					salvarConfiguracoesDaExtensao()
+					setTimeout(
+						() => {
+							abrirPaginaTermosDeUso()
+							fechar()
+						},
+						500
+					)
+			
+				}
+			)
+
 		}
 	)
 
-	let salvar = selecionar('#salvar')
-	if(!salvar)
-		return
+	
 
-	salvar.addEventListener('click',salvarConfiguracoes)
-
-	function salvarConfiguracoes(){
-
-		let configuracoes = selecionar('.configuracao','',true)
-
-		configuracoes.forEach(
-			elemento => browser.storage.local.set({[elemento.id]: elemento.value})
-		)
-
-		setTimeout(
-			() => {
-				abrirPaginaTermosDeUso()
-				fechar()
-			},
-			500
-		)
-
-	}
 
 }

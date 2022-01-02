@@ -3,7 +3,7 @@
 	"short_name":				"AVJT",
 	"description":			"Otimiza as rotinas de tarefas inerentes aos sistemas da Justiça do Trabalho",
 	"manifest_version":	2,
-	"version":					"59.5",
+	"version":					"60.0",
 	"author":						"Sisenando Calixto",
 
 	"applications":{
@@ -51,9 +51,9 @@
         "publicas/gerais.js",
         "publicas/dom.js",
         "publicas/esforcos.js",
+        "publicas/whatsapp.js",
         "iniciar.js",
-        "selecao.js",
-        "whatsapp.js"
+        "selecao.js"
       ],
       "all_frames":					true,
       "match_about_blank":	true,

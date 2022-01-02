@@ -8,7 +8,7 @@ browser.storage.local.get(
 		CONFIGURACAO			= armazenamento
 		definicoesGlobais()
 
-		if(!CONFIGURACAO?.tribunal)
+		if(!CONFIGURACAO?.instituicao?.tribunal)
 			abrirPaginaConfiguracaoDoTribunal()
 
 		definirIconeDaExtensaoPeloEstado(EXTENSAO.ativada)
@@ -40,22 +40,9 @@ browser.storage.local.get(
 					console.debug('CONFIGURACAO',CONFIGURACAO)
 					
 				}
-				
-
 
 			}
-			
 
-			/*					
-			let dados = CONFIGURACAO[destino]
-								if(dados[chave] === undefined){
-									if(ativar.hasOwnProperty(destino)){
-										if(ativar[destino].includes(chave))
-											estadoInicial = true
-									}
-								}
-			*/
-			
 		}
 
 	}

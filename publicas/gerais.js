@@ -75,6 +75,20 @@ function numeros(texto){
 }
 
 
+function maiusculas(texto){
+	if(!texto)
+		return ''
+	return texto.toUpperCase().trim() || ''
+}
+
+
+function minusculas(texto){
+	if(!texto)
+		return ''
+	return texto.toLowerCase().trim() || ''
+}
+
+
 /**
  * Retorna o valor de um parametro de URL:
  * @param {string}	parametro

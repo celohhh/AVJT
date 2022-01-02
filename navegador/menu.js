@@ -10,7 +10,7 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 			EXTENSAO.ativada	= armazenamento.ativada
 			CONFIGURACAO			= armazenamento
 
-			if(!CONFIGURACAO?.tribunal)
+			if(!CONFIGURACAO?.instituicao?.tribunal)
 				abrirPaginaConfiguracaoDoTribunal()
 
 			setInterval(contarEsforcosRepetitivosPoupados,100)
@@ -21,7 +21,8 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 			criarRodapeDePaginaDaExtensao()
 			criarLinksUteis()
 			inserirLegendaNosLinksDoYoutube()
-			criarBotaorecarregar()
+			criarBotaoRecarregar()
+			criarBotaoFalarComDesenvolvedor()
 
 			obterConfiguracoesDaExtensao()
 			
@@ -46,8 +47,8 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 		}
 	)
 
-	function criarBotaorecarregar(){
-		let botao = criar('recarregar','','')
+	function criarBotaoRecarregar(){
+		let botao = criar('botao-flutante','recarregar','')
 		botao.setAttribute('aria-label','Recarregar Extensão')
 		botao.addEventListener(
 			'click',
@@ -56,6 +57,15 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 				botao.classList.toggle('recarregar')
 				setTimeout(recarregar,550)
 			}
+		)
+	}
+
+	function criarBotaoFalarComDesenvolvedor(){
+		let botao = criar('botao-flutante','desenvolvimento','')
+		botao.setAttribute('aria-label','Sente falta de alguma funcionalidade? Clique neste botão e fale com o Desenvolvedor desta Extensão')
+		botao.addEventListener(
+			'click',
+			abrirPaginaDesenvolvimento
 		)
 	}
 
@@ -352,75 +362,5 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 		}
 
 	}
-
-}
-
-
-function obterConfiguracoesDaExtensao(){
-
-	console.debug('CONFIGURACAO',CONFIGURACAO)
-
-	document.querySelectorAll('configuracoes').forEach(
-		configuracoes => {
-
-			let destino = definirDestinoDasConfiguracoes(configuracoes)
-			
-			configuracoes.querySelectorAll('input').forEach(
-				configuracao => {
-
-					let chave = configuracao.className
-					let dados = CONFIGURACAO[destino]
-					if(configuracao.type === 'checkbox')
-						configuracao.checked = dados[chave] || false
-
-				}
-			)
-		}
-	)
-
-}
-
-
-function salvarConfiguracoesDaExtensao(){
-
-	setTimeout(salvar,50)
-
-	function salvar(){
-
-		document.querySelectorAll('configuracoes').forEach(
-			configuracoes => {
-
-				let destino	= definirDestinoDasConfiguracoes(configuracoes)
-				let dados		= CONFIGURACAO[destino]
-
-				configuracoes.querySelectorAll('input').forEach(
-					configuracao => {
-
-						let chave = configuracao.className
-
-						if(configuracao.type === 'checkbox')
-							dados[chave] = configuracao.checked || false
-
-					}
-				)
-
-				browser.storage.local.set({[destino]:dados})
-
-			}
-		)
-
-	}
-
-}
-
-
-function definirDestinoDasConfiguracoes(configuracoes){
-
-	let destino = configuracoes.className
-
-	if(CONFIGURACAO[destino] == undefined)
-		CONFIGURACAO[destino] = {}
-
-	return destino
 
 }

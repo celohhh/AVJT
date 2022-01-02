@@ -104,6 +104,7 @@ h3{
 }
 
 input[type="button"],
+input[type="email"],
 input[type="number"],
 input[type="submit"],
 input[type="text"]
@@ -124,22 +125,37 @@ input[type="number"]{
 	width:100px;
 }
 
-input[type="text"]{
+input[type="email"],
+input[type="text"]
+{
 	cursor:text;
 	width:100%;
 }
 
-#salvar{
+#acao,
+#salvar
+{
 	background:rgba(var(--extensao-cor-branco),0.9);
-	padding:1rem 1.5rem;
+	box-shadow:0 6px 4px -4px rgba(var(--extensao-cor-preto),0.5);
+	border-radius:10px;
+	color:rgba(var(--extensao-cor-preto),0.9);
+	cursor:pointer;
+	display:block;
+	font-weight:600;
+	padding:1rem;
+	margin:1rem auto;
 	font-size: 1.2rem;
 }
 
-#salvar:hover{
+#acao:hover,
+#salvar:hover
+{
 	background:rgba(var(--extensao-cor-branco),1);
 }
 
-#salvar:active{
+#acao:active,
+#salvar:active
+{
 	background:rgba(var(--extensao-cor-branco),0.8);
 }
 
@@ -149,4 +165,8 @@ input[type="text"]{
 
 .largura49{
 	width:49%;
+}
+
+.largura100{
+	width:100%;
 }
