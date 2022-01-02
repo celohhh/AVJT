@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="../css/icones.css" />
 		<link rel="stylesheet" href="../css/legenda.css" />
 		<link rel="stylesheet" href="../css/navegador.css" />
+		<link rel="stylesheet" href="../css/menu.css" />
 		<script src="../publicas/definicoes.js"></script>
 		<script src="../publicas/gerais.js"></script>
 		<script src="../publicas/navegador.js"></script>
@@ -18,464 +19,14 @@
 		<script src="cabecalho.js"></script>
 		<script src="rodape.js"></script>
 		<script src="menu.js"></script>
-		<style>
-
-			body{
-				width:800px;
-			}
-
-			main{
-				height:450px;
-				margin:66px 0 60px 0;
-				padding:20px 0 0 0;
-			}
-
-			#links-uteis{
-				align-items:center;
-				display:flex;
-				flex-wrap:wrap;
-				justify-content:space-around;
-				width:95%;
-			}
-			#links-uteis .link{
-				border-radius:5px;
-				box-shadow:0px 2px 2px 2px rgba(var(--extensao-cor-preto), 0.5);
-				cursor:pointer;
-				display:block;
-				margin:5px;
-				height:50px;
-				opacity:0.9;
-				position:relative;
-				width:50px;
-			}
-			#links-uteis .link:hover{
-				box-shadow:0px 0px 2px 2px rgba(var(--extensao-cor-branco), 0.5);
-				opacity:1;
-			}
-			#links-uteis .link:active{
-				box-shadow:0px 2px 1px 1px rgba(var(--extensao-cor-preto), 0.25);
-				opacity:0.8;
-			}
-
-
-			#menu-de-contexto{
-				animation:aparecer 0.3s ease-out 0s 1 both;
-				background:rgba(var(--extensao-cor-branco),0.9);
-				border:rgba(var(--extensao-cor-branco),1) solid 2px;
-				border-radius:10px;
-				box-shadow:0px 2px 2px 2px rgba(var(--extensao-cor-preto), 0.25);
-				display:block;
-				padding:10px;
-				position:fixed;
-				width:140px;
-			}
-			#menu-de-contexto::before{
-				border-left:8px solid transparent;
-				border-right:8px solid transparent;
-				border-bottom:rgba(var(--extensao-cor-branco),1) 8px solid;
-				content: "";
-				display:block;
-				height:0;
-				left:calc(50% - 8px);
-				padding:0;
-				position:absolute;
-				top:-8px;
-				width:0;
-			}
-			#menu-de-contexto p{
-				color:rgba(var(--extensao-cor-preto),0.9);
-				text-align:center;
-			}
-			.menu-de-contexto-botao{
-				background:rgba(var(--extensao-cor-primaria),0.9);
-				border:rgba(var(--extensao-cor-preto),0.25) solid 2px;
-				border-radius:5px;
-				box-shadow:0px 2px 2px 2px rgba(var(--extensao-cor-preto), 0.25);
-				color:rgba(var(--extensao-cor-branco),1);
-				cursor:pointer;
-				font-size:1.2rem;
-				display:block;
-				margin:0 auto !important;
-				opacity:0.9;
-				padding:5px 0;
-				text-align:center;
-				text-transform:uppercase;
-				width:120px;
-			}
-			.menu-de-contexto-botao:hover{
-				opacity:1;
-			}
-			.menu-de-contexto-botao:active{
-				box-shadow:0px 2px 1px 1px rgba(var(--extensao-cor-preto), 0.25);
-				opacity:0.8;
-			}
-
-			.recarregar{
-				animation:girar 0.5s ease-out 0s 1 both;
-				opacity:1;
-			}
-
-			botao-flutante{
-				background:var(--extensao-icone-recarregar) no-repeat center center;
-				cursor:pointer;
-				display:block;
-				height:30px;
-				opacity:0.8;
-				position:fixed;
-				top:5px;
-				width:30px;
-			}
-			botao-flutante:hover::before{
-				animation:aparecer 0.5s ease-out 0s 1 both;
-				border-radius:15px 0 15px 15px;
-				box-shadow:0px 2px 2px 2px rgba(var(--extensao-cor-preto), 0.3);
-				content:attr(aria-label);
-				background-color:rgba(var(--extensao-cor-preto),0.95);
-				color:rgba(var(--extensao-cor-branco),1);
-				display:block;
-				font-size:14px;
-				font-weight:600;
-				line-height:20px;
-				right:30px;
-				padding:10px;
-				position:absolute;
-				text-align:center;
-				top:15px;
-				width:320px;
-			}
-
-			botao-flutante#recarregar{
-				background:var(--extensao-icone-recarregar) no-repeat center center;
-				right:10px;
-			}
-			botao-flutante#desenvolvimento{
-				background:var(--extensao-icone-lupa-interrogacao) no-repeat center center;
-				filter:drop-shadow(0px 2px 2px rgba(var(--extensao-cor-preto),1));
-				right:20px;
-				top:calc(50% - 15px);
-			}
-			botao-flutante.recarregar:hover::before{
-				opacity:0;
-			}
-			botao-flutante.recarregar:hover{
-				animation:girar 0.5s ease-out 0s 1 both;
-				opacity:1;
-			}
-			botao-flutante:hover{
-				opacity:1;
-			}
-			botao-flutante:active{
-				opacity:0.7;
-			}
-
-			#pje-instancia-1{
-				background:
-					var(--extensao-icone-pje) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-branco),1)
-				;
-			}
-
-			#pje1{
-				background:
-					var(--extensao-icone-pje) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					var(--extensao-cor-clarear),
-					var(--extensao-cor-clarear),
-					var(--extensao-cor-clarear),
-					var(--extensao-cor-clarear),
-					var(--extensao-cor-clarear),
-					var(--extensao-cor-clarear),
-					var(--extensao-cor-clarear),
-					rgba(var(--extensao-cor-amarelo),1)
-				;
-			}
-
-			#pje-instancia-2{
-				background:
-					var(--extensao-icone-pje) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-preto),1)
-				;
-			}
-
-			#pje-painel-global{
-				background:
-					var(--extensao-icone-painel) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-preto),1)
-				;
-			}
-
-			#pje-painel-gigs{
-				background:
-					var(--extensao-icone-gigs) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-vermelho),1)
-				;
-			}
-
-			#pje-consulta-processos{
-				background:
-					var(--extensao-icone-lupa) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-laranja),1)
-				;
-			}
-
-			#pje-consulta-pessoa{
-				background:
-					var(--extensao-icone-agenda) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-amarelo),1)
-				;
-			}
-
-			#pje-consulta-advogado{
-				background:
-					var(--extensao-icone-advogado) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					var(--extensao-cor-escurecer),
-					var(--extensao-cor-escurecer),
-					rgba(var(--extensao-cor-verde),1)
-				;
-			}
-
-			#pje-modelos-de-documentos{
-				background:
-					var(--extensao-icone-html) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					var(--extensao-cor-escurecer),
-					var(--extensao-cor-escurecer),
-					rgba(var(--extensao-cor-azul),1)
-				;
-			}
-
-			#garimpo{
-				background:
-					var(--extensao-icone-picareta) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					var(--extensao-cor-escurecer),
-					rgba(var(--extensao-cor-indigo),1)
-				;
-			}
-
-			#intranet{
-				background:
-					var(--extensao-icone-intranet) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-violeta),1)
-				;
-			}
-
-			#zoom{
-				background:
-					var(--extensao-icone-zoom) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-branco),1)
-				;
-			}
-
-			#meet{
-				background:
-					var(--extensao-icone-google-meet) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-branco),1)
-				;
-			}
-
-			#drive{
-				background:
-					var(--extensao-icone-google-drive) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-preto),1)
-				;
-			}
-
-			#agenda{
-				background:
-					var(--extensao-icone-google-agenda) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-preto),1)
-				;
-			}
-
-			#webmail{
-				background:
-					var(--extensao-icone-arroba) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-vermelho),1)
-				;
-			}
-
-			#chamado{
-				background:
-					var(--extensao-icone-bug) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-laranja),1)
-				;
-			}
-
-			#balcao{
-				background:
-					var(--extensao-icone-headset) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-amarelo),1)
-				;
-			}
-
-			#planilha{
-				background:
-					var(--extensao-icone-tabela) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					var(--extensao-cor-escurecer),
-					var(--extensao-cor-escurecer),
-					rgba(var(--extensao-cor-verde),1)
-				;
-			}
-
-			#eCarta{
-				background:
-					var(--extensao-icone-correios) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					var(--extensao-cor-escurecer),
-					var(--extensao-cor-escurecer),
-					rgba(var(--extensao-cor-azul),1)
-				;
-			}
-
-			#malote{
-				background:
-					var(--extensao-icone-malote) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					var(--extensao-cor-escurecer),
-					rgba(var(--extensao-cor-indigo),1)
-				;
-			}
-
-			#sigeo{
-				background:
-					var(--extensao-icone-sigeo) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-violeta),1)
-				;
-			}
-
-			#trt{
-				background:
-					var(--extensao-icone-trt) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-branco),1)
-				;
-			}
-
-			#tst{
-				background:
-					var(--extensao-icone-tst) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-branco),1)
-				;
-			}
-
-			#wikivt{
-				background:
-					var(--extensao-icone-wikivt) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-branco),1)
-				;
-			}
-
-			#egestao{
-				background:
-					var(--extensao-icone-egestao) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-preto),1)
-				;
-			}
-
-			#sisbajud{
-				background:
-					var(--extensao-icone-sisbajud) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-preto),1)
-				;
-			}
-
-			#infojud{
-				background:
-					var(--extensao-icone-infojud) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-vermelho),1)
-				;
-			}
-
-			#siscondj{
-				background:
-					var(--extensao-icone-bb) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-laranja),1)
-				;
-			}
-
-			#bb{
-				background:
-					var(--extensao-icone-bb) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-amarelo),1)
-				;
-			}
-
-			#cefRecursais{
-				background:
-					var(--extensao-icone-cef) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					var(--extensao-cor-escurecer),
-					var(--extensao-cor-escurecer),
-					var(--extensao-cor-escurecer),
-					rgba(var(--extensao-cor-verde),1)
-				;
-			}
-
-			#cefJudiciais{
-				background:
-					var(--extensao-icone-cef) no-repeat center / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					var(--extensao-cor-escurecer),
-					rgba(var(--extensao-cor-azul),1)
-				;
-			}
-
-			#renajud{
-				background:
-					var(--extensao-icone-martelo) no-repeat center 5px / 40% 40%,
-					var(--extensao-icone-renajud) no-repeat center 15px / 70% 70%,
-					var(--extensao-gradiente-branco-preto),
-					var(--extensao-cor-escurecer),
-					rgba(var(--extensao-cor-indigo),1)
-				;
-			}
-
-			#pjeCalc{
-				background:
-					var(--extensao-icone-pje) no-repeat center / 50% 50%,
-					var(--extensao-icone-operador-adicao) no-repeat 5px 5px / 10px 10px,
-					var(--extensao-icone-operador-subtracao) no-repeat 5px 35px / 10px 10px,
-					var(--extensao-icone-operador-multiplicacao) no-repeat 35px 5px / 10px 10px,
-					var(--extensao-icone-operador-divisao) no-repeat 35px 35px / 10px 10px,
-					var(--extensao-gradiente-branco-preto),
-					rgba(var(--extensao-cor-violeta),1)
-				;
-			}
-
-		</style>
-
 	</head>
 
 	<body>
 
-
 		<header>
+
 			<h1></h1>
+
 			<section>
 				<label id="extensao-ativador-rotulo" tabindex="0" class="ativador">
 				<input autofocus id="ativador" type="checkbox" />
@@ -486,23 +37,29 @@
 					></span>
 				</label>
 			</section>
+
 		</header>
 
 		<main>
 
 			<section id="secao-links">
+
 				<h2>Links Úteis</h2>
+
 				<informacoes>
 					<i aria-label="Nesta seção, é possível editar as configurações de alguns botões, tais como link, dimesões e posição da janela que eles abrem. Clique com o botão direito do mouse sobre qualquer um dos botões desta seção para acessar o respectivo menu de opções."></i>
 					<a class="youtube" href="https://www.youtube.com/channel/UCG0r5f3lk6AqDsEaZqzFzxQ"></a>
 				</informacoes>
+
 				<nav id="links-uteis"></nav>
+
 			</section>
 
 			<section>
-				<h2>Assistente de Seleção</h2>
-				<configuracoes class="assistenteDeSelecao">
 
+				<h2>Assistente de Seleção</h2>
+
+				<configuracoes class="assistenteDeSelecao">
 					<label class="ativador assistente largura49">
 						<input
 							type	= "checkbox"
@@ -524,12 +81,12 @@
 						></span>
 					</label>
 				</configuracoes>
+
 			</section>
-			
+
 			<section>
 				<h2>Ao Abrir Detalhes do Processo</h2>
 				<configuracoes>
-
 				</configuracoes>
 			</section>
 
@@ -539,23 +96,7 @@
 			<esforcos-poupados>Desde </esforcos-poupados>
 		</footer>
 
-		<a id="cooperari" title="O AVJT - Assistente Virtual da Justiça do Trabalho venceu a 1ª Edição (2021) do Prêmio Cooperari - Estratégias para Evoluir, da Justiça do Trabalho" href="http://www.csjt.jus.br/web/csjt/cooperari/inicio">
-			<style scoped>
-				#cooperari{
-					background:url(../imagens/cooperari.png);
-					filter:drop-shadow(0px 3px 3px rgba(var(--extensao-cor-preto),1));
-					cursor:pointer;
-					display:block;
-					height:90px;
-					left:40px;
-					position:fixed;
-					top:5px;
-					z-index:1;
-					width:78px;
-				}
-			</style>
-
-		</a>
+		<a id="cooperari" title="O AVJT - Assistente Virtual da Justiça do Trabalho venceu a 1ª Edição (2021) do Prêmio Cooperari - Estratégias para Evoluir, da Justiça do Trabalho" href="http://www.csjt.jus.br/web/csjt/cooperari/inicio"></a>
 
 	</body>
 

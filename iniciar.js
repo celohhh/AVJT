@@ -11,7 +11,7 @@ browser.storage.local.get(
 		EXTENSAO.ativada	= armazenamento.ativada
 		CONFIGURACAO			= armazenamento
 		definicoesGlobais()
-		
+
 		//publicas/gerais.js
 		relatar('CONFIGURAÇÃO: ', CONFIGURACAO)
 
@@ -25,7 +25,7 @@ function otimizar(){
 
 	if(!EXTENSAO.ativada)
 		return
-	
+
 	//selecao.js
 	assistenteDeSelecao()
 

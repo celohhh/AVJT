@@ -225,7 +225,7 @@ function obterConfiguracoesDaExtensao(){
 		configuracoes => {
 
 			let destino = definirDestinoDasConfiguracoes(configuracoes)
-			
+
 			configuracoes.querySelectorAll('input').forEach(
 				configuracao => {
 
@@ -256,7 +256,6 @@ function salvarConfiguracoesDaExtensao(){
 
 		document.querySelectorAll('configuracoes').forEach(
 			configuracoes => {
-				
 
 				let destino	= definirDestinoDasConfiguracoes(configuracoes)
 				let dados		= CONFIGURACAO[destino]

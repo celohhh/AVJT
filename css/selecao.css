@@ -84,7 +84,7 @@ assistente-de-selecao #copiar{
   background:var(--extensao-icone-copiar) no-repeat center;
 }
 
-assistente-de-selecao #copiar.copiado{	
+assistente-de-selecao #copiar.copiado{
   background:var(--extensao-icone-copiado) no-repeat center;
 }
 

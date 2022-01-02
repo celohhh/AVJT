@@ -201,7 +201,7 @@ function definirLinks(){
 		return 'https://' + subdominio + '.' + url.dominio + '/' + caminho
 	}
 
-	
+
 	function obterLinkWhatsapp(){
 
 		let url				= {}
@@ -233,7 +233,7 @@ function definirLinks(){
 		url.mail			= montarUrl(url,'mail')
 		url.meet 			= montarUrl(url,'meet')
 		url.planilhas	= montarUrl(url,'docs','spreadsheets')
-		url.tradutor	= montarUrl(url,'translate','?sl=en&tl=pt&text=') 
+		url.tradutor	= montarUrl(url,'translate','?sl=en&tl=pt&text=')
 
 		return url
 

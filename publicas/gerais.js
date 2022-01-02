@@ -195,7 +195,7 @@ function saudacao(){
 	let data	= new Date()
 	let hora	= data.getHours()
 	let texto	= 'Bo'
-	
+
 	switch(true){
 		case(hora < 12):
 			texto += 'm dia!'

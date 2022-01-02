@@ -25,7 +25,7 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 			criarBotaoFalarComDesenvolvedor()
 
 			obterConfiguracoesDaExtensao()
-			
+
 			window.addEventListener('input',salvarConfiguracoesDaExtensao)
 
 			window.addEventListener(
@@ -36,13 +36,13 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 					let id	= evento.target.id
 
 					if(id === 'ativador')
-						return		
-					
+						return
+
 					if(tag.includes('INPUT'))
-						salvarConfiguracoesDaExtensao()					
+						salvarConfiguracoesDaExtensao()
 
 				}
-			)		
+			)
 
 		}
 	)
@@ -53,7 +53,6 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 		botao.addEventListener(
 			'click',
 			() => {
-				botao.removeAttribute('aria-label')
 				botao.classList.toggle('recarregar')
 				setTimeout(recarregar,550)
 			}

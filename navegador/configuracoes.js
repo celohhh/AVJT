@@ -8,7 +8,7 @@ function contadorDeEsforcosRepetitivos(){
 
 			EXTENSAO.ativada	= armazenamento.ativada
 			CONFIGURACAO			= armazenamento
-			
+
 			definicoesGlobais()
 			criarCabecalhoDePaginaDaExtensao()
 			criarRodapeDePaginaDaExtensao()

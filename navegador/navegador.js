@@ -18,7 +18,7 @@ browser.storage.local.get(
 
 			if(!CONFIGURACAO?.instituicao?.tribunal)
 				abrirPaginaConfiguracaoDoTribunal()
-	
+
 			definirIconeDaExtensaoPeloEstado(EXTENSAO.ativada)
 
 			ativarConfiguracoesIniciais()
@@ -30,7 +30,7 @@ browser.storage.local.get(
 			let ativar = {
 				assistenteDeSelecao:['ativado']
 			}
-			
+
 			for(let chave in ativar){
 
 				let configuracoes = ativar[chave]
@@ -46,9 +46,9 @@ browser.storage.local.get(
 						}
 					)
 					CONFIGURACAO[chave] = dados
-					
+
 					console.debug('CONFIGURACAO',CONFIGURACAO)
-					
+
 				}
 
 			}

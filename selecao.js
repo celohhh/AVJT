@@ -19,7 +19,7 @@ function assistenteDeSelecao(){
 		posicao.vertical		= Math.ceil(atributos.top)
 
 		let texto	= selecao.toString().trim() || ''
-		
+
 		if(!texto){
 			fecharMenu()
 			return
@@ -87,7 +87,7 @@ function assistenteDeSelecao(){
 			let texto			= saudacao() + "\n\n"
 
 			whatsappEscreverMensagem(telefone,texto)
-			
+
 			esforcosPoupados(9,2,(3 + caracteres))
 
 		}
@@ -105,7 +105,7 @@ function assistenteDeSelecao(){
 			copiar(texto)
 		}
 
-		
+
 		function criarMenu(){
 
 			let elemento	= criar(
@@ -162,7 +162,7 @@ function assistenteDeSelecao(){
 					}
 				)
 			}
-		
+
 		}
 
 

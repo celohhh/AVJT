@@ -24,14 +24,11 @@ function definirTribunal(){
 						},
 						500
 					)
-			
+
 				}
 			)
 
 		}
 	)
-
-	
-
 
 }
