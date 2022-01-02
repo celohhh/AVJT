@@ -59,11 +59,20 @@ main section
 	display:flex;
 	flex-flow:row wrap;
 	justify-content:center;
-	margin:30px auto 0 auto;
+	margin:1rem auto 1.5rem auto;
 	overflow:hidden;
 	padding:0;
 	position:relative;
 	width:95%;
+}
+
+
+configuracoes{
+	justify-content:space-between;
+}
+
+section nav{
+	margin:1.5rem auto 1.5rem auto;
 }
 
 h1,
@@ -91,7 +100,7 @@ h2{
 	display:block;
 	line-height:30px;
 	font-size:16px;
-	margin:0 0 20px 0;
+	margin:0;
 	text-transform:uppercase;
 	width:100%;
 }
@@ -101,6 +110,28 @@ h3{
 	font-size:16x;
 	margin:0 0 0.5rem 0;
 	width:100%;
+}
+
+p{
+	color:rgba(var(--extensao-cor-branco),1);
+	line-height:1.7rem;
+	padding:1.5rem 1rem 0 1rem;
+}
+
+p:last-child{
+	padding-bottom:1.5rem;
+}
+
+label{
+	color:rgba(var(--extensao-cor-preto),0.9);
+	font-size: 1.2rem;
+	margin:1rem 0;
+	display:block;
+	text-align:center;
+}
+
+label input{
+	margin:5px auto 0 auto;	
 }
 
 input[type="button"],

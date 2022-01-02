@@ -101,7 +101,7 @@ function abrirPaginaDesenvolvimento(){
 		caminho('navegador/desenvolvimento.htm'),
 		'',
 		700,
-		800,
+		700,
 		0,
 		0,
 		'detached_panel'
@@ -235,14 +235,12 @@ function obterConfiguracoesDaExtensao(){
 					let dados = CONFIGURACAO[destino]
 					if(configuracao.type === 'checkbox')
 						configuracao.checked = dados[chave] || false
+					if(configuracao.type === 'email')
+						configuracao.value = dados[chave] || ('@' + obterDominioTribunal()) || configuracao.value || ''
 					if(configuracao.type === 'number')
-						configuracao.value = dados[chave] || 0
-					if(
-						configuracao.type === 'email'
-						||
-						configuracao.type === 'text'
-					)
-						configuracao.value = dados[chave] || ''
+						configuracao.value = dados[chave] || configuracao.value || 0
+					if(configuracao.type === 'text')
+						configuracao.value = dados[chave] || configuracao.value || ''
 
 				}
 			)

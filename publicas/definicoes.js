@@ -190,19 +190,6 @@ function definirLinks(){
 
 	}
 
-
-	function obterDominioTribunal(){
-
-		if(CONFIGURACAO?.instituicao?.tribunal == undefined)
-			return ''
-
-		let sigla = obterSiglaTribunal()
-
-		return minusculas(sigla) + '.jus.br'
-
-	}
-
-
 	function montarUrl(
 		url					= '',
 		subdominio	= '',
@@ -364,6 +351,18 @@ function definirLinks(){
 }
 
 
+function obterDominioTribunal(){
+
+	if(CONFIGURACAO?.instituicao?.tribunal == undefined)
+		return ''
+
+	let sigla = obterSiglaTribunal()
+
+	return minusculas(sigla) + '.jus.br'
+
+}
+
+
 function obterSiglaTribunal(){
 
 	if(CONFIGURACAO?.instituicao?.tribunal == undefined)
@@ -379,3 +378,4 @@ function obterSiglaTribunal(){
 	return sigla
 
 }
+

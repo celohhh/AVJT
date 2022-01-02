@@ -32,7 +32,7 @@
 				background:rgba(var(--extensao-cor-preto),0.4);
 				border-radius:0.5rem 0.5rem 1rem 1rem;
 				display:block;
-				height:calc(100vh - 40px - 30px - 2rem);
+				height:auto;
 				margin:0 auto;
 				overflow-y:auto;
 				padding:0;
@@ -46,9 +46,7 @@
 				animation:aparecer 1s ease-out 1s 1 both;
 			}
 
-
-			main h2
-			{
+			main h2{
 				background:
 					var(--extensao-gradiente-branco-preto),
 					linear-gradient(
@@ -59,22 +57,18 @@
 				;
 				box-shadow:0px 3px 3px 2px rgba(var(--extensao-cor-preto), 0.5);
 				padding:0.5rem 0;
+				margin:0 0 0.5rem 0;
 				position:sticky;
 				top:0px;
 				z-index: 1;
 			}
 
-			main p
-			{
+			main p{
 				font-size:1.2rem;
 				font-weight:500;
 				line-height:1.5rem;
 				text-align:left;
-			}
-
-			main p
-			{
-				padding:1rem 2rem;
+				padding:1rem 2rem 0 2rem;
 				width:100%;
 				position:sticky;
 				top:1.8rem;
@@ -107,8 +101,8 @@
 				<p>A sucessão de atualizações do PJe e do navegador trouxe a necessidade de recriar o código desta extensão para uma versão mais sustentável.</p>
 				<p>Todas as conhecidas funcionalidades desta extensão serão paulatinamente recriadas e eventualmente disponibilizadas, de acordo com as possibilidades de seu desenvolvedor.</p>
 				<p>Se você está sentindo muita falta de alguma funcionalidade e deseja tentar priorizar o seu desenvolvimento, clique no botão abaixo (informe seu nome, cargo, unidade e tribunal para facilitar o planilhamento de sua demanda).</p>
-				<button id="acao">FALE COM O DESENVOLVEDOR</button>
 			</section>
+			<button id="acao">FALE COM O DESENVOLVEDOR</button>
 
 		</main>
 
