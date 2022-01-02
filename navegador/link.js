@@ -44,8 +44,6 @@ function editarLinksUteisDoMenuDaExtensao(){
 
 				configuracoes.forEach(
 					elemento => {
-						console.debug('elemento',elemento)
-
 						configuracao[elemento.id] = elemento.value
 					}
 				)

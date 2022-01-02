@@ -134,6 +134,22 @@ label input{
 	margin:5px auto 0 auto;	
 }
 
+input:invalid{
+	
+	position:relative;
+
+}
+
+input:invalid{
+  background:
+		linear-gradient(
+			rgba(var(--extensao-cor-vermelho),0.2)   0%,
+			rgba(var(--extensao-cor-vermelho),0.2) 100%
+		),
+		rgba(var(--extensao-cor-branco),1)
+	;
+}
+
 input[type="button"],
 input[type="email"],
 input[type="number"],

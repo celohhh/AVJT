@@ -8,14 +8,19 @@ function contadorDeEsforcosRepetitivos(){
 
 			EXTENSAO.ativada	= armazenamento.ativada
 			CONFIGURACAO			= armazenamento
-
-			console.debug('CONFIGURACAO',CONFIGURACAO)
 			
 			definicoesGlobais()
 			criarCabecalhoDePaginaDaExtensao()
 			criarRodapeDePaginaDaExtensao()
 			obterConfiguracoesDaExtensao()
-			selecionar('#salvar').addEventListener('click',salvarConfiguracoesDaExtensao)
+
+			selecionar('#salvar').addEventListener(
+				'click',
+				evento => {
+					evento.preventDefault()
+					salvarConfiguracoesDaExtensao()
+				}
+			)
 
 		}
 	)

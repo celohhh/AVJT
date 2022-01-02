@@ -312,9 +312,6 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 					referencia.preventDefault()
 
 					let posicao = referencia.target.getBoundingClientRect()
-
-					console.debug('posicao',posicao)
-
 					let menu = criar('nav','menu-de-contexto')
 
 					menu.style.left	= (posicao.left - 45) + 'px'/*posicao.left + 'px'*/

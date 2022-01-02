@@ -6,14 +6,24 @@ browser.storage.local.get(
 
 		EXTENSAO.ativada	= armazenamento.ativada
 		CONFIGURACAO			= armazenamento
-		definicoesGlobais()
 
-		if(!CONFIGURACAO?.instituicao?.tribunal)
-			abrirPaginaConfiguracaoDoTribunal()
+		if(CONFIGURACAO?.extensaoAtiva)
+			browser.storage.local.clear().then(definicoes)
 
-		definirIconeDaExtensaoPeloEstado(EXTENSAO.ativada)
+		definicoes()
 
-		ativarConfiguracoesIniciais()
+		function definicoes(){
+
+			definicoesGlobais()
+
+			if(!CONFIGURACAO?.instituicao?.tribunal)
+				abrirPaginaConfiguracaoDoTribunal()
+	
+			definirIconeDaExtensaoPeloEstado(EXTENSAO.ativada)
+
+			ativarConfiguracoesIniciais()
+
+		}
 
 		function ativarConfiguracoesIniciais(){
 

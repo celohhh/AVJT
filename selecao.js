@@ -20,10 +20,6 @@ function assistenteDeSelecao(){
 
 		let texto	= selecao.toString().trim() || ''
 		
-
-		console.debug('atributos',atributos)
-		console.debug('posicao',posicao)
-
 		if(!texto){
 			fecharMenu()
 			return

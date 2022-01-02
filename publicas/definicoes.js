@@ -28,10 +28,10 @@ function definicoesGlobais(){
 
 	definirChavesPrimariasDoArmazenamento()
 
-	relatar('MODO:', MODO)
-	MODO.relatar = true
-	relatar('CONFIGURACAO:',CONFIGURACAO)
+	//MODO.relatar = true
 	MODO.relatar = false
+	relatar('MODO:', MODO)
+	relatar('CONFIGURACAO:',CONFIGURACAO)
 	relatar('LINK:',LINK)
 	relatar('DATA:',DATA)
 	relatar('ESFORCOS:',ESFORCOS)
@@ -134,6 +134,7 @@ function definirLinks(){
 	let link = {}
 
 	link.extensao				= 'https://addons.mozilla.org/pt-BR/firefox/addon/assistentevirtual-justrabalho'
+	link.github					= EXTENSAO.homepage_url
 
 	link.egestao				= 'https://novoegestao.tst.jus.br'
 	link.infojud				= 'https://cav.receita.fazenda.gov.br/ecac/Aplicacao.aspx?id=5032'
@@ -341,11 +342,11 @@ function definirLinks(){
 	)
 
 	function aoFuncionar(chave){
-		console.debug('Chave removida: ',chave)
+		relatar('Chave removida: ',chave)
 	}
 
 	function aoFalhar(erro){
-		console.debug('Erro:',erro)
+		relatar('Erro:',erro)
 	}
 
 }

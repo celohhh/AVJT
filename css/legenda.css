@@ -1,6 +1,7 @@
 .legenda:hover::before,
 label[aria-label]:hover::before
 {
+	animation:aparecer 0.3s ease-out 0s 1 both;
 	border-radius:5px;
 	content:attr(aria-label);
 	background-color:rgba(var(--extensao-cor-preto),0.8);
@@ -22,7 +23,6 @@ label[aria-label]:hover::before
 }
 
 label[aria-label]:hover::before{
-	animation:aparecer 0.5s ease-out 0s 1 both;
 	left:calc(50% - 15vw);
 	width:30vw;
 	top:calc(100% - 1.5rem);

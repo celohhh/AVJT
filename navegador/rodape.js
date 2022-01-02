@@ -102,6 +102,7 @@ function criarRodapeDePaginaDaExtensao(){
 				}
 
 				.icone:hover::before{
+					animation:aparecer 0.5s ease-out 0s 1 both;
 					border-radius:15px 15px 0 0;
 					box-shadow:0px 2px 2px 2px rgba(var(--extensao-cor-preto), 0.3);
 					content:attr(aria-label);
@@ -120,6 +121,9 @@ function criarRodapeDePaginaDaExtensao(){
 
 				#configuracoes{
 					background:var(--extensao-icone-engrenagem);
+				}
+				#github{
+					background:var(--extensao-icone-github);
 				}
 				#pagina{
 					background:var(--extensao-icone-branco);
@@ -207,6 +211,7 @@ function criarRodapeDePaginaDaExtensao(){
 		criarLinkDoRodape('youtube', LINK.youtube, 'Canal no Youtube')
 		criarLinkDoRodape('telegram', LINK.telegram, 'Grupo de utilizadores no Telegram')
 		criarLinkDoRodape('whatsapp', LINK.whatsapp.grupo, 'Grupo de utilizadores no WhatsApp')
+		criarLinkDoRodape('github', LINK.github, 'Código-Fonte desta Extensão no GitHub')
 		criarLinkDoRodape('configuracoes', '', 'Configurações da extensão', abrirPaginaOpcoesDaExtensao)
 
 		function criarLinkDoRodape(

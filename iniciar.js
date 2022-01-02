@@ -10,9 +10,8 @@ browser.storage.local.get(
 		//publicas/definicoes.js
 		EXTENSAO.ativada	= armazenamento.ativada
 		CONFIGURACAO			= armazenamento
-
 		definicoesGlobais()
-
+		
 		//publicas/gerais.js
 		relatar('CONFIGURAÇÃO: ', CONFIGURACAO)
 
@@ -26,11 +25,9 @@ function otimizar(){
 
 	if(!EXTENSAO.ativada)
 		return
-
-	assistenteDeSelecao()	//selecao.js
-
-	console.debug('saudacao',saudacao())
 	
+	//selecao.js
+	assistenteDeSelecao()
 
 	//publicas/esforcos.js
 	setInterval(contarEsforcosRepetitivosPoupados,1000)

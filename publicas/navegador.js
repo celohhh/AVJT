@@ -221,8 +221,6 @@ function recarregar(){
 
 function obterConfiguracoesDaExtensao(){
 
-	console.debug('CONFIGURACAO',CONFIGURACAO)
-
 	document.querySelectorAll('configuracoes').forEach(
 		configuracoes => {
 
@@ -277,7 +275,7 @@ function salvarConfiguracoesDaExtensao(){
 							||
 							configuracao.type === 'text'
 						)
-							dados[chave] = configuracao.value || ''
+							dados[chave] = configuracao.value.trim() || ''
 
 					}
 				)

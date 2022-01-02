@@ -23,7 +23,7 @@ function termosDeUso(){
 					let nome			= CONFIGURACAO.usuario.nome			|| ''
 					let unidade		= CONFIGURACAO.usuario.unidade	|| ''
 
-					let mensagem = saudacao() + `\n\nMeu nome é ${nome}\n\nE-Mail:\n${email}\n\nCargo:\n${cargo}\n\nUnidade:\n${unidade} do ${tribunal}\n\n`
+					let mensagem = saudacao() + `\n\nMeu nome é ${nome}\n\nE-Mail:\n${email}\n\nCargo:\n${cargo}\n\nUnidade:\n${unidade} (${tribunal})\n\n`
 					whatsappEscreverMensagem('5512988043003',mensagem)
 
 				}
