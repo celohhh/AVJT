@@ -26,7 +26,6 @@
 			rgba(var(--extensao-cor-preto),var(--extensao-cor-gradacao)) 100%
 		);
 
-
 	--extensao-gradiente-branco:
 		linear-gradient(
 			rgba(var(--extensao-cor-branco),0.15)	0%,
@@ -55,7 +54,4 @@
 			rgba(var(--extensao-cor-branco),0.15) 100%
 		);
 
-
-
 }
-

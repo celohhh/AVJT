@@ -88,6 +88,24 @@ assistente-de-selecao #copiar.copiado{
   background:var(--extensao-icone-copiado) no-repeat center;
 }
 
+assistente-de-selecao #valor-por-extenso{
+  background:
+    var(--extensao-icone-extenso-valor) no-repeat center / 70% 70%,
+    var(--extensao-gradiente-branco-preto),
+    var(--extensao-cor-escurecer),
+    rgba(var(--extensao-cor-violeta),1)
+  ;
+}
+
+assistente-de-selecao #numero-por-extenso{
+  background:
+    var(--extensao-icone-extenso-numero) no-repeat center / 70% 70%,
+    var(--extensao-gradiente-branco-preto),
+    var(--extensao-cor-escurecer),
+    rgba(var(--extensao-cor-indigo),1)
+  ;
+}
+
 assistente-de-selecao #google{
   background:
     var(--extensao-icone-google) no-repeat center / 70% 70%,

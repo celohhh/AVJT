@@ -39,18 +39,38 @@ function assistenteDeSelecao(){
 			() => copiarTextoSelecionado()
 		)
 
+		if(valor){
+			criarBotao(
+				'valor-por-extenso',
+				'',
+				'Valor Monetário por Extenso',
+				escreverValorPorExtenso
+			)
+		}
+
+		if(numero){
+			criarBotao(
+				'numero-por-extenso',
+				'',
+				'Número Inteiro por Extenso',
+				escreverNumeroPorExtenso
+			)
+		}
+
 		criarBotao(
 			'google',
 			'',
 			'Pesquisar texto selecionado no Google',
 			abrirGoogle
 		)
+
 		criarBotao(
 			'google-tradutor',
 			'',
 			'Traduzir texto selecionado',
 			abrirGoogleTradutor
 		)
+
 		criarBotao(
 			'whatsapp',
 			'',
@@ -59,26 +79,56 @@ function assistenteDeSelecao(){
 		)
 
 
+
+
 		copiarAutomaticamenteTextoSelecionado()
 	//		console.debug('valor',valor)
 	//	let data											= obterData(texto)
 	//	let numeroDeProcessoPadraoCNJ	= obterNumeroDoProcessoPadraoCNJ(texto)
 
+		function escreverValorPorExtenso(){
+
+			if(selecao.rangeCount){
+				let conteudo = selecao.getRangeAt(0)
+				conteudo.deleteContents()
+				let porExtenso = 'R$ ' + texto + ' (' + extenso(valor,true) + ')'
+				conteudo.insertNode(document.createTextNode(porExtenso))
+			}
+
+		}
+
+
+		function escreverNumeroPorExtenso(){
+
+			if(selecao.rangeCount){
+				let conteudo = selecao.getRangeAt(0)
+				conteudo.deleteContents()
+				let porExtenso = texto + ' (' + extenso(texto) + ')'
+				conteudo.insertNode(document.createTextNode(porExtenso))
+			}
+
+		}
+
+
 		function abrirGoogle(){
+
 			abrirPagina(LINK.google.raiz + 'search?q=' + uri)
 			esforcosPoupados(1,2,caracteres)
+
 		}
 
 
 		function abrirGoogleTradutor(){
+
 			abrirPagina(LINK.google.tradutor + uri)
 			esforcosPoupados(1,2,caracteres)
+
 		}
 
 
 		function abrirWhatsapp(){
 
-			let resposta = prompt("Informe o número do telefone do destinatário observando o padrão internacional (Código do País Código de Área Telefone).\n\nPor exemplo, se o número do telefone for +55 (12) 98765-4321, utilize 5512987654321\n\n",'55'+numero) || ''
+			let resposta = prompt('Informe o número do telefone do destinatário observando o padrão internacional (Código do País Código de Área Telefone).'+"\n\n"+'Por exemplo, se o número do telefone for +55 (12) 98765-4321, utilize 5512987654321'+"\n\n",'55'+numero) || ''
 
 			if(!resposta)
 				return

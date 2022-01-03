@@ -29,6 +29,12 @@ function otimizar(){
 	//selecao.js
 	assistenteDeSelecao()
 
+	let e = extenso('123.456,78',true)
+	let v = extenso('123.456')
+	console.debug(e)
+	console.debug(v)
+	
+
 	//publicas/esforcos.js
 	setInterval(contarEsforcosRepetitivosPoupados,1000)
 
