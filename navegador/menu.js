@@ -334,7 +334,7 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 					if(!editavel){
 						botaoEditar.remove()
 						let texto = criar('p','','',menu)
-						texto.innerText = 'Sem Opções'
+						texto.innerText = 'Sem opções'
 						return
 					}
 
