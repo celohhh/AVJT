@@ -56,6 +56,13 @@ function assistenteDeSelecao(){
 			converterTextoParaMinusculas
 		)
 
+		criarBotao(
+			'titularizar',
+			'',
+			'Converter texto para Título',
+			converterTextoParaTitulo
+		)
+
 		if(valor){
 			criarBotao(
 				'valor-por-extenso',
@@ -146,6 +153,17 @@ function assistenteDeSelecao(){
 				let conteudo = selecao.getRangeAt(0)
 				conteudo.deleteContents()
 				conteudo.insertNode(document.createTextNode(minusculas(texto)))
+			}
+
+		}
+
+		function converterTextoParaTitulo(){
+//			titularizar(texto)
+//			return
+			if(selecao.rangeCount){
+				let conteudo = selecao.getRangeAt(0)
+				conteudo.deleteContents()
+				conteudo.insertNode(document.createTextNode(titularizar(texto)))
 			}
 
 		}

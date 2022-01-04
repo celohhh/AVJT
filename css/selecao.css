@@ -106,24 +106,6 @@ assistente-de-selecao #numero-por-extenso{
   ;
 }
 
-assistente-de-selecao #maiusculas{
-  background:
-    var(--extensao-icone-maiusculas) no-repeat center / 70% 70%,
-    var(--extensao-gradiente-branco-preto),
-    var(--extensao-cor-escurecer),
-    rgba(var(--extensao-cor-preto),0.8)
-  ;
-}
-
-assistente-de-selecao #minusculas{
-  background:
-    var(--extensao-icone-minusculas) no-repeat center / 70% 70%,
-    var(--extensao-gradiente-branco-preto),
-    var(--extensao-cor-escurecer),
-    rgba(var(--extensao-cor-preto),0.8)
-  ;
-}
-
 assistente-de-selecao #google{
   background:
     var(--extensao-icone-google) no-repeat center / 70% 70%,
@@ -146,5 +128,29 @@ assistente-de-selecao #whatsapp{
     var(--extensao-gradiente-branco-preto),
     var(--extensao-cor-escurecer),
     rgba(var(--extensao-cor-verde),1)
+  ;
+}
+
+assistente-de-selecao #maiusculas{
+  background:
+    var(--extensao-icone-maiusculas) no-repeat center / 70% 70%,
+    var(--extensao-gradiente-branco-preto),
+    rgba(var(--extensao-cor-preto),0.8)
+  ;
+}
+
+assistente-de-selecao #minusculas{
+  background:
+    var(--extensao-icone-minusculas) no-repeat center / 70% 70%,
+    var(--extensao-gradiente-branco-preto),
+    rgba(var(--extensao-cor-preto),0.8)
+  ;
+}
+
+assistente-de-selecao #titularizar{
+  background:
+    var(--extensao-icone-t) no-repeat center / 70% 70%,
+    var(--extensao-gradiente-branco-preto),
+    rgba(var(--extensao-cor-preto),0.8)
   ;
 }

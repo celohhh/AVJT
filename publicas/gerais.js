@@ -89,6 +89,33 @@ function minusculas(texto){
 }
 
 
+function titularizar(texto){
+
+	if(!texto)
+		return
+
+	let textoEmMinusculas = minusculas(texto)
+	
+	let titulo = textoEmMinusculas.split(' ').map(
+		palavra => {
+			if(palavra)
+				return palavra.replace(
+					palavra[0],
+					maiusculas(palavra[0])
+				)
+		}
+	).join(' ')
+		
+	
+	return titulo.replace(
+		/\s(E|(A|O)(s)|D(e|a|as|o|os))\s/g,
+		correspondencia => minusculas(correspondencia)
+	)
+
+}
+
+
+
 /**
  * Retorna o valor de um parametro de URL:
  * @param {string}	parametro

@@ -66,10 +66,9 @@ function editarLinksUteisDoMenuDaExtensao(){
 
 				if(configuracao.url){
 
-					let tituloUrl = criar('h3','','',selecionar('#links-uteis'))
-					tituloUrl.innerText = 'Endereço:'
-
-					let campoUrl = criar('input','url','configuracao',selecionar('#links-uteis'))
+					let label = criar('label','','largura100',selecionar('#campos'))
+					label.innerText = 'Endereço:'
+					let campoUrl = criar('input','url','configuracao',label)
 					campoUrl.type = 'text'
 					campoUrl.value = configuracao.url
 

@@ -86,7 +86,7 @@ function abrirPaginaTermosDeUso(){
 		caminho('navegador/termos.htm'),
 		'',
 		700,
-		800,
+		600,
 		0,
 		0,
 		'detached_panel'
@@ -101,7 +101,7 @@ function abrirPaginaDesenvolvimento(){
 		caminho('navegador/desenvolvimento.htm'),
 		'',
 		700,
-		700,
+		600,
 		0,
 		0,
 		'detached_panel'
@@ -134,7 +134,7 @@ function abrirPaginaConfiguracaoDeLink(
 		caminho(`navegador/link.htm?editar=${editar}&descricao=${descricao}`),
 		'',
 		800,
-		775,
+		600,
 		0,
 		0,
 		'detached_panel'

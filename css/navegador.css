@@ -201,6 +201,18 @@ input[type="text"]
 	background:rgba(var(--extensao-cor-branco),0.8);
 }
 
+.largura20{
+	width:20%;
+}
+
+.largura24{
+	width:24%;
+}
+
+.largura25{
+	width:25%;
+}
+
 .largura32{
 	width:32%;
 }
