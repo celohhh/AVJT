@@ -139,7 +139,6 @@ function assistenteDeSelecao(){
 		function converterTextoParaMaiusculas(){
 
 			if(selecao.rangeCount){
-				let conteudo = selecao.getRangeAt(0)
 				conteudo.deleteContents()
 				conteudo.insertNode(document.createTextNode(maiusculas(texto)))
 			}
@@ -150,7 +149,6 @@ function assistenteDeSelecao(){
 		function converterTextoParaMinusculas(){
 
 			if(selecao.rangeCount){
-				let conteudo = selecao.getRangeAt(0)
 				conteudo.deleteContents()
 				conteudo.insertNode(document.createTextNode(minusculas(texto)))
 			}
@@ -158,10 +156,8 @@ function assistenteDeSelecao(){
 		}
 
 		function converterTextoParaTitulo(){
-//			titularizar(texto)
-//			return
+
 			if(selecao.rangeCount){
-				let conteudo = selecao.getRangeAt(0)
 				conteudo.deleteContents()
 				conteudo.insertNode(document.createTextNode(titularizar(texto)))
 			}
