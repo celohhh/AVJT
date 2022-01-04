@@ -78,14 +78,14 @@ function numeros(texto){
 function maiusculas(texto){
 	if(!texto)
 		return ''
-	return texto.toUpperCase().trim() || ''
+	return texto?.toUpperCase() || ''
 }
 
 
 function minusculas(texto){
 	if(!texto)
 		return ''
-	return texto.toLowerCase().trim() || ''
+	return texto?.toLowerCase() || ''
 }
 
 

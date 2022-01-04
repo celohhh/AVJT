@@ -12,20 +12,23 @@ function assistenteDeSelecao(){
 		if(!selecao)
 			return
 
-		let atributos = selecao.getRangeAt(0).getBoundingClientRect()
+		let conteudo	= selecao.getRangeAt(0)
+		let retangulo = conteudo.getBoundingClientRect()
 
 		let posicao = {}
-		posicao.horizontal	= Math.ceil(atributos.left)
-		posicao.vertical		= Math.ceil(atributos.top)
+		posicao.horizontal	= Math.ceil(retangulo.left)
+		posicao.vertical		= Math.ceil(retangulo.top)
 
-		let texto	= selecao.toString().trim() || ''
+		let texto	= selecao.toString() || ''
 
 		if(!texto){
 			fecharMenu()
 			return
 		}
 
+		
 		let caracteres								= texto.length
+		let textoAparado							= texto.trim()
 		let numero										= numeros(texto)
 		let valor											= obterValorMonetario(texto)
 		let uri												= encodeURI(texto)
@@ -37,6 +40,20 @@ function assistenteDeSelecao(){
 			'solido',
 			'Copiar texto selecionado',
 			() => copiarTextoSelecionado()
+		)
+
+		criarBotao(
+			'maiusculas',
+			'',
+			'Converter texto para letras maiúsculas',
+			converterTextoParaMaiusculas
+		)
+
+		criarBotao(
+			'minusculas',
+			'',
+			'Converter texto para letras minúsculas',
+			converterTextoParaMinusculas
 		)
 
 		if(valor){
@@ -78,21 +95,24 @@ function assistenteDeSelecao(){
 			abrirWhatsapp
 		)
 
-
-
-
 		copiarAutomaticamenteTextoSelecionado()
-	//		console.debug('valor',valor)
-	//	let data											= obterData(texto)
-	//	let numeroDeProcessoPadraoCNJ	= obterNumeroDoProcessoPadraoCNJ(texto)
+
 
 		function escreverValorPorExtenso(){
 
 			if(selecao.rangeCount){
-				let conteudo = selecao.getRangeAt(0)
+
 				conteudo.deleteContents()
-				let porExtenso = 'R$ ' + texto + ' (' + extenso(valor,true) + ')'
+
+				let prefixo = ''
+
+				if(!texto.includes('$'))
+					prefixo = 'R$ '
+
+				let porExtenso = prefixo + texto + ' (' + extenso(valor,true) + ')'
+
 				conteudo.insertNode(document.createTextNode(porExtenso))
+
 			}
 
 		}
@@ -101,10 +121,31 @@ function assistenteDeSelecao(){
 		function escreverNumeroPorExtenso(){
 
 			if(selecao.rangeCount){
-				let conteudo = selecao.getRangeAt(0)
 				conteudo.deleteContents()
 				let porExtenso = texto + ' (' + extenso(texto) + ')'
 				conteudo.insertNode(document.createTextNode(porExtenso))
+			}
+
+		}
+
+
+		function converterTextoParaMaiusculas(){
+
+			if(selecao.rangeCount){
+				let conteudo = selecao.getRangeAt(0)
+				conteudo.deleteContents()
+				conteudo.insertNode(document.createTextNode(maiusculas(texto)))
+			}
+
+		}
+
+
+		function converterTextoParaMinusculas(){
+
+			if(selecao.rangeCount){
+				let conteudo = selecao.getRangeAt(0)
+				conteudo.deleteContents()
+				conteudo.insertNode(document.createTextNode(minusculas(texto)))
 			}
 
 		}
@@ -152,7 +193,7 @@ function assistenteDeSelecao(){
 
 
 		function copiarTextoSelecionado(){
-			copiar(texto)
+			copiar(textoAparado)
 		}
 
 

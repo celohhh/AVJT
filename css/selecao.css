@@ -4,14 +4,14 @@ assistente-de-selecao{
 	background:
 		url(../imagens/icones/extensao/branco.svg) no-repeat 5px center / 30px 30px,
 		var(--extensao-gradiente-branco-preto),
-		rgba(var(--extensao-cor-primaria),0.8)
+		rgba(var(--extensao-cor-primaria),0.7)
 	;
 	border-radius:15px 15px 0 0;
 	border:rgba(var(--extensao-cor-branco),0.2) solid 2px;
 	box-sizing:border-box;
 	box-shadow:0px 2px 3px rgba(var(--extensao-cor-preto),0.5);
 	display:flex;
-	gap:10px;
+	gap:7px;
 	flex-flow:row wrap;
 	justify-content:space-around;
 	min-height:50px;
@@ -103,6 +103,24 @@ assistente-de-selecao #numero-por-extenso{
     var(--extensao-gradiente-branco-preto),
     var(--extensao-cor-escurecer),
     rgba(var(--extensao-cor-indigo),1)
+  ;
+}
+
+assistente-de-selecao #maiusculas{
+  background:
+    var(--extensao-icone-maiusculas) no-repeat center / 70% 70%,
+    var(--extensao-gradiente-branco-preto),
+    var(--extensao-cor-escurecer),
+    rgba(var(--extensao-cor-preto),0.8)
+  ;
+}
+
+assistente-de-selecao #minusculas{
+  background:
+    var(--extensao-icone-minusculas) no-repeat center / 70% 70%,
+    var(--extensao-gradiente-branco-preto),
+    var(--extensao-cor-escurecer),
+    rgba(var(--extensao-cor-preto),0.8)
   ;
 }
 
