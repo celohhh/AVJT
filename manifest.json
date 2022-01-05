@@ -76,13 +76,13 @@
   ],
 
   "options_ui":{
-		"page": "navegador/configuracoes.htm",
+		"page": "navegador/configuracoes/configuracoes.htm",
 		"open_in_tab": false
 	},
 
   "browser_action":{
     "browser_style":	true,
-    "default_popup": 	"navegador/menu.htm"
+    "default_popup": 	"navegador/menu/menu.htm"
   }
 
 }

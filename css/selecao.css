@@ -2,7 +2,7 @@ assistente-de-selecao{
 	box-sizing:border-box;
 	align-items:center;
 	background:
-		url(../imagens/icones/extensao/branco.svg) no-repeat 5px center / 30px 30px,
+		url(/imagens/icones/extensao/branco.svg) no-repeat 5px center / 30px 30px,
 		var(--extensao-gradiente-branco-preto),
 		rgba(var(--extensao-cor-primaria),0.7)
 	;

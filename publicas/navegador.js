@@ -83,7 +83,7 @@ function abrirPaginaOpcoesDaExtensao(){
 function abrirPaginaTermosDeUso(){
 
 	criarJanela(
-		caminho('navegador/termos.htm'),
+		caminho('navegador/termos/termos.htm'),
 		'',
 		700,
 		600,
@@ -98,7 +98,7 @@ function abrirPaginaTermosDeUso(){
 function abrirPaginaDesenvolvimento(){
 
 	criarJanela(
-		caminho('navegador/desenvolvimento.htm'),
+		caminho('navegador/desenvolvimento/desenvolvimento.htm'),
 		'',
 		700,
 		600,
@@ -113,7 +113,7 @@ function abrirPaginaDesenvolvimento(){
 function abrirPaginaContadorDeEsforcosRepetitivos(){
 
 	criarJanela(
-		caminho('navegador/esforcos.htm'),
+		caminho('navegador/esforcos/esforcos.htm'),
 		'',
 		700,
 		400,
@@ -131,7 +131,7 @@ function abrirPaginaConfiguracaoDeLink(
 ){
 
 	criarJanela(
-		caminho(`navegador/link.htm?editar=${editar}&descricao=${descricao}`),
+		caminho(`navegador/link/link.htm?editar=${editar}&descricao=${descricao}`),
 		'',
 		800,
 		600,
@@ -146,7 +146,7 @@ function abrirPaginaConfiguracaoDeLink(
 function abrirPaginaConfiguracaoDoTribunal(){
 
 	criarJanela(
-		caminho('navegador/tribunal.htm'),
+		caminho('navegador/tribunal/tribunal.htm'),
 		'',
 		700,
 		500,
@@ -178,9 +178,9 @@ function definirIconeDaExtensaoPeloEstado(ativada){
 	}
 
 	if(ativada)
-		browser.browserAction.setIcon({path:'../imagens/icones/extensao/colorido.svg'})
+		browser.browserAction.setIcon({path:'/imagens/icones/extensao/colorido.svg'})
 	else
-		browser.browserAction.setIcon({path:'../imagens/icones/extensao/branco.svg'})
+		browser.browserAction.setIcon({path:'/imagens/icones/extensao/branco.svg'})
 
 }
 

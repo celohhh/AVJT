@@ -55,7 +55,7 @@ informacoes i::before
 	width:24px;
 }
 informacoes i::before{
-	background:var(--extensao-icone-informacoes) center center / 70% 70% no-repeat;
+	background:var(--extensao-icone-i) center center / 70% 70% no-repeat;
 	border:rgba(var(--extensao-cor-laranja),1) solid 3px;
 	border-radius:15px;
 	content:"";
