@@ -25,7 +25,6 @@ function assistenteDeSelecao(){
 			fecharMenu()
 			return
 		}
-
 		
 		let caracteres								= texto.length
 		let textoAparado							= texto.trim()
