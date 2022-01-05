@@ -20,9 +20,9 @@ campoCodigo.value = codigoPadrao
 async function obterConfiguracoes() {
 
 	const armazenamento	= await browser.storage.local.get()
-	const {codigoSalvo}	= armazenamento?.scriptDeUsuario || {}
+	const {code}	= armazenamento?.scriptDeUsuario || {}
 
-	campoCodigo.value	= codigoSalvo ? codigoSalvo : codigoPadrao
+	campoCodigo.value	= code ? code : codigoPadrao
 	textoErro.textContent	= armazenamento?.ultimoErro || ''
 
 }
