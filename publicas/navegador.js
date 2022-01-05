@@ -80,6 +80,21 @@ function abrirPaginaOpcoesDaExtensao(){
 }
 
 
+function abrirPaginaScriptDeUsuario(){
+
+	criarJanela(
+		caminho('navegador/sandbox/sandbox.htm'),
+		'',
+		700,
+		600,
+		0,
+		0,
+		'detached_panel'
+	)
+
+}
+
+
 function abrirPaginaTermosDeUso(){
 
 	criarJanela(

@@ -21,6 +21,7 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 			criarRodapeDePaginaDaExtensao()
 			criarLinksUteis()
 			inserirLegendaNosLinksDoYoutube()
+			criarBotaoScriptDeUsuario()
 			criarBotaoRecarregar()
 			criarBotaoFalarComDesenvolvedor()
 
@@ -47,6 +48,14 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 		}
 	)
 
+	function criarBotaoScriptDeUsuario(){
+		let botao = criar('botao-flutante','script','')
+		botao.setAttribute('aria-label','Script de Usuário (se você possui conhecimento em JavaScript, poderá executar códigos nas páginas em que desejar)')
+		botao.addEventListener(
+			'click',
+			abrirPaginaScriptDeUsuario
+		)
+	}
 	function criarBotaoRecarregar(){
 		let botao = criar('botao-flutante','recarregar','')
 		botao.setAttribute('aria-label','Recarregar Extensão')
@@ -70,7 +79,7 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 
 	function inserirLegendaNosLinksDoYoutube(){
 
-		let informacoes = selecionar('.youtube','',true)
+		let informacoes = document.querySelectorAll('.youtube')
 		informacoes.forEach(
 			youtube => {
 				youtube.setAttribute('aria-label',"Acesse vídeo(s) sobre esta seção no Canal do Youtube do " + EXTENSAO.name)

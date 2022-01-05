@@ -38,7 +38,7 @@ function editarLinksUteisDoMenuDaExtensao(){
 
 			function salvarConfiguracoes(){
 
-				let configuracoes	= selecionar('.configuracao','',true)
+				let configuracoes	= document.querySelectorAll('.configuracao')
 				let configuracao	= {}
 				let janela				= CONFIGURACAO?.janela
 
@@ -59,7 +59,7 @@ function editarLinksUteisDoMenuDaExtensao(){
 
 			function obterConfiguracoes(){
 
-				let configuracoes	= selecionar('.configuracao','',true)
+				let configuracoes	= document.querySelectorAll('.configuracao')
 				let configuracao	= CONFIGURACAO?.janela[editar] || ''
 				if(!configuracao)
 					return
