@@ -9,9 +9,9 @@ const campoCodigo			= document.querySelector('#codigo')
 const textoErro       = document.querySelector('erro')
 const textoResultado  = document.querySelector('resultado')
 
-const codigoPadrao = `(async function () {
+const codigoPadrao = `(async function(){
 
-console.debug('usuario')
+console.debug('Script de Usuário')
 
 })()`
 
