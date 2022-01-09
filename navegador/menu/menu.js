@@ -21,10 +21,26 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 			criarRodapeDePaginaDaExtensao()
 			criarLinksUteis()
 			inserirLegendaNosLinksDoYoutube()
-			criarBotaoScriptDeUsuario()
-			criarBotaoRecarregar()
-			criarBotaoFalarComDesenvolvedor()
 
+			criarBotaoFixo(
+				'script',
+				'Script de Usuário (se você possui conhecimento em JavaScript, poderá executar códigos nas páginas em que desejar)',
+				abrirPaginaScriptDeUsuario
+			)
+			criarBotaoFixo(
+				'desenvolvimento',
+				'Sente falta de alguma funcionalidade? Clique neste botão e fale com o Desenvolvedor desta Extensão',
+				abrirPaginaDesenvolvimento
+			)
+			criarBotaoFixo(
+				'recarregar',
+				'Recarregar Extensão',
+				evento => {
+					evento.target.classList.toggle('recarregar')
+					setTimeout(recarregar,500)
+				}
+			)
+		
 			obterConfiguracoesDaExtensao()
 
 			window.addEventListener('input',salvarConfiguracoesDaExtensao)
@@ -48,33 +64,14 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 		}
 	)
 
-	function criarBotaoScriptDeUsuario(){
-		let botao = criar('botao-flutante','script','')
-		botao.setAttribute('aria-label','Script de Usuário (se você possui conhecimento em JavaScript, poderá executar códigos nas páginas em que desejar)')
-		botao.addEventListener(
-			'click',
-			abrirPaginaScriptDeUsuario
-		)
-	}
-	function criarBotaoRecarregar(){
-		let botao = criar('botao-flutante','recarregar','')
-		botao.setAttribute('aria-label','Recarregar Extensão')
-		botao.addEventListener(
-			'click',
-			() => {
-				botao.classList.toggle('recarregar')
-				setTimeout(recarregar,550)
-			}
-		)
-	}
-
-	function criarBotaoFalarComDesenvolvedor(){
-		let botao = criar('botao-flutante','desenvolvimento','')
-		botao.setAttribute('aria-label','Sente falta de alguma funcionalidade? Clique neste botão e fale com o Desenvolvedor desta Extensão')
-		botao.addEventListener(
-			'click',
-			abrirPaginaDesenvolvimento
-		)
+	function criarBotaoFixo(
+		id				= '',
+		legenda		= '',
+		aoClicar	= ''
+	){
+		let botao = criar('botao-fixo',id)
+		botao.setAttribute('aria-label',legenda)
+		botao.addEventListener('click',aoClicar)
 	}
 
 	function inserirLegendaNosLinksDoYoutube(){
@@ -322,7 +319,7 @@ function criarMenuDaBarraDeFerramentasDoNavegador(){
 					let posicao = referencia.target.getBoundingClientRect()
 					let menu = criar('nav','menu-de-contexto')
 
-					menu.style.left	= (posicao.left - 45) + 'px'/*posicao.left + 'px'*/
+					menu.style.left	= (posicao.left - 45) + 'px'
 					menu.style.top	= (posicao.top + 55) + 'px'
 
 					menu.addEventListener(

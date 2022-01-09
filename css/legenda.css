@@ -4,7 +4,7 @@ label[aria-label]:hover::before
 	animation:aparecer 0.3s ease-out 0s 1 both;
 	border-radius:5px;
 	content:attr(aria-label);
-	background-color:rgba(var(--extensao-cor-preto),0.8);
+	background-color:rgba(var(--extensao-cor-preto),0.9);
 	color:rgba(var(--extensao-cor-branco),1);
 	display:block;
 	font-size:0.9rem;
@@ -45,7 +45,7 @@ informacoes *{
 	font-style:normal;
 	line-height:2rem;
 	text-align:center;
-	z-index:1;
+	z-index:9;
 }
 informacoes i,
 informacoes i::before
@@ -53,6 +53,7 @@ informacoes i::before
 	cursor:help;
 	height:24px;
 	width:24px;
+	z-index:9;
 }
 informacoes i::before{
 	background:var(--extensao-icone-i) center center / 70% 70% no-repeat;
@@ -74,6 +75,7 @@ informacoes i:hover::after
 	transition:all 0.5s ease-out;
 	top:3px;
 	width:70vw;
+	z-index:9;
 }
 informacoes i:hover::before{
 	background:

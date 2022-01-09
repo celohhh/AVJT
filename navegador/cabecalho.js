@@ -23,6 +23,7 @@ function criarCabecalhoDePaginaDaExtensao(){
 					position:fixed;
 					top:0;
 					width:100%;
+					z-index:2;
 				}
 				h1{
 					background:

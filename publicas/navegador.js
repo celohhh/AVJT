@@ -73,6 +73,33 @@ function caminho(arquivo=''){
 }
 
 
+function destacarJanela(
+	separar				= false,
+	mensagem			= '',
+	largura				= 1200,
+	altura				= 900,
+	horizontal		= 0,
+	vertical			= 0
+){
+
+	if(separar){
+		if(!CONFIGURACAO?.janela?.nova){
+			browser.runtime.sendMessage(
+				{
+					mensagem:mensagem,
+					largura:largura,
+					altura:altura,
+					horizontal:horizontal,
+					vertical:vertical
+				}
+			)
+			CONFIGURACAO.janela.nova = true			
+		}
+	}
+
+}
+
+
 function abrirPaginaOpcoesDaExtensao(){
 
 	browser.runtime.openOptionsPage()
@@ -245,6 +272,8 @@ function obterConfiguracoesDaExtensao(){
 				configuracao => {
 
 					let chave = configuracao.className
+					if(!chave)
+						return
 					let dados = CONFIGURACAO[destino]
 					if(configuracao.type === 'checkbox')
 						configuracao.checked = dados[chave] || false
@@ -278,7 +307,9 @@ function salvarConfiguracoesDaExtensao(){
 				configuracoes.querySelectorAll('input').forEach(
 					configuracao => {
 
-						let chave = configuracao.className
+						let chave = configuracao.className || ''
+						if(!chave)
+							return
 
 						if(configuracao.type === 'checkbox')
 							dados[chave] = configuracao.checked || false
@@ -306,7 +337,9 @@ function salvarConfiguracoesDaExtensao(){
 
 function definirDestinoDasConfiguracoes(configuracoes){
 
-	let destino = configuracoes.className
+	let destino = configuracoes.className || ''
+	if(!destino)
+		return
 
 	if(CONFIGURACAO[destino] == undefined)
 		CONFIGURACAO[destino] = {}

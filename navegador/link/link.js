@@ -26,7 +26,7 @@ function editarLinksUteisDoMenuDaExtensao(){
 
 			function alterarTitulos(){
 
-				let texto		= `Editar Dimensões e Posição da Janela ${descricao}`.replace(/(PJe - Painel)(.*)/,"$1")
+				let texto		= `Editar Dimensões da Janela ${descricao}`.replace(/(PJe - Painel)(.*)/,"$1")
 
 				let titulo	= selecionar('h2')
 				if(titulo){
@@ -47,8 +47,6 @@ function editarLinksUteisDoMenuDaExtensao(){
 						configuracao[elemento.id] = elemento.value
 					}
 				)
-
-				console.debug('configuracao',configuracao)
 
 				janela[editar] = configuracao
 

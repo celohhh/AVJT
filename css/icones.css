@@ -12,6 +12,7 @@
 	--extensao-icone-copiar:									url(/imagens/icones/copiar.svg);
 	--extensao-icone-copiado:									url(/imagens/icones/copiado.svg);
 	--extensao-icone-correios:								url(/imagens/icones/correios.svg);
+	--extensao-icone-dimensoes:								url(/imagens/icones/dimensoes.svg);
 	--extensao-icone-egestao:									url(/imagens/icones/egestao.svg);
 	--extensao-icone-engrenagem:							url(/imagens/icones/engrenagem.svg);
 	--extensao-icone-extenso-numero:					url(/imagens/icones/extenso-numero.svg);
@@ -39,8 +40,10 @@
 	--extensao-icone-operador-multiplicacao:	url(/imagens/icones/operador-multiplicacao.svg);
 	--extensao-icone-operador-subtracao:			url(/imagens/icones/operador-subtracao.svg);
 	--extensao-icone-painel:									url(/imagens/icones/painel.svg);
+	--extensao-icone-pessoa:									url(/imagens/icones/pessoa.svg);
 	--extensao-icone-picareta:								url(/imagens/icones/picareta.svg);
 	--extensao-icone-pje:											url(/imagens/icones/pje.svg);
+	--extensao-icone-processo:								url(/imagens/icones/processo.svg);
 	--extensao-icone-recarregar:							url(/imagens/icones/recarregar.svg);
 	--extensao-icone-renajud:									url(/imagens/icones/renajud.svg);
 	--extensao-icone-script:									url(/imagens/icones/script.svg);

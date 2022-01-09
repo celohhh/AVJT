@@ -9,7 +9,8 @@ var
 	EXTENSAO			= browser.runtime.getManifest(),
 	JANELA				= window.location.href || '',
 	LINK					= {},
-	MODO					= {}
+	MODO					= {},
+	PROCESSO			= {}
 
 
 function definicoesGlobais(){
@@ -29,13 +30,13 @@ function definicoesGlobais(){
 	definirChavesPrimariasDoArmazenamento()
 
 	//MODO.relatar = true
-	MODO.relatar = false
-	relatar('MODO:', MODO)
 	relatar('CONFIGURACAO:',CONFIGURACAO)
-	relatar('LINK:',LINK)
+	MODO.relatar = false
 	relatar('DATA:',DATA)
 	relatar('ESFORCOS:',ESFORCOS)
 	relatar('EXTENSAO:',EXTENSAO)
+	relatar('LINK:',LINK)
+	relatar('MODO:', MODO)
 
 	function definirChavesPrimariasDoArmazenamento(){
 
@@ -161,20 +162,14 @@ function definirLinks(){
 
 	if(dominioTribunal){
 
-		browser.storage.local.get(
-			'janela',
-			armazenamento => {
+		link.chamado	= CONFIGURACAO?.janela?.chamado?.url	|| obterLinkDaMemoria('chamado',	'https://assyst.'			+ dominioTribunal + '/assystnet')
+		link.eCarta		= CONFIGURACAO?.janela?.eCarta?.url		|| obterLinkDaMemoria('eCarta',		'https://ecarta.'			+ dominioTribunal)
+		link.garimpo	= CONFIGURACAO?.janela?.garimpo?.url	|| obterLinkDaMemoria('garimpo',	'https://deposito.'		+ dominioTribunal)
+		link.intranet	= CONFIGURACAO?.janela?.intranet?.url	|| obterLinkDaMemoria('intranet',	'https://satelites.'	+ dominioTribunal + '/aplicacoesExtranet')
+		link.siscondj	= CONFIGURACAO?.janela?.siscondj?.url	|| obterLinkDaMemoria('siscondj',	'https://siscondj.'		+ dominioTribunal)
+		link.tribunal	= dominioTribunal
+		link.pje			= obterLinkPje()
 
-				link.chamado	= armazenamento?.janela?.chamado?.url		|| obterLinkDaMemoria('chamado',	'https://assyst.'			+ dominioTribunal + '/assystnet')
-				link.eCarta		= armazenamento?.janela?.eCarta?.url		|| obterLinkDaMemoria('eCarta',		'https://ecarta.'			+ dominioTribunal)
-				link.garimpo	= armazenamento?.janela?.garimpo?.url		|| obterLinkDaMemoria('garimpo',	'https://deposito.'		+ dominioTribunal)
-				link.intranet	= armazenamento?.janela?.intranet?.url	|| obterLinkDaMemoria('intranet',	'https://satelites.'	+ dominioTribunal + '/aplicacoesExtranet')
-				link.siscondj	= armazenamento?.janela?.siscondj?.url	|| obterLinkDaMemoria('siscondj',	'https://siscondj.'		+ dominioTribunal)
-				link.tribunal	= dominioTribunal
-				link.pje			= obterLinkPje()
-
-			}
-		)
 
 	}
 
@@ -297,6 +292,7 @@ function definirLinks(){
 			return ''
 
 		let pje									= {}
+		pje.api									= {}
 		pje.consulta						= {}
 		pje.painel							= {}
 
@@ -316,6 +312,8 @@ function definirLinks(){
 		pje.painel.global				= pje.kz + 'painel/global/todos/lista-processos'
 		pje.versao1							= pje.primeirograu + 'Painel/painel_usuario/list.seam'
 		pje.modelos							= pje.kz + 'configuracao/modelos-documentos'
+
+		pje.api.comum						= pje.raiz + 'pje-comum-api/api/'
 
 		return pje
 

@@ -1,3 +1,5 @@
+@import url("/css/navegador.css");
+
 body{
 	width:800px;
 }
@@ -45,6 +47,7 @@ main{
 	padding:10px;
 	position:fixed;
 	width:140px;
+	z-index:9;
 }
 #menu-de-contexto::before{
 	border-left:8px solid transparent;
@@ -92,7 +95,7 @@ main{
 	opacity:1;
 }
 
-botao-flutante{
+botao-fixo{
 	background:var(--extensao-icone-recarregar) no-repeat center center;
 	cursor:pointer;
 	display:block;
@@ -101,8 +104,9 @@ botao-flutante{
 	position:fixed;
 	top:5px;
 	width:30px;
+	z-index:9;
 }
-botao-flutante:hover::before{
+botao-fixo:hover::before{
 	animation:aparecer 0.5s ease-out 0s 1 both;
 	border-radius:15px 0 15px 15px;
 	box-shadow:0px 2px 2px 2px rgba(var(--extensao-cor-preto), 0.3);
@@ -119,36 +123,34 @@ botao-flutante:hover::before{
 	text-align:center;
 	top:15px;
 	width:320px;
+	z-index:9;
 }
-
-botao-flutante#desenvolvimento{
+botao-fixo#desenvolvimento{
 	background:var(--extensao-icone-lupa-interrogacao) no-repeat center center;
 	filter:drop-shadow(0px 2px 2px rgba(var(--extensao-cor-preto),1));
 	right:20px;
 	top:calc(50% - 15px);
 }
-botao-flutante#recarregar{
+botao-fixo#recarregar{
 	background:var(--extensao-icone-recarregar) no-repeat center center;
 	right:10px;
 }
-botao-flutante#script{
+botao-fixo#script{
 	background:var(--extensao-icone-script) no-repeat center center;
 	right:60px;
 }
 
-
-
-botao-flutante.recarregar:hover{
+botao-fixo.recarregar:hover{
 	animation:girar 0.5s ease-out 0s 1 both;
 	opacity:1;
 }
-botao-flutante.recarregar:hover::before{
+botao-fixo.recarregar:hover::before{
 	opacity:0 !important;
 }
-botao-flutante:hover{
+botao-fixo:hover{
 	opacity:1;
 }
-botao-flutante:active{
+botao-fixo:active{
 	opacity:0.7;
 }
 
@@ -460,6 +462,6 @@ botao-flutante:active{
 	left:40px;
 	position:fixed;
 	top:5px;
-	z-index:1;
+	z-index:9;
 	width:78px;
 }

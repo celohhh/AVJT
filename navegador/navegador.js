@@ -47,8 +47,6 @@ browser.storage.local.get(
 					)
 					CONFIGURACAO[chave] = dados
 
-					console.debug('CONFIGURACAO',CONFIGURACAO)
-
 				}
 
 			}
@@ -60,6 +58,7 @@ browser.storage.local.get(
 
 browser.runtime.onMessage.addListener(
 	acao => {
+
 		if(acao.url){
 			criarJanela(
 				acao.url,
@@ -72,5 +71,35 @@ browser.runtime.onMessage.addListener(
 			)
 			return
 		}
+
+		browser.windows.getCurrent().then(
+			janela => {
+				browser.tabs.query({}).then(
+					abas => {
+						abas.forEach(
+							aba => {
+							
+								if(
+										(aba.url.includes('detalhe') && acao.mensagem == 'separarAbaDetalhesDoProcesso')
+									)
+									browser.windows.create({
+										tabId:aba.id,
+										width:Number(acao.largura),
+										height:Number(acao.altura),
+										left:Number(acao.horizontal),
+										top:Number(acao.vertical)
+									})
+							}
+						)
+					},
+					null
+				)
+			},
+			null
+		)
+
 	}
+
 )
+
+

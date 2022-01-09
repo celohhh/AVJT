@@ -3,7 +3,7 @@
 	"short_name":				"AVJT",
 	"description":			"Otimiza as rotinas de tarefas inerentes aos sistemas da Justiça do Trabalho",
 	"manifest_version":	2,
-	"version":					"62.4",
+	"version":					"64.1",
 	"author":						"Sisenando Calixto",
 	"homepage_url":			"https://github.com/SisenandoCalixto/avjt/",
 
@@ -45,9 +45,11 @@
         "<all_urls>"
       ],
       "css":[
+        "css/animacoes.css",
         "css/cores.css",
         "css/selecao.css",
-        "css/icones.css"
+        "css/icones.css",
+        "css/pje.css"
       ],
       "js":[
         "publicas/definicoes.js",
@@ -55,9 +57,12 @@
         "publicas/dom.js",
         "publicas/esforcos.js",
         "publicas/extenso.js",
+        "publicas/navegador.js",
+        "publicas/pje.js",
         "publicas/whatsapp.js",
         "iniciar.js",
-        "selecao.js"
+        "selecao.js",
+        "pje.js"
       ],
       "all_frames":					true,
       "match_about_blank":	true,

@@ -1,3 +1,11 @@
+@import url("/css/reset.css");
+@import url("/css/animacoes.css");
+@import url("/css/ativador.css");
+@import url("/css/cores.css");
+@import url("/css/icones.css");
+@import url("/css/largura.css");
+@import url("/css/legenda.css");
+
 *,
 *::before,
 *::after
@@ -64,6 +72,7 @@ main section
 	padding:0;
 	position:relative;
 	width:95%;
+	z-index:2;
 }
 
 
@@ -199,28 +208,4 @@ input[type="text"]
 #salvar:active
 {
 	background:rgba(var(--extensao-cor-branco),0.8);
-}
-
-.largura20{
-	width:20%;
-}
-
-.largura24{
-	width:24%;
-}
-
-.largura25{
-	width:25%;
-}
-
-.largura32{
-	width:32%;
-}
-
-.largura49{
-	width:49%;
-}
-
-.largura100{
-	width:100%;
 }

@@ -1,3 +1,5 @@
+@import url("/css/navegador.css");
+
 main{
 	color:rgba(var(--extensao-cor-branco),1);
 	height:calc(100vh - 70px);

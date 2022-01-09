@@ -21,7 +21,9 @@ assistente-de-selecao{
 	text-align:center;
 	user-select:none;
 	width:auto;
-	z-index:1000000;
+	z-index:9999;
+	opacity:0;
+	transition:opacity 0.5s;
 }
 
 assistente-de-selecao button{

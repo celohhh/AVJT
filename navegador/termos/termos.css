@@ -1,3 +1,5 @@
+@import url("/css/navegador.css");
+
 main{
 	color:rgba(var(--extensao-cor-branco),1);
 	height:calc(100vh - 96px);
@@ -29,7 +31,7 @@ main h2{
 	padding:0.5rem 0 2.5rem 0;
 	position:sticky;
 	top:0px;
-	z-index: 1;
+	z-index:1;
 }
 
 main p,
@@ -47,7 +49,7 @@ main p{
 	width:100%;
 	position:sticky;
 	top:1.8rem;
-	z-index: 1;
+	z-index:1;
 }
 
 main ul{
@@ -82,6 +84,6 @@ seta{
 	left:50px;
 	position:fixed;
 	top:55px;
-	z-index:1;
+	z-index:9;
 	width:70px;
 }

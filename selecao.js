@@ -14,10 +14,8 @@ function assistenteDeSelecao(){
 
 		let conteudo	= selecao.getRangeAt(0)
 		let retangulo = conteudo.getBoundingClientRect()
+		let posicao		= {}
 
-		console.debug('retangulo',retangulo)
-		
-		let posicao = {}
 		posicao.horizontal	= Math.ceil(retangulo.left)
 		posicao.vertical		= Math.ceil(retangulo.top)
 
@@ -105,8 +103,9 @@ function assistenteDeSelecao(){
 
 		copiarAutomaticamenteTextoSelecionado()
 		
-		menu.style.left	= posicao.horizontal + 'px'
-		menu.style.top	= (posicao.vertical - menu.offsetHeight) + 'px'
+		menu.style.left			= posicao.horizontal + 'px'
+		menu.style.top			= (posicao.vertical - menu.offsetHeight) + 'px'
+		menu.style.opacity	= '1'
 
 		function escreverValorPorExtenso(){
 

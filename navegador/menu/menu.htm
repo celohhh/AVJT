@@ -6,6 +6,8 @@
 
 		<title>Menu</title>
 
+		<link rel="stylesheet" href="menu.css" />
+
 	</head>
 
 	<body>
@@ -35,7 +37,6 @@
 
 				<informacoes>
 					<i aria-label="Nesta seção, é possível editar as configurações de alguns botões, tais como link, dimesões e posição da janela que eles abrem. Clique com o botão direito do mouse sobre qualquer um dos botões desta seção para acessar o respectivo menu de opções."></i>
-					<a class="youtube" href="https://www.youtube.com/channel/UCG0r5f3lk6AqDsEaZqzFzxQ"></a>
 				</informacoes>
 
 				<nav id="links-uteis"></nav>
@@ -73,7 +74,17 @@
 
 			<section>
 				<h2>Ao Abrir Detalhes do Processo</h2>
-				<configuracoes>
+				<configuracoes class="aoAbrirDetalhesDoProcesso">
+					<label class="ativador assistente largura49">
+						<input
+							type	= "checkbox"
+							class	= "redimensionar"
+						>
+						<span
+							data-ativado		= "Redimensionar Janela"
+							data-desativado	= "Não Redimensionar Janela"
+						></span>
+					</label>
 				</configuracoes>
 			</section>
 
@@ -87,21 +98,13 @@
 
 	</body>
 
-<link rel="stylesheet" href="/css/animacoes.css" />
-<link rel="stylesheet" href="/css/ativador.css" />
-<link rel="stylesheet" href="/css/cores.css" />
-<link rel="stylesheet" href="/css/icones.css" />
-<link rel="stylesheet" href="/css/legenda.css" />
-<link rel="stylesheet" href="/css/navegador.css" />
-<link rel="stylesheet" href="menu.css" />
-
-<script src="/publicas/definicoes.js"></script>
-<script src="/publicas/gerais.js"></script>
-<script src="/publicas/navegador.js"></script>
-<script src="/publicas/dom.js"></script>
-<script src="/publicas/esforcos.js"></script>
-<script src="/navegador/cabecalho.js"></script>
-<script src="/navegador/rodape.js"></script>
-<script src="menu.js"></script>
+	<script src="/publicas/definicoes.js"></script>
+	<script src="/publicas/gerais.js"></script>
+	<script src="/publicas/navegador.js"></script>
+	<script src="/publicas/dom.js"></script>
+	<script src="/publicas/esforcos.js"></script>
+	<script src="/navegador/cabecalho.js"></script>
+	<script src="/navegador/rodape.js"></script>
+	<script src="menu.js"></script>
 
 </html>

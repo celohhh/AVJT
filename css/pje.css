@@ -1,0 +1,55 @@
+.avjt-botao-fixo{
+	cursor:pointer;
+	display:block;
+	opacity:0.8;
+	position:fixed;
+	z-index:1;
+}
+.avjt-botao-fixo:hover{
+	opacity:1;
+}
+.avjt-botao-fixo:active{
+	opacity:0.7;
+}
+.avjt-botao-fixo:hover::before
+{
+	animation:aparecer 0.3s ease-out 0s 1 both;
+	border-radius:0 5px 5px 5px;
+	content:attr(aria-label);
+	background-color:rgba(var(--extensao-cor-preto),0.9);
+	color:rgba(var(--extensao-cor-branco),1);
+	display:block;
+	font-size:12px;
+	font-weight:600;
+	left:15px;
+	padding:5px;
+	position:absolute;
+	text-align:center;
+	top:100%;
+	width:120px;
+	z-index:2;
+}
+
+botao-dimensoes{
+	background:
+		var(--extensao-icone-dimensoes) no-repeat center
+	;
+	height:13px;
+	left:0;
+	position:fixed;
+	top:0;
+	width:13px;
+	z-index:1;
+}
+
+botao-dados-do-processo{
+	background:
+		var(--extensao-icone-processo) no-repeat center
+	;
+	height:20px;
+	left:80px;
+	position:fixed;
+	top:45px;
+	width:30px;
+	z-index:1;
+}

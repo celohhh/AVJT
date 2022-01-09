@@ -208,6 +208,15 @@ function copiar(texto){
 }
 
 
+function copiarConteudo(){
+
+	this.select()
+	copiar(this.value)
+	esforcosPoupados(0,0,2)
+
+}
+
+
 function fechar(){
 
 	relatar('Fechando a janela...')
@@ -240,9 +249,6 @@ function saudacao(){
 }
 
 
-
-
-
 function obterValorMonetario(texto){
 
 	if(!texto)
@@ -254,4 +260,29 @@ function obterValorMonetario(texto){
 
 	return valor.join()
 
+}
+
+
+function obterCPF(texto){
+	let cpf = texto.match(EXPRESSAO.cpf) || ''
+	if(!cpf)
+		return ''
+	return cpf.join()
+}
+
+function obterCNPJ(texto){
+	let cnpj = texto.match(EXPRESSAO.cnpj) || ''
+	if(!cnpj)
+		return ''
+	return cnpj.join()
+}
+
+function obterRaizCNPJ(texto){
+	return texto.replace(/[/].*/gi,'') || ''
+}
+
+function obterDocumento(texto){
+	let cnpj = obterCNPJ(texto)
+	let cpf = obterCPF(texto)
+	return cnpj+cpf
 }
