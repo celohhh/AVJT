@@ -314,6 +314,7 @@ function definirLinks(){
 		pje.modelos							= pje.kz + 'configuracao/modelos-documentos'
 
 		pje.api.comum						= pje.raiz + 'pje-comum-api/api/'
+		pje.api.mandados				= pje.raiz + 'pje-centralmandados-api/api/'
 
 		return pje
 

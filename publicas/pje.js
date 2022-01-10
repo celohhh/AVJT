@@ -1,10 +1,26 @@
 function pjeObterProcessoId(){
 
-	EXPRESSAO.processoId = new RegExp('processo.*?[/](detalhe|documento|tarefa)','gi')
+	EXPRESSAO.processoId = new RegExp(/(processo.*?[/](detalhe|documento|tarefa))/,'gi')
 
 	let caminho = window.location.pathname.match(EXPRESSAO.processoId) || ''
 	let id      = ''
+	
+	if(!caminho)
+		return id
 
+	id = numeros(caminho.join()) || ''
+
+	return id
+
+}
+
+function pjeObterMandadoId(){
+
+	EXPRESSAO.mandadoId = new RegExp(/(centralmandados[/]mandados[/]\d+$)/,'gi')
+
+	let caminho = window.location.pathname.match(EXPRESSAO.mandadoId) || ''
+	let id      = ''
+	
 	if(!caminho)
 		return id
 
@@ -107,3 +123,34 @@ async function pjeApiObterProcessoPartes(id){
 	return dados
 
 }
+
+async function pjeApiCentralDeMandadosObterMandadoDadosPrimarios(id){
+
+	let url = LINK.pje.api.mandados + 'mandados/' + id + '/detalhamentos'
+
+	relatar('Consultando API do PJe:',url)
+
+	let resposta  = await fetch(url)
+	let dados     = await resposta.json()
+
+	return dados
+
+}
+
+
+async function pjeApiCentralDeMandadosObterProcessoId(id){
+
+	let url = LINK.pje.api.comum + 'processos/id/' + id + '/partes'
+
+	relatar('Consultando API do PJe:',url)
+
+	let resposta  = await fetch(url)
+	let dados     = await resposta.json()
+
+	return dados
+
+	//idProcessoExterno
+}
+
+
+//https://pje.trt17.jus.br/pje-centralmandados-api/api/mandados/51928/detalhamentos

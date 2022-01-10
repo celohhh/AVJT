@@ -5,15 +5,23 @@ function pje(){
 	if(!JANELA.includes(LINK.pje.dominio))
 		return
 
-	PROCESSO.id	= pjeObterProcessoId()
+	pjeOtimizarPerfilUsuario()
+	pjeOtimizarPerfilOficialDeJustica()
+	
+}
 
-	if(PROCESSO.id){
+function pjeOtimizarPerfilUsuario(){
 
-		pjeObterDadosDoProcesso(PROCESSO.id).then(
+	let id	= pjeObterProcessoId()
+
+	if(id){
+
+		pjeObterDadosDoProcesso(id).then(
 			
-			() => {
+			dados => {
 
-				console.debug('PROCESSO:',PROCESSO)
+				PROCESSO = dados
+
 				pjeOtimizarDetalhesDoProcesso()
 				
 			}
@@ -21,8 +29,53 @@ function pje(){
 		)
 
 	}
-	
+
 }
+
+
+function pjeOtimizarPerfilOficialDeJustica(){
+
+	let id	= pjeObterMandadoId()
+
+	if(id){
+
+		pjeApiCentralDeMandadosObterMandadoDadosPrimarios(id).then(
+			
+			mandado => {
+
+				if(!mandado?.idProcessoExterno)
+					return
+
+				pjeObterDadosDoProcesso(mandado.idProcessoExterno).then(
+			
+					dados => {
+						PROCESSO = dados
+						pjeOtimizarDetalhesDoMandado()
+						
+					}
+					
+				)
+				
+			}
+			
+		)
+
+	}
+
+}
+
+
+function pjeOtimizarDetalhesDoMandado(){
+
+	let contexto	= pjeObterContexto()
+
+	if(!contexto.includes('mandados'))
+		return
+
+	pjeCriarBotaoFixoDestacarDadosDoProcesso()
+
+}
+
 
 function pjeOtimizarDetalhesDoProcesso(){
 
@@ -58,18 +111,21 @@ function pjeOtimizarDetalhesDoProcesso(){
 
 }
 
+
 function pjeObterContexto(){
 
 	if(JANELA.match(/processo[/]\d+[/]detalhe/i))
 		return 'detalhes'
 	
+	if(JANELA.match(/centralmandados[/]mandados[/]\d+$/i))
+		return 'mandados'
+	
 	return ''
 
 }
 
-async function pjeObterDadosDoProcesso(){
 
-	const id = PROCESSO.id
+async function pjeObterDadosDoProcesso(id){
 
 	PROCESSO = await pjeApiObterProcessoDadosPrimarios(id)
 
@@ -80,7 +136,6 @@ async function pjeObterDadosDoProcesso(){
 
 	PROCESSO.data		= {}
 	PROCESSO.valor	= pjeObterValoresDoProcesso()
-	
 	PROCESSO.tarefa = await pjeApiObterProcessoTarefa(id)
 	PROCESSO.partes = await pjeApiObterProcessoPartes(id)
 	
@@ -89,6 +144,7 @@ async function pjeObterDadosDoProcesso(){
 	return PROCESSO
 	
 }
+
 
 function pjeObterValoresDoProcesso(){
 
@@ -101,21 +157,10 @@ function pjeObterValoresDoProcesso(){
 
 }
 
+
 function pjeCriarBotoesFixos(){
 
-	pjeCriarBotaoFixo(
-		'botao-dados-do-processo',
-		'Destacar dados do processo em uma nova janela',
-		() => {
-			let dados = {}
-			dados.id			= PROCESSO.id
-			dados.numero	= PROCESSO.numero
-			dados.partes	= PROCESSO.partes	
-			dados.valor		= PROCESSO.valor
-		
-			abrirPagina(caminho('navegador/processo/processo.htm')+'?processo='+encodeURIComponent(JSON.stringify(dados)),'processo',450,700,0,0,'popup')
-		}
-	)
+	pjeCriarBotaoFixoDestacarDadosDoProcesso()
 
 	pjeCriarBotaoFixo(
 		'botao-dimensoes',
@@ -133,17 +178,36 @@ function pjeCriarBotoesFixos(){
 		}
 	)
 
-	function pjeCriarBotaoFixo(
-		tag				= '',
-		legenda		= '',
-		aoClicar	= ''
-	){
-	
-		let botao = criar(tag,'avjt'+tag,'avjt-botao-fixo')
-		botao.setAttribute('aria-label',legenda)
-		botao.addEventListener('click',aoClicar)
+}
 
-	}
 
+function pjeCriarBotaoFixoDestacarDadosDoProcesso(){
+
+	pjeCriarBotaoFixo(
+		'botao-dados-do-processo',
+		'Destacar dados do processo em uma nova janela',
+		() => {
+			let dados = {}
+			dados.id			= PROCESSO.id
+			dados.numero	= PROCESSO.numero
+			dados.partes	= PROCESSO.partes	
+			dados.valor		= PROCESSO.valor
+		
+			abrirPagina(caminho('navegador/processo/processo.htm')+'?processo='+encodeURIComponent(JSON.stringify(dados)),'processo',450,700,0,0,'popup')
+		}
+	)
+
+}
+
+
+function pjeCriarBotaoFixo(
+	tag				= '',
+	legenda		= '',
+	aoClicar	= ''
+){
+
+	let botao = criar(tag,'avjt'+tag,'avjt-botao-fixo')
+	botao.setAttribute('aria-label',legenda)
+	botao.addEventListener('click',aoClicar)
 
 }

@@ -53,27 +53,28 @@ function criarMenuDePartesDoProcesso(){
 			criarCampos(polo,secao)
 		}
 
-		function criarCampos(polo,secao){
-
-			
+		function criarCampos(polo,secao){		
 			
 			polo.forEach(
 				parte => {
 					let subsecao = criar('parte','','',secao)
+
+					if(!parte?.nome)
+						return
 					criarCampo('Nome:','largura100',parte.nome,subsecao)
 
 					let classe = 'largura49'
+
+					if(parte?.documento){
+						let cnpj = obterCNPJ(parte.documento)
+						if(cnpj)
+							classe = 'largura32'
+						criarCampo('Documento:',classe,parte.documento,subsecao)
+						if(cnpj)
+							criarCampo('Raiz do CNPJ:',classe,obterRaizCNPJ(parte.documento),subsecao)
+						criarCampo('Sem separadores:',classe,numeros(parte.documento),subsecao)									
+					}
 					
-					let cnpj = obterCNPJ(parte.documento)
-
-					if(cnpj)
-						classe = 'largura32'
-
-					criarCampo('Documento:',classe,parte.documento,subsecao)
-					if(cnpj)
-						criarCampo('Raiz do CNPJ:',classe,obterRaizCNPJ(parte.documento),subsecao)
-					criarCampo('Sem separadores:',classe,numeros(parte.documento),subsecao)
-									
 				}
 			)
 
