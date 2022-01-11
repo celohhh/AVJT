@@ -10,55 +10,33 @@ function pje(){
 	
 }
 
-function pjeOtimizarPerfilUsuario(){
+async function pjeOtimizarPerfilUsuario(){
 
 	let id	= pjeObterProcessoId()
 
 	if(id){
 
-		pjeObterDadosDoProcesso(id).then(
-			
-			dados => {
-
-				PROCESSO = dados
-
-				pjeOtimizarDetalhesDoProcesso()
-				
-			}
-			
-		)
+		PROCESSO = await pjeObterDadosDoProcesso(id)
+		pjeOtimizarDetalhesDoProcesso()
 
 	}
 
 }
 
 
-function pjeOtimizarPerfilOficialDeJustica(){
+async function pjeOtimizarPerfilOficialDeJustica(){
 
 	let id	= pjeObterMandadoId()
 
 	if(id){
 
-		pjeApiCentralDeMandadosObterMandadoDadosPrimarios(id).then(
-			
-			mandado => {
+		mandado = await pjeApiCentralDeMandadosObterMandadoDadosPrimarios(id)
+		if(!mandado?.idProcessoExterno)
+			return
 
-				if(!mandado?.idProcessoExterno)
-					return
+		PROCESSO = await pjeObterDadosDoProcesso(mandado.idProcessoExterno)
 
-				pjeObterDadosDoProcesso(mandado.idProcessoExterno).then(
-			
-					dados => {
-						PROCESSO = dados
-						pjeOtimizarDetalhesDoMandado()
-						
-					}
-					
-				)
-				
-			}
-			
-		)
+		pjeOtimizarDetalhesDoMandado()
 
 	}
 

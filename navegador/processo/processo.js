@@ -1,6 +1,6 @@
 window.addEventListener('load',criarMenuDePartesDoProcesso)
 
-function criarMenuDePartesDoProcesso(){
+async function criarMenuDePartesDoProcesso(){
 
 	setInterval(contarEsforcosRepetitivosPoupados,100)
 
@@ -15,6 +15,11 @@ function criarMenuDePartesDoProcesso(){
 	listarDadosDoProcesso()
 	listarPartes()
 
+	CONFIGURACAO = await browser.storage.local.get(['assistenteDeSelecao'])
+	CONFIGURACAO.assistenteDeSelecao.copiar = true
+
+	assistenteDeSelecao()
+
 	function listarDadosDoProcesso(){
 
 		let base = selecionar('processo')
@@ -23,13 +28,13 @@ function criarMenuDePartesDoProcesso(){
 
 		if(PROCESSO?.numero){
 			let secao = criar('numero','','subsecao',base)
-			criarCampo('Número:','processo',PROCESSO.numero,secao)
-			criarCampo('Número sem separadores:','processo',numeros(PROCESSO.numero),secao)
+			criarCampo('Número:','largura49',PROCESSO.numero,secao)
+			criarCampo('Número sem separadores:','largura49',numeros(PROCESSO.numero),secao)
 		}
 
 		if(PROCESSO?.valor?.causa){
 			let secao = criar('valor','','subsecao',base)
-			criarCampo('Valor da Causa:','valor',PROCESSO.valor.causa,secao)
+			criarCampo('Valor da Causa:','largura49',PROCESSO.valor.causa,secao)
 		}
 
 
@@ -100,13 +105,18 @@ function criarMenuDePartesDoProcesso(){
 		let rotulo	= criar('rotulo','',classe,ancestral)
 		rotulo.setAttribute('aria-label',titulo)
 
-		let campo		= criar('input','','',rotulo)
-		campo.type	= 'text'
-		campo.value	= texto
+		let campo		= criar('campo','','',rotulo)
+		campo.innerText				= texto
+		campo.contentEditable	= true
+		campo.spellcheck			= false
 
 		campo.addEventListener(
 			'click',
-			copiarConteudo
+			evento => {
+				let elemento = evento.target
+				window.getSelection().selectAllChildren(elemento)
+				//copiar(elemento.innerText)		
+			}
 		)
 
 		return campo

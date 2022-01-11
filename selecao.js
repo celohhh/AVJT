@@ -1,3 +1,5 @@
+
+
 function assistenteDeSelecao(){
 
 	if(!CONFIGURACAO.assistenteDeSelecao.ativado)
@@ -24,10 +26,11 @@ function assistenteDeSelecao(){
 		if(!texto){
 			fecharMenu()
 			return
-		}
+		}		
 		
 		let caracteres								= texto.length
 		let textoAparado							= texto.trim()
+		let letra											= texto.match(/[A-Za-zÀ-ȕ]/)
 		let numero										= numeros(texto)
 		let valor											= obterValorMonetario(texto)
 		let uri												= encodeURI(texto)
@@ -41,26 +44,31 @@ function assistenteDeSelecao(){
 			() => copiarTextoSelecionado()
 		)
 
-		criarBotao(
-			'maiusculas',
-			'',
-			'Converter texto para letras maiúsculas',
-			converterTextoParaMaiusculas
-		)
+		if(letra){
 
-		criarBotao(
-			'minusculas',
-			'',
-			'Converter texto para letras minúsculas',
-			converterTextoParaMinusculas
-		)
+			criarBotao(
+				'maiusculas',
+				'',
+				'Converter texto para letras maiúsculas',
+				converterTextoParaMaiusculas
+			)
+	
+			criarBotao(
+				'minusculas',
+				'',
+				'Converter texto para letras minúsculas',
+				converterTextoParaMinusculas
+			)
+	
+			criarBotao(
+				'titularizar',
+				'',
+				'Converter texto para Título',
+				converterTextoParaTitulo
+			)
 
-		criarBotao(
-			'titularizar',
-			'',
-			'Converter texto para Título',
-			converterTextoParaTitulo
-		)
+		}
+
 
 		if(valor){
 			criarBotao(
@@ -234,7 +242,7 @@ function assistenteDeSelecao(){
 			aoClicar	= ''
 		){
 
-			let botao			= criar('button',id,'link legenda',menu)
+			let botao			= criar('button',id,'link',menu)
 
 			if(id)
 				botao.id = id
