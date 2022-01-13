@@ -47,6 +47,18 @@ function assistenteDeSelecao(){
 			() => copiarTextoSelecionado()
 		)
 
+
+		if(letra){
+
+			criarBotao(
+				'pje-consultar-processo',
+				'',
+				'Consultar Parte ou Representante no PJe',
+				() => pjeAbrirPainelDeConsultaProcessual({nomeParte:maiusculas(textoAparado)})
+			)
+
+		}
+
 		if(cnpj){
 
 			criarBotao(
@@ -90,13 +102,6 @@ function assistenteDeSelecao(){
 		}
 
 		if(letra){
-
-			criarBotao(
-				'pje-consultar-processo',
-				'',
-				'Consultar Parte ou Representante no PJe',
-				() => pjeAbrirPainelDeConsultaProcessual({nomeParte:maiusculas(textoAparado)})
-			)
 
 			criarBotao(
 				'maiusculas',
