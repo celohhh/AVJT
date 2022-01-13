@@ -181,7 +181,6 @@ async function pjeConsultarDetalhesDoProcesso(numero=''){
 	let url = LINK.pje.processo + id + '/detalhe?janela=destacada'
 
 	let janela			= CONFIGURACAO?.janela?.pjeDetalhes || ''
-
 	let largura			=	janela?.largura			|| 1200
 	let altura			= janela?.altura			|| 900
 	let horizontal	= janela?.horizontal	|| 0
@@ -198,9 +197,7 @@ async function pjeConsultarDetalhesDoProcesso(numero=''){
 }
 
 
-function pjeAbrirPainelDeConsultaProcessual(
-	consulta = {}
-){
+function pjeAbrirPainelDeConsultaProcessual(consulta = {}){
 
 	if(vazio(consulta))
 		return
@@ -210,7 +207,20 @@ function pjeAbrirPainelDeConsultaProcessual(
 
 	let url = LINK.pje.consulta.processos + '?' + campo + '=' + conteudo
 
-	abrirPagina(url)
+	let janela			= CONFIGURACAO?.janela?.pjePainel || ''
+
+	let largura			=	janela?.largura			|| 1200
+	let altura			= janela?.altura			|| 900
+	let horizontal	= janela?.horizontal	|| 0
+	let vertical		= janela?.vertical		|| 0
+
+	abrirPagina(
+		url,
+		largura,
+		altura,
+		horizontal,
+		vertical
+	)
 
 	esforcosPoupados(3,3,contarCaracteres(conteudo))
 
