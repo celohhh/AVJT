@@ -1,20 +1,15 @@
 window.addEventListener('load',termosDeUso)
 
-function termosDeUso(){
+async function termosDeUso(){
 
-	browser.storage.local.get(
-		null,
-		armazenamento => {
+	let armazenamento = await browser.storage.local.get()
 
-			EXTENSAO.ativada	= armazenamento.ativada
-			CONFIGURACAO			= armazenamento
+	CONFIGURACAO			= armazenamento
+	EXTENSAO.ativada	= CONFIGURACAO.ativada
 
-			definicoesGlobais()
-			criarCabecalhoDePaginaDaExtensao()
-			definirEstadoDaExtensao()
-			criarRodapeDePaginaDaExtensao()
-
-		}
-	)
+	definicoesGlobais()
+	criarCabecalhoDePaginaDaExtensao()
+	definirEstadoDaExtensao()
+	criarRodapeDePaginaDaExtensao()
 
 }

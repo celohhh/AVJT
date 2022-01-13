@@ -8,7 +8,7 @@ browser.userScripts.onBeforeScript.addListener(
 			return `${id}:${nome}`
 		}
 
-		
+
 		script.defineGlobals({
 
 			async obterValor(nome){

@@ -1,5 +1,3 @@
-
-
 function assistenteDeSelecao(){
 
 	if(!CONFIGURACAO.assistenteDeSelecao.ativado)
@@ -9,7 +7,7 @@ function assistenteDeSelecao(){
 
 	function aoSelecionar(){
 
-		let selecao = document.getSelection()
+		let selecao = document.getSelection() || ''
 
 		if(!selecao)
 			return
@@ -26,16 +24,21 @@ function assistenteDeSelecao(){
 		if(!texto){
 			fecharMenu()
 			return
-		}		
-		
-		let caracteres								= texto.length
-		let textoAparado							= texto.trim()
-		let letra											= texto.match(/[A-Za-zÀ-ȕ]/)
-		let numero										= numeros(texto)
-		let valor											= obterValorMonetario(texto)
-		let uri												= encodeURI(texto)
+		}
+
+		let caracteres									= contarCaracteres(texto)
+		let cnpj												= obterCNPJ(texto)
+		let cpf													= obterCPF(texto)
+		let textoAparado								= texto.trim()
+		let letra												= texto.match(/[A-Za-zÀ-ȕ]/)
+		let numero											= numeros(texto)
+		let pjeNumeroDoProcessoParcial	= obterNumeroDoProcessoParcial(texto)
+		let pjeNumeroDoProcessoCompleto	= obterNumeroDoProcessoPadraoCNJ(texto)
+		let valor												= obterValorMonetario(texto)
+		let uri													= encodeURI(texto)
 
 		let menu = criarMenu()
+
 
 		criarBotao(
 			'copiar',
@@ -44,7 +47,56 @@ function assistenteDeSelecao(){
 			() => copiarTextoSelecionado()
 		)
 
+		if(cnpj){
+
+			criarBotao(
+				'pje-consultar-processo',
+				'',
+				'Consultar CNPJ no PJe',
+				() => pjeAbrirPainelDeConsultaProcessual({cnpj})
+			)
+
+		}
+
+		if(cpf){
+
+			criarBotao(
+				'pje-consultar-processo',
+				'',
+				'Consultar CPF no PJe',
+				() => pjeAbrirPainelDeConsultaProcessual({cpf})
+			)
+
+		}
+
+		if(pjeNumeroDoProcessoParcial){
+
+			criarBotao(
+				'pje-consultar-processo',
+				'',
+				'Consultar Processo no PJe',
+				() => pjeAbrirPaginaDeConsultaProcessual(pjeNumeroDoProcessoParcial)
+			)
+
+			if(pjeNumeroDoProcessoCompleto)
+				criarBotao(
+					'pje-consultar-processo',
+					'',
+					'Consultar Detalhes do Processo no PJe',
+					() => pjeConsultarDetalhesDoProcesso(pjeNumeroDoProcessoCompleto)
+				)
+
+
+		}
+
 		if(letra){
+
+			criarBotao(
+				'pje-consultar-processo',
+				'',
+				'Consultar Parte ou Representante no PJe',
+				() => pjeAbrirPainelDeConsultaProcessual({nomeParte:maiusculas(textoAparado)})
+			)
 
 			criarBotao(
 				'maiusculas',
@@ -52,14 +104,14 @@ function assistenteDeSelecao(){
 				'Converter texto para letras maiúsculas',
 				converterTextoParaMaiusculas
 			)
-	
+
 			criarBotao(
 				'minusculas',
 				'',
 				'Converter texto para letras minúsculas',
 				converterTextoParaMinusculas
 			)
-	
+
 			criarBotao(
 				'titularizar',
 				'',
@@ -109,71 +161,62 @@ function assistenteDeSelecao(){
 			abrirWhatsapp
 		)
 
-		copiarAutomaticamenteTextoSelecionado()
-		
 		menu.style.left			= posicao.horizontal + 'px'
 		menu.style.top			= (posicao.vertical - menu.offsetHeight) + 'px'
 		menu.style.opacity	= '1'
 
+		copiarAutomaticamenteTextoSelecionado()
+
 		function escreverValorPorExtenso(){
 
-			if(selecao.rangeCount){
+			let prefixo = ''
 
-				conteudo.deleteContents()
+			if(!texto.includes('$'))
+			prefixo = 'R$ '
 
-				let prefixo = ''
+			let porExtenso = prefixo + texto + ' (' + extenso(valor,true) + ')'
 
-				if(!texto.includes('$'))
-					prefixo = 'R$ '
-
-				let porExtenso = prefixo + texto + ' (' + extenso(valor,true) + ')'
-
-				conteudo.insertNode(document.createTextNode(porExtenso))
-
-			}
+			conteudo.deleteContents()
+			conteudo.insertNode(document.createTextNode(porExtenso))
+			esforcosPoupados(0,1,contarCaracteres(porExtenso))
 
 		}
 
 
 		function escreverNumeroPorExtenso(){
 
-			if(selecao.rangeCount){
-				conteudo.deleteContents()
-				let porExtenso = texto + ' (' + extenso(texto) + ')'
-				conteudo.insertNode(document.createTextNode(porExtenso))
-			}
+			let porExtenso = texto + ' (' + extenso(texto) + ')'
+			conteudo.deleteContents()
+			conteudo.insertNode(document.createTextNode(porExtenso))
+			esforcosPoupados(0,1,contarCaracteres(porExtenso))
 
 		}
 
 
 		function converterTextoParaMaiusculas(){
 
-			if(selecao.rangeCount){
-				conteudo.deleteContents()
-				conteudo.insertNode(document.createTextNode(maiusculas(texto)))
-			}
+			conteudo.deleteContents()
+			conteudo.insertNode(document.createTextNode(maiusculas(texto)))
+			esforcosPoupados(0,1,caracteres)
 
 		}
 
 
 		function converterTextoParaMinusculas(){
 
-			if(selecao.rangeCount){
-				conteudo.deleteContents()
-				conteudo.insertNode(document.createTextNode(minusculas(texto)))
-			}
+			conteudo.deleteContents()
+			conteudo.insertNode(document.createTextNode(minusculas(texto)))
+			esforcosPoupados(0,1,caracteres)
 
 		}
 
 		function converterTextoParaTitulo(){
 
-			if(selecao.rangeCount){
-				conteudo.deleteContents()
-				conteudo.insertNode(document.createTextNode(titularizar(texto)))
-			}
+			conteudo.deleteContents()
+			conteudo.insertNode(document.createTextNode(titularizar(texto)))
+			esforcosPoupados(0,1,caracteres)
 
 		}
-
 
 		function abrirGoogle(){
 
@@ -182,14 +225,12 @@ function assistenteDeSelecao(){
 
 		}
 
-
 		function abrirGoogleTradutor(){
 
 			abrirPagina(LINK.google.tradutor + uri)
 			esforcosPoupados(1,2,caracteres)
 
 		}
-
 
 		function abrirWhatsapp(){
 
@@ -207,14 +248,12 @@ function assistenteDeSelecao(){
 
 		}
 
-
 		function copiarAutomaticamenteTextoSelecionado(){
 
 			if(CONFIGURACAO.assistenteDeSelecao.copiar)
 				clicar('assistente-de-selecao > #copiar')
 
 		}
-
 
 		function copiarTextoSelecionado(){
 			copiar(textoAparado)
@@ -242,7 +281,7 @@ function assistenteDeSelecao(){
 			aoClicar	= ''
 		){
 
-			let botao			= criar('button',id,'link',menu)
+			let botao			= criar('botao',id,'link',menu)
 
 			if(id)
 				botao.id = id

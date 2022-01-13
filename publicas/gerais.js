@@ -95,7 +95,7 @@ function titularizar(texto){
 		return
 
 	let textoEmMinusculas = minusculas(texto)
-	
+
 	let titulo = textoEmMinusculas.split(' ').map(
 		palavra => {
 			if(palavra)
@@ -105,8 +105,8 @@ function titularizar(texto){
 				)
 		}
 	).join(' ')
-		
-	
+
+
 	return titulo.replace(
 		/\s(E|(A|O)(s)|D(e|a|as|o|os))\s/g,
 		correspondencia => minusculas(correspondencia)
@@ -154,11 +154,11 @@ function obterParametroDeURL(parametro){
 
 function abrirPagina(
 	url,
-	chave				= 'nova',
 	largura			= 1000,
 	altura			= 700,
 	horizontal	= 0,
 	vertical		= 0,
+	chave				= '_blank',
 	tipo				= 'normal'
 ){
 
@@ -249,10 +249,8 @@ function saudacao(){
 }
 
 
-function obterValorMonetario(texto){
 
-	if(!texto)
-		return ''
+function obterValorMonetario(texto){
 
 	let valor = texto.match(EXPRESSAO.valorMonetario) || ''
 	if(!valor)
@@ -285,4 +283,58 @@ function obterDocumento(texto){
 	let cnpj = obterCNPJ(texto)
 	let cpf = obterCPF(texto)
 	return cnpj+cpf
+}
+
+function obterNumeroDoProcessoPadraoCNJ(texto){
+	let numero = texto.match(EXPRESSAO.processoNumero) || ''
+	if(!numero)
+		return ''
+	return numero.join() || ''
+}
+
+function obterNumeroDoProcessoParcial(texto){
+	let numero = texto.match(EXPRESSAO.processoNumeroParcial) || ''
+	if(!numero)
+		return ''
+	return String(numero.join())?.padStart(15,'0') || ''
+}
+
+
+function alterarValorDeCampo(
+	campo = '',
+	texto = ''
+){
+
+	if(!campo)
+		return
+
+	let propriedade = Object.getOwnPropertyDescriptor(
+		window.HTMLInputElement.prototype,
+		'value'
+	).set
+
+	propriedade.call(campo,texto)
+
+	esforcosPoupados(1,1,contarCaracteres(texto))
+
+	let evento = new Event(
+		'input',
+		{bubbles:true}
+	)
+
+	campo.dispatchEvent(evento)
+
+}
+
+
+function contarCaracteres(texto){
+	if(!texto)
+		return 0
+	if(texto?.length){
+		let caracteres = texto.length || 0
+		if(caracteres > 0)
+			return caracteres
+	}
+	else
+		return 0
 }

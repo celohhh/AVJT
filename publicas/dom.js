@@ -7,7 +7,7 @@
  * @example
  * esperar('#id').then(elemento => console.log(elemento))
  */
-function esperar(
+async function esperar(
 	seletor			= '',
 	atributos		= false,
 	caracteres	= false
@@ -28,7 +28,7 @@ function esperar(
 					if(observado){
 						relatar('-> Elemento encontrado: ',observado)
 						observador.disconnect()
-						resolver(elemento)
+						resolver(observado)
 					}
 				}
 			)
@@ -41,6 +41,7 @@ function esperar(
 					characterData:	caracteres
 				}
 			)
+
 		}
 	)
 }

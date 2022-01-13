@@ -1,68 +1,63 @@
 window.addEventListener('load',criarMenuDaBarraDeFerramentasDoNavegador)
 
+async function criarMenuDaBarraDeFerramentasDoNavegador(){
 
-function criarMenuDaBarraDeFerramentasDoNavegador(){
+	let armazenamento = await browser.storage.local.get()
 
-	browser.storage.local.get(
-		null,
-		armazenamento => {
+	CONFIGURACAO			= armazenamento
+	EXTENSAO.ativada	= CONFIGURACAO.ativada
 
-			EXTENSAO.ativada	= armazenamento.ativada
-			CONFIGURACAO			= armazenamento
+	if(!CONFIGURACAO?.instituicao?.tribunal)
+		abrirPaginaConfiguracaoDoTribunal()
 
-			if(!CONFIGURACAO?.instituicao?.tribunal)
-				abrirPaginaConfiguracaoDoTribunal()
+	definicoesGlobais()
+	criarCabecalhoDePaginaDaExtensao()
+	definirEstadoDaExtensao()
+	criarRodapeDePaginaDaExtensao()
+	criarLinksUteis()
+	inserirLegendaNosLinksDoYoutube()
 
-			setInterval(contarEsforcosRepetitivosPoupados,100)
+	criarBotaoFixo(
+		'script',
+		'Script de Usuário (se você possui conhecimento em JavaScript, poderá executar códigos nas páginas em que desejar)',
+		abrirPaginaScriptDeUsuario
+	)
+	criarBotaoFixo(
+		'desenvolvimento',
+		'Sente falta de alguma funcionalidade? Clique neste botão e fale com o Desenvolvedor desta Extensão',
+		abrirPaginaDesenvolvimento
+	)
+	criarBotaoFixo(
+		'recarregar',
+		'Recarregar Extensão',
+		evento => {
+			evento.target.classList.toggle('recarregar')
+			setTimeout(recarregar,500)
+		}
+	)
 
-			definicoesGlobais()
-			criarCabecalhoDePaginaDaExtensao()
-			definirEstadoDaExtensao()
-			criarRodapeDePaginaDaExtensao()
-			criarLinksUteis()
-			inserirLegendaNosLinksDoYoutube()
+	obterConfiguracoesDaExtensao()
 
-			criarBotaoFixo(
-				'script',
-				'Script de Usuário (se você possui conhecimento em JavaScript, poderá executar códigos nas páginas em que desejar)',
-				abrirPaginaScriptDeUsuario
-			)
-			criarBotaoFixo(
-				'desenvolvimento',
-				'Sente falta de alguma funcionalidade? Clique neste botão e fale com o Desenvolvedor desta Extensão',
-				abrirPaginaDesenvolvimento
-			)
-			criarBotaoFixo(
-				'recarregar',
-				'Recarregar Extensão',
-				evento => {
-					evento.target.classList.toggle('recarregar')
-					setTimeout(recarregar,500)
-				}
-			)
-		
-			obterConfiguracoesDaExtensao()
+	window.addEventListener('input',salvarConfiguracoesDaExtensao)
 
-			window.addEventListener('input',salvarConfiguracoesDaExtensao)
+	window.addEventListener(
+		'click',
+		evento => {
 
-			window.addEventListener(
-				'click',
-				evento => {
+			let tag	= evento.target.tagName
+			let id	= evento.target.id
 
-					let tag	= evento.target.tagName
-					let id	= evento.target.id
+			if(id === 'ativador')
+				return
 
-					if(id === 'ativador')
-						return
-
-					if(tag.includes('INPUT'))
-						salvarConfiguracoesDaExtensao()
-
-				}
-			)
+			if(tag.includes('INPUT'))
+				salvarConfiguracoesDaExtensao()
 
 		}
 	)
+
+	setInterval(contarEsforcosRepetitivosPoupados,100)
+
 
 	function criarBotaoFixo(
 		id				= '',

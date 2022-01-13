@@ -36,7 +36,7 @@ function extenso(
 		textual = []
 
 	){
-		
+
 		indice && (
 			numero[indice] = (
 				('.' + numero[indice]) * 1
@@ -59,7 +59,7 @@ function extenso(
 				).length
 			)
 			continue
-      
+
 		for(
 
 			texto = -1,
@@ -74,9 +74,9 @@ function extenso(
 
 			if(
 				!(inteiro = numerico[texto] * 1)
-			) 
+			)
 				continue
-          
+
 			inteiro % 100 < 20 && (termo += termos[0][inteiro % 100]) || inteiro % 100 + 1 && (
 				termo += termos[1][(inteiro % 100 / 10 >> 0) - 1] + (
 					inteiro % 10

@@ -1,13 +1,15 @@
-window.addEventListener('load',criarMenuDePartesDoProcesso)
+window.addEventListener('load',criarMenuDadosDoProcesso)
 
-async function criarMenuDePartesDoProcesso(){
+async function criarMenuDadosDoProcesso(){
 
-	setInterval(contarEsforcosRepetitivosPoupados,100)
+	let armazenamento = await browser.storage.local.get()
+
+	CONFIGURACAO = armazenamento
 
 	let processo = obterParametroDeURL('processo')
 
 	PROCESSO = JSON.parse(processo)
-	
+
 	definicoesGlobais()
 	criarCabecalhoDePaginaDaExtensao()
 	selecionar('h1').innerText = 'DADOS DO PROCESSO'
@@ -20,10 +22,12 @@ async function criarMenuDePartesDoProcesso(){
 
 	assistenteDeSelecao()
 
+	setInterval(contarEsforcosRepetitivosPoupados,100)
+
 	function listarDadosDoProcesso(){
 
 		let base = selecionar('processo')
-		
+
 		criarTitulo('Processo',base)
 
 		if(PROCESSO?.numero){
@@ -58,8 +62,8 @@ async function criarMenuDePartesDoProcesso(){
 			criarCampos(polo,secao)
 		}
 
-		function criarCampos(polo,secao){		
-			
+		function criarCampos(polo,secao){
+
 			polo.forEach(
 				parte => {
 					let subsecao = criar('parte','','',secao)
@@ -77,16 +81,16 @@ async function criarMenuDePartesDoProcesso(){
 						criarCampo('Documento:',classe,parte.documento,subsecao)
 						if(cnpj)
 							criarCampo('Raiz do CNPJ:',classe,obterRaizCNPJ(parte.documento),subsecao)
-						criarCampo('Sem separadores:',classe,numeros(parte.documento),subsecao)									
+						criarCampo('Sem separadores:',classe,numeros(parte.documento),subsecao)
 					}
-					
+
 				}
 			)
 
 		}
 
 	}
-	
+
 	function criarTitulo(
 		texto			= '',
 		ancestral	= ''
@@ -115,7 +119,6 @@ async function criarMenuDePartesDoProcesso(){
 			evento => {
 				let elemento = evento.target
 				window.getSelection().selectAllChildren(elemento)
-				//copiar(elemento.innerText)		
 			}
 		)
 

@@ -4,7 +4,7 @@ function pjeObterProcessoId(){
 
 	let caminho = window.location.pathname.match(EXPRESSAO.processoId) || ''
 	let id      = ''
-	
+
 	if(!caminho)
 		return id
 
@@ -20,7 +20,7 @@ function pjeObterMandadoId(){
 
 	let caminho = window.location.pathname.match(EXPRESSAO.mandadoId) || ''
 	let id      = ''
-	
+
 	if(!caminho)
 		return id
 
@@ -39,7 +39,7 @@ function obterDadosDoNumeroDoProcesso(numero){
 	let processo = {}
 
 	processo.numeros = numeros(numero)
-	
+
 	if(numero.length === 25){
 
 		let campos = numero.replace(/\D/g,'.').split('.')
@@ -149,8 +149,104 @@ async function pjeApiCentralDeMandadosObterProcessoId(id){
 
 	return dados
 
-	//idProcessoExterno
 }
 
 
-//https://pje.trt17.jus.br/pje-centralmandados-api/api/mandados/51928/detalhamentos
+async function pjeConsultarDetalhesDoProcesso(numero=''){
+
+	if(!numero)
+		return
+
+	let dados = await pjeApiConsultaPublicaObterProcessoId(numero) || ''
+	let id = dados[0]?.id || ''
+
+	if(
+		!id
+		||
+		!dados
+		||
+		dados?.codigoErro
+	){
+
+		MODO.consutar = true
+
+		copiar(JSON.stringify(MODO))
+
+		pjeAbrirPaginaDeConsultProcessual(numero)
+
+		return
+
+	}
+
+	let url = LINK.pje.processo + id + '/detalhe?janela=destacada'
+
+	let janela			= CONFIGURACAO?.janela?.pjeDetalhes || ''
+
+	let largura			=	janela?.largura			|| 1200
+	let altura			= janela?.altura			|| 900
+	let horizontal	= janela?.horizontal	|| 0
+	let vertical		= janela?.vertical		|| 0
+
+	abrirPagina(
+		url,
+		largura,
+		altura,
+		horizontal,
+		vertical
+	)
+
+}
+
+
+function pjeAbrirPainelDeConsultaProcessual(
+	consulta = {}
+){
+
+	if(vazio(consulta))
+		return
+
+	let campo			= Object.keys(consulta)[0]
+	let conteudo	= consulta[campo]
+
+	let url = LINK.pje.consulta.processos + '?' + campo + '=' + conteudo
+
+	abrirPagina(url)
+
+	esforcosPoupados(3,3,contarCaracteres(conteudo))
+
+}
+
+
+function pjeAbrirPaginaDeConsultaProcessual(numero=''){
+
+	if(!numero)
+		return
+
+	let url = LINK.pje.painel.global + '?processo=' + numero
+
+	abrirPagina(url)
+
+}
+
+
+async function pjeApiConsultaPublicaObterProcessoId(numero){
+
+	let url = LINK.pje.api.consulta + 'processos/dadosbasicos/' + numero
+
+	let resposta = 	await fetch(
+		url,
+		{
+			"credentials": "include",
+			"headers": {
+					"X-Grau-Instancia": CONFIGURACAO?.instituicao?.instancia || 1
+			},
+			"method": "GET",
+			"mode": "cors"
+		}
+	)
+
+	let dados = await resposta.json()
+
+	return dados || ''
+
+}

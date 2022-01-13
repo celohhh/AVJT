@@ -1,31 +1,26 @@
 window.addEventListener('load',definirTribunal)
 
-function definirTribunal(){
+async function definirTribunal(){
 
-	browser.storage.local.get(
-		null,
-		armazenamento => {
+	let armazenamento = await browser.storage.local.get()
 
-			EXTENSAO.ativada	= armazenamento.ativada
-			CONFIGURACAO			= armazenamento
+	CONFIGURACAO			= armazenamento
+	EXTENSAO.ativada	= CONFIGURACAO.ativada
 
-			definicoesGlobais()
-			criarCabecalhoDePaginaDaExtensao()
-			criarRodapeDePaginaDaExtensao()
+	definicoesGlobais()
+	criarCabecalhoDePaginaDaExtensao()
+	criarRodapeDePaginaDaExtensao()
 
-			selecionar('#salvar').addEventListener(
-				'click',
+	selecionar('#salvar').addEventListener(
+		'click',
+		() => {
+			salvarConfiguracoesDaExtensao()
+			setTimeout(
 				() => {
-					salvarConfiguracoesDaExtensao()
-					setTimeout(
-						() => {
-							abrirPaginaTermosDeUso()
-							fechar()
-						},
-						500
-					)
-
-				}
+					abrirPaginaTermosDeUso()
+					fechar()
+				},
+				500
 			)
 
 		}

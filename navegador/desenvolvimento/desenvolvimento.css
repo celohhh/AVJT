@@ -60,3 +60,7 @@ main p{
 {
 	display:none;
 }
+
+main button{
+	font-size:1rem;
+}

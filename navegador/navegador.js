@@ -4,8 +4,8 @@ browser.storage.local.get(
 
 		//publicas/definicoes.js
 
-		EXTENSAO.ativada	= armazenamento.ativada
 		CONFIGURACAO			= armazenamento
+		EXTENSAO.ativada	= CONFIGURACAO.ativada
 
 		if(CONFIGURACAO?.extensaoAtiva)
 			browser.storage.local.clear().then(definicoes)
@@ -59,7 +59,7 @@ browser.storage.local.get(
 browser.runtime.onMessage.addListener(
 	acao => {
 
-		if(acao.url){
+		if(acao?.url){
 			criarJanela(
 				acao.url,
 				acao.chave,
@@ -78,7 +78,10 @@ browser.runtime.onMessage.addListener(
 					abas => {
 						abas.forEach(
 							aba => {
-							
+
+								if(aba.url.includes('janela=destacada'))
+									return
+
 								if(
 										(aba.url.includes('detalhe') && acao.mensagem == 'separarAbaDetalhesDoProcesso')
 									)
@@ -89,6 +92,7 @@ browser.runtime.onMessage.addListener(
 										left:Number(acao.horizontal),
 										top:Number(acao.vertical)
 									})
+
 							}
 						)
 					},
@@ -101,5 +105,3 @@ browser.runtime.onMessage.addListener(
 	}
 
 )
-
-

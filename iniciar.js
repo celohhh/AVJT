@@ -10,7 +10,7 @@ browser.storage.local.get(
 		//publicas/definicoes.js
 		EXTENSAO.ativada	= armazenamento.ativada
 		CONFIGURACAO			= armazenamento
-		
+
 
 		//publicas/gerais.js
 		relatar('CONFIGURAÇÃO: ', CONFIGURACAO)
@@ -28,13 +28,13 @@ function otimizar(){
 
 	definicoesGlobais()
 
-	//publicas/esforcos.js
-	setInterval(contarEsforcosRepetitivosPoupados,1000)
-		
 	//selecao.js
 	assistenteDeSelecao()
 
 	//pje.js
 	pje()
+
+	//publicas/esforcos.js
+	setInterval(contarEsforcosRepetitivosPoupados,1000)
 
 }

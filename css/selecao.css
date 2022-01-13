@@ -26,7 +26,7 @@ assistente-de-selecao{
 	transition:opacity 0.5s;
 }
 
-assistente-de-selecao button{
+assistente-de-selecao botao{
 	box-shadow:0px 2px 3px rgba(var(--extensao-cor-preto),0.5);
 	box-sizing:border-box;
 	cursor:pointer;
@@ -38,7 +38,7 @@ assistente-de-selecao button{
 	width:30px;
 }
 
-assistente-de-selecao button:hover::before{
+assistente-de-selecao botao:hover::before{
 	border-radius:5px;
 	box-shadow:0px 2px 2px 2px rgba(var(--extensao-cor-preto), 0.3);
 	content:attr(aria-label);
@@ -59,26 +59,26 @@ assistente-de-selecao button:hover::before{
 }
 
 
-assistente-de-selecao button:hover{
+assistente-de-selecao botao:hover{
 	box-shadow:0px 0px 2px 2px rgba(var(--extensao-cor-branco), 0.5);
 	opacity:1;
 }
 
-assistente-de-selecao button:active{
+assistente-de-selecao botao:active{
 	box-shadow:0px 2px 1px 1px rgba(var(--extensao-cor-preto), 0.25);
 	opacity:0.8;
 }
 
-assistente-de-selecao button.solido{
+assistente-de-selecao botao.solido{
 	box-shadow:none;
 	opacity:0.9;
 }
 
-assistente-de-selecao button.solido:hover{
+assistente-de-selecao botao.solido:hover{
 	opacity:1;
 }
 
-assistente-de-selecao button.solido:active{
+assistente-de-selecao botao.solido:active{
 	opacity:0.8;
 }
 
@@ -154,5 +154,13 @@ assistente-de-selecao #titularizar{
     var(--extensao-icone-t) no-repeat center / 70% 70%,
     var(--extensao-gradiente-branco-preto),
     rgba(var(--extensao-cor-preto),0.8)
+  ;
+}
+
+assistente-de-selecao #pje-consultar-processo{
+  background:
+    var(--extensao-icone-pje) no-repeat center / 70% 70%,
+    var(--extensao-gradiente-branco-preto),
+    rgba(var(--extensao-cor-branco),0.8)
   ;
 }

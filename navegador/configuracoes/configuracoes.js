@@ -1,30 +1,22 @@
 window.addEventListener('load',contadorDeEsforcosRepetitivos)
 
-function contadorDeEsforcosRepetitivos(){
+async function contadorDeEsforcosRepetitivos(){
 
-	browser.storage.local.get(
-		null,
-		armazenamento => {
+	let armazenamento = await browser.storage.local.get()
 
-			EXTENSAO.ativada	= armazenamento.ativada
-			CONFIGURACAO			= armazenamento
+	CONFIGURACAO = armazenamento
 
-			definicoesGlobais()
-			criarCabecalhoDePaginaDaExtensao()
-			criarRodapeDePaginaDaExtensao()
-			obterConfiguracoesDaExtensao()
+	definicoesGlobais()
+	criarCabecalhoDePaginaDaExtensao()
+	criarRodapeDePaginaDaExtensao()
+	obterConfiguracoesDaExtensao()
 
-			selecionar('#salvar').addEventListener(
-				'click',
-				evento => {
-					evento.preventDefault()
-					salvarConfiguracoesDaExtensao()
-				}
-			)
-
+	selecionar('#salvar').addEventListener(
+		'click',
+		evento => {
+			evento.preventDefault()
+			salvarConfiguracoesDaExtensao()
 		}
 	)
 
 }
-
-

@@ -93,7 +93,7 @@ function destacarJanela(
 					vertical:vertical
 				}
 			)
-			CONFIGURACAO.janela.nova = true			
+			CONFIGURACAO.janela.nova = true
 		}
 	}
 
@@ -200,9 +200,9 @@ function abrirPaginaConfiguracaoDoTribunal(){
 }
 
 
-function reiniciarContadorDeEsforcosRepetitivos(){
+async function reiniciarContadorDeEsforcosRepetitivos(){
 
-	browser.storage.local.remove('esforcos')
+	await browser.storage.local.remove('esforcos')
 	window.location.reload()
 
 }

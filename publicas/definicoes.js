@@ -3,23 +3,20 @@
  */
 var
 	CONFIGURACAO	= {},
-	DATA					= {},
+	DATA					= definirDatas(),
 	ESFORCOS			= {},
-	EXPRESSAO			= {},
+	EXPRESSAO			= definirExpressoesRegulares(),
 	EXTENSAO			= browser.runtime.getManifest(),
 	JANELA				= window.location.href || '',
 	LINK					= {},
-	MODO					= {},
+	MODO					= definirModo(),
 	PROCESSO			= {}
 
 
 function definicoesGlobais(){
 
-	DATA					= definirDatas(),
-	ESFORCOS			= definirEsforcosRepetitivos(),
-	EXPRESSAO			= definirExpressoesRegulares(),
-	LINK					= definirLinks(),
-	MODO					= definirModo()
+	ESFORCOS			= definirEsforcosRepetitivos()
+	LINK					= definirLinks()
 
 	removerChavesDaMemoria(
 		[
@@ -170,7 +167,6 @@ function definirLinks(){
 		link.tribunal	= dominioTribunal
 		link.pje			= obterLinkPje()
 
-
 	}
 
 	return link
@@ -309,11 +305,13 @@ function definirLinks(){
 		pje.consulta.pessoa			= pje.primeirograu + 'ConsultaPessoa/listView.seam'
 		pje.consulta.processos	= pje.raiz + 'administracao/consulta/processo/index'
 		pje.painel.gigs					= pje.kz + 'gigs/relatorios/atividades'
-		pje.painel.global				= pje.kz + 'painel/global/todos/lista-processos'
+		pje.painel.global				= pje.kz + 'painel/global/todos/lista-processos/'
 		pje.versao1							= pje.primeirograu + 'Painel/painel_usuario/list.seam'
 		pje.modelos							= pje.kz + 'configuracao/modelos-documentos'
+		pje.processo						= pje.kz + 'processo/'
 
 		pje.api.comum						= pje.raiz + 'pje-comum-api/api/'
+		pje.api.consulta				= pje.raiz + 'pje-consulta-api/api/'
 		pje.api.mandados				= pje.raiz + 'pje-centralmandados-api/api/'
 
 		return pje

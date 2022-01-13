@@ -5,9 +5,47 @@ function pje(){
 	if(!JANELA.includes(LINK.pje.dominio))
 		return
 
+	pjeRedirecionarPaginaAcessoNegado()
+	pjeOtimizarPainelGlobal()
 	pjeOtimizarPerfilUsuario()
 	pjeOtimizarPerfilOficialDeJustica()
-	
+
+}
+
+
+function pjeRedirecionarPaginaAcessoNegado(){
+
+	esperar('pje-acesso-negado').then(redirecionar)
+
+	function redirecionar(){
+		window.location = LINK.pje.raiz
+	}
+
+}
+
+
+function pjeOtimizarPainelGlobal(){
+
+	pjePesquisarProcesso()
+
+	function pjePesquisarProcesso(){
+
+		let processo =  obterParametroDeURL('processo')
+		if(!processo)
+			return
+
+		esperar('#inputNumeroProcesso',true).then(
+			campo => {
+
+				alterarValorDeCampo(campo,processo)
+				campo.click()
+
+			}
+
+		)
+
+	}
+
 }
 
 async function pjeOtimizarPerfilUsuario(){
@@ -60,7 +98,7 @@ function pjeOtimizarDetalhesDoProcesso(){
 	let contexto	= pjeObterContexto()
 	if(!contexto.includes('detalhes'))
 		return
-	
+
 	pjeRedimensionarJanela()
 	pjeCriarBotoesFixos()
 
@@ -94,10 +132,10 @@ function pjeObterContexto(){
 
 	if(JANELA.match(/processo[/]\d+[/]detalhe/i))
 		return 'detalhes'
-	
+
 	if(JANELA.match(/centralmandados[/]mandados[/]\d+$/i))
 		return 'mandados'
-	
+
 	return ''
 
 }
@@ -116,11 +154,11 @@ async function pjeObterDadosDoProcesso(id){
 	PROCESSO.valor	= pjeObterValoresDoProcesso()
 	PROCESSO.tarefa = await pjeApiObterProcessoTarefa(id)
 	PROCESSO.partes = await pjeApiObterProcessoPartes(id)
-	
+
 	pjeSalvarDadosDoProcesso()
 
 	return PROCESSO
-	
+
 }
 
 
@@ -139,25 +177,30 @@ function pjeObterValoresDoProcesso(){
 function pjeCriarBotoesFixos(){
 
 	pjeCriarBotaoFixoDestacarDadosDoProcesso()
+	pjeCriarBotaoFixoConfigurarDimensoesDaJanela()
+
+}
+
+
+function pjeCriarBotaoFixoConfigurarDimensoesDaJanela(){
 
 	pjeCriarBotaoFixo(
 		'botao-dimensoes',
 		'Definir dimensões padrão para a janela',
 		() => {
 			let descricao	= ''
-			let editar		= ''	
+			let editar		= ''
 			let contexto	= pjeObterContexto()
 			if(contexto.includes('detalhes')){
 				descricao	= 'Detalhes do Processo'
 				editar		= 'pjeDetalhes'
 			}
 
-			abrirPagina(caminho(`navegador/link/link.htm?editar=${editar}&descricao=${descricao}`),'link',800,500,0,0,'popup')
+			abrirPagina(caminho(`navegador/link/link.htm?editar=${editar}&descricao=${descricao}`),800,500,0,0,'link','popup')
 		}
 	)
 
 }
-
 
 function pjeCriarBotaoFixoDestacarDadosDoProcesso(){
 
@@ -168,10 +211,10 @@ function pjeCriarBotaoFixoDestacarDadosDoProcesso(){
 			let dados = {}
 			dados.id			= PROCESSO.id
 			dados.numero	= PROCESSO.numero
-			dados.partes	= PROCESSO.partes	
+			dados.partes	= PROCESSO.partes
 			dados.valor		= PROCESSO.valor
-		
-			abrirPagina(caminho('navegador/processo/processo.htm')+'?processo='+encodeURIComponent(JSON.stringify(dados)),'processo',450,700,0,0,'popup')
+
+			abrirPagina(caminho('navegador/processo/processo.htm')+'?processo='+encodeURIComponent(JSON.stringify(dados)),450,700,0,0,'processo','popup')
 		}
 	)
 
