@@ -137,7 +137,6 @@ function definirLinks(){
 	link.egestao				= 'https://novoegestao.tst.jus.br'
 	link.infojud				= 'https://cav.receita.fazenda.gov.br/ecac/Aplicacao.aspx?id=5032'
 	link.maloteDigital	= 'https://malotedigital.jt.jus.br'
-	link.renajud				= 'https://renajud.denatran.serpro.gov.br'
 	link.sigeo					= 'https://portal.sigeo.jt.jus.br'
 	link.sisbajud				= 'https://sisbajud.cnj.jus.br'
 	link.telegram				= 'https://t.me/AssistenteVirtualPJeTrabalhista'
@@ -145,10 +144,11 @@ function definirLinks(){
 	link.wikivt					= 'https://fluxonacional.jt.jus.br'
 	link.youtube				= 'https://www.youtube.com/channel/UCG0r5f3lk6AqDsEaZqzFzxQ'
 	link.zoom						= 'https://zoom.us'
-
+	
 	link.bb							= obterLinkBancoDoBasil()
 	link.cef						= obterLinkCaixaEconomicaFederal()
 	link.google					= obterLinkGoogle()
+	link.renajud				= obterLinkRenajud()
 	link.whatsapp				= obterLinkWhatsapp()
 
 	link.balcao					= CONFIGURACAO?.janela?.balcao?.url		|| obterLinkDaMemoria('balcao',		'https://meet.google.com')
@@ -259,6 +259,17 @@ function definirLinks(){
 
 	}
 
+
+	function obterLinkRenajud(){
+
+		let url			= {}
+		url.dominio	= 'renajud.denatran.serpro.gov.br'
+		url.raiz		= montarUrl(url)
+		url.inserir	= montarUrl(url,'','renajud/restrito/restricoes-insercao.jsf')
+
+		return url
+
+	}
 
 	function obterLinkBancoDoBasil(){
 

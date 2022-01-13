@@ -258,7 +258,7 @@ async function criarMenuDaBarraDeFerramentasDoNavegador(){
 		criarBotaoDoMenu(
 			'renajud',
 			'RENAJUD',
-			() => criarJanela(LINK.renajud,'renajud')
+			() => criarJanela(LINK.renajud.raiz,'renajud')
 		)
 		criarBotaoDoMenu(
 			'pjeCalc',

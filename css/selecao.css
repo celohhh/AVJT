@@ -157,10 +157,20 @@ assistente-de-selecao #titularizar{
   ;
 }
 
-assistente-de-selecao #pje-consultar-processo{
+assistente-de-selecao #pje-consultar{
   background:
     var(--extensao-icone-pje) no-repeat center / 70% 70%,
     var(--extensao-gradiente-branco-preto),
     rgba(var(--extensao-cor-branco),0.8)
   ;
+}
+
+assistente-de-selecao #renajud{
+	background:
+		var(--extensao-icone-martelo) no-repeat center 3px / 42% 42%,
+		var(--extensao-icone-renajud) no-repeat center 9px / 75% 75%,
+		var(--extensao-gradiente-branco-preto),
+		var(--extensao-cor-escurecer),
+		rgba(var(--extensao-cor-indigo),1)
+	;
 }

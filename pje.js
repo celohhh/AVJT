@@ -30,7 +30,7 @@ function pjeOtimizarPainelGlobal(){
 
 	function pjePesquisarProcesso(){
 
-		let processo =  obterParametroDeURL('processo')
+		let processo =  obterParametroDeUrl('processo')
 		if(!processo)
 			return
 

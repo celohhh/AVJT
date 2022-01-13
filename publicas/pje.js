@@ -168,12 +168,7 @@ async function pjeConsultarDetalhesDoProcesso(numero=''){
 		dados?.codigoErro
 	){
 
-		MODO.consutar = true
-
-		copiar(JSON.stringify(MODO))
-
 		pjeAbrirPaginaDeConsultProcessual(numero)
-
 		return
 
 	}

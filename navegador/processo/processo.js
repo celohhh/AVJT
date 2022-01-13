@@ -6,7 +6,7 @@ async function criarMenuDadosDoProcesso(){
 
 	CONFIGURACAO = armazenamento
 
-	let processo = obterParametroDeURL('processo')
+	let processo = obterParametroDeUrl('processo')
 
 	PROCESSO = JSON.parse(processo)
 

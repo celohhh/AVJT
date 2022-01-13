@@ -120,7 +120,7 @@ function titularizar(texto){
  * Retorna o valor de um parametro de URL:
  * @param {string}	parametro
  */
-function obterParametroDeURL(parametro){
+function obterParametroDeUrl(parametro){
 
 	relatar('Instanciando objeto...')
 
@@ -183,6 +183,18 @@ function clicar(seletor){
 
 	if(elemento){
 		elemento.click()
+		esforcosPoupados(1,1)
+	}
+
+}
+
+
+function focar(seletor){
+
+	let elemento = selecionar(seletor)
+
+	if(elemento){
+		elemento.focus()
 		esforcosPoupados(1,1)
 	}
 
@@ -308,21 +320,25 @@ function alterarValorDeCampo(
 	if(!campo)
 		return
 
+	campo.focus()
+
 	let propriedade = Object.getOwnPropertyDescriptor(
 		window.HTMLInputElement.prototype,
 		'value'
 	).set
 
 	propriedade.call(campo,texto)
-
-	esforcosPoupados(1,1,contarCaracteres(texto))
-
+	
 	let evento = new Event(
 		'input',
-		{bubbles:true}
+		{
+			bubbles:true
+		}
 	)
-
+		
 	campo.dispatchEvent(evento)
+		
+	esforcosPoupados(1,1,contarCaracteres(texto))
 
 }
 

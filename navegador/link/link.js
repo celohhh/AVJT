@@ -10,8 +10,8 @@ async function editarLinksUteisDoMenuDaExtensao(){
 	criarCabecalhoDePaginaDaExtensao()
 	criarRodapeDePaginaDaExtensao()
 
-	let editar		= obterParametroDeURL('editar')
-	let descricao	= obterParametroDeURL('descricao')
+	let editar		= obterParametroDeUrl('editar')
+	let descricao	= obterParametroDeUrl('descricao')
 
 	obterConfiguracoes()
 

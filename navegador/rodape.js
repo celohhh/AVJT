@@ -11,7 +11,6 @@ function criarRodapeDePaginaDaExtensao(){
 	function criarEstilo(){
 
 		estilizar(
-			'',
 			rodape,
 			`
 				footer{

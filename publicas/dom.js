@@ -186,9 +186,9 @@ function criar(
  * )
  */
 function estilizar(
-	id				= '',
 	ancestral	= '',
-	css				= ''
+	css				= '',
+	id				= ''
 ){
 
 	let escopo = ancestral || ''
@@ -230,10 +230,13 @@ function criarLink(
 	endereco	= '',
 	texto			= '',
 	titulo		= '',
-	aoClicar	= ''
+	aoClicar	= '',
+	estilo		= ''
 ){
 
 	let a					= criar('a',id,classe,ancestral)
+
+	a.target			= '_blank'
 
 	if(endereco)
 		a.href			= endereco
@@ -247,7 +250,8 @@ function criarLink(
 	if(aoClicar)
 		a.addEventListener('click',aoClicar)
 
-	a.target	= '_blank'
+	if(estilo)
+		estilizar(a,estilo)
 
 	return a
 
@@ -283,7 +287,8 @@ function criarListaDeDefinicoes(
 	id				= '',
 	classe		= '',
 	ancestral = '',
-	itens			= []
+	itens			= [],
+	estilo 		= ''
 ){
 
 	let dl	= criar('dl',id,classe,ancestral)
@@ -297,6 +302,51 @@ function criarListaDeDefinicoes(
 		}
 	)
 
+	if(estilo)
+		estilizar(dl,estilo)
+
 	return dl
+
+}
+
+
+/**
+ * Cria um <botao> e insere no ${document.body} ou em um ancestral específico:
+ * @param  {string}	id
+ * @param  {string}	classe
+ * @param  {object}	ancestral
+ * @param  {string} texto
+ * @param  {string}	titulo
+ * @param  {method}	aoClicar	Função a ser executada ao clicar
+ * @param  {string}	estilo
+ * @return elemento
+ */
+function criarBotao(
+	id				= '',
+	classe		= '',
+	ancestral = '',
+	texto			= '',
+	titulo		= '',
+	aoClicar	= '',
+	estilo		= ''
+){
+
+	let elemento	= criar('botao',id,classe,ancestral)
+
+	if(texto)
+		elemento.innerText	= texto
+
+	if(!titulo){
+		titulo = texto
+		elemento.setAttribute('aria-label',titulo)
+	}
+
+	if(aoClicar)
+		elemento.addEventListener('click',aoClicar)
+
+	if(estilo)
+		estilizar(elemento,estilo)
+
+	return elemento
 
 }

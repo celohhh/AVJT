@@ -14,7 +14,6 @@ function criarCabecalhoDePaginaDaExtensao(){
 	function criarEstilo(){
 
 		estilizar(
-			'',
 			cabecalho,
 			`
 				header{

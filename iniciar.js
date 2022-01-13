@@ -34,6 +34,12 @@ function otimizar(){
 	//pje.js
 	pje()
 
+	//planilha.js
+	planilha()
+
+	//renajud.js
+	renajud()
+
 	//publicas/esforcos.js
 	setInterval(contarEsforcosRepetitivosPoupados,1000)
 

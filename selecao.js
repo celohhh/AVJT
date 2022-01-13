@@ -29,6 +29,7 @@ function assistenteDeSelecao(){
 		let caracteres									= contarCaracteres(texto)
 		let cnpj												= obterCNPJ(texto)
 		let cpf													= obterCPF(texto)
+		let documento										= obterDocumento(texto)
 		let textoAparado								= texto.trim()
 		let letra												= texto.match(/[A-Za-zÀ-ȕ]/)
 		let numero											= numeros(texto)
@@ -51,7 +52,7 @@ function assistenteDeSelecao(){
 		if(letra){
 
 			criarBotao(
-				'pje-consultar-processo',
+				'pje-consultar',
 				'',
 				'Consultar Parte ou Representante no PJe',
 				() => pjeAbrirPainelDeConsultaProcessual({nomeParte:maiusculas(textoAparado)})
@@ -59,10 +60,19 @@ function assistenteDeSelecao(){
 
 		}
 
+		if(documento){
+			criarBotao(
+				'renajud',
+				'',
+				'Consultar / Inserir Restrição no RENAJUD',
+				() => renajudInserirRestricao({documento})
+			)
+		}
+
 		if(cnpj){
 
 			criarBotao(
-				'pje-consultar-processo',
+				'pje-consultar',
 				'',
 				'Consultar CNPJ no PJe',
 				() => pjeAbrirPainelDeConsultaProcessual({cnpj})
@@ -73,7 +83,7 @@ function assistenteDeSelecao(){
 		if(cpf){
 
 			criarBotao(
-				'pje-consultar-processo',
+				'pje-consultar',
 				'',
 				'Consultar CPF no PJe',
 				() => pjeAbrirPainelDeConsultaProcessual({cpf})
@@ -84,7 +94,7 @@ function assistenteDeSelecao(){
 		if(pjeNumeroDoProcessoParcial){
 
 			criarBotao(
-				'pje-consultar-processo',
+				'pje-consultar',
 				'',
 				'Consultar Processo no PJe',
 				() => pjeAbrirPaginaDeConsultaProcessual(pjeNumeroDoProcessoParcial)
@@ -92,7 +102,7 @@ function assistenteDeSelecao(){
 
 			if(pjeNumeroDoProcessoCompleto)
 				criarBotao(
-					'pje-consultar-processo',
+					'pje-consultar',
 					'',
 					'Consultar Detalhes do Processo no PJe',
 					() => pjeConsultarDetalhesDoProcesso(pjeNumeroDoProcessoCompleto)
