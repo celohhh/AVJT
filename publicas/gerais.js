@@ -311,6 +311,21 @@ function obterNumeroDoProcessoParcial(texto){
 	return String(numero.join())?.padStart(15,'0') || ''
 }
 
+function obterChassi(texto){
+	let chassi = texto.match(EXPRESSAO.chassi) || ''
+	if(!chassi)
+		return ''
+	return chassi.join()
+}
+
+function obterPlacaDeVeiculoAutomotor(texto){
+	let placa = texto.match(/[A-Za-z]{3}\d{4}/gi) || texto.match(/[A-Za-z]{3}(-|–|\s|[.])\d{4}/gi) || texto.match(/[A-Za-z]{3}\d{1}[A-Za-z]\d{2}/gi) || ''
+	if(!placa)
+		return ''
+	return placa.join().replace(/(-|–|\s|[.])/,'')
+}
+
+
 
 function alterarValorDeCampo(
 	campo = '',

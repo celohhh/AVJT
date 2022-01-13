@@ -1,32 +1,37 @@
 function renajud(){
-	
-	let erro = selecionar('.ui-messages-error-detail')
 
-	if(erro){
-		window.location = LINK.renajud.raiz
-		return
-	}
-	
 	if(JANELA.includes('login'))
 		return
 
 	if(!JANELA.includes('restricoes-insercao.jsf'))
 		return
 
+	let chassi		= obterParametroDeUrl('chassi')
 	let documento	= obterParametroDeUrl('documento')
+	let placa			= obterParametroDeUrl('placa')
 	let campo			= ''
 	let conteudo	= ''
+
+	if(chassi){
+		campo			= selecionar('[id$="campo-chassi"]')
+		conteudo	= chassi
+	}
 
 	if(documento){
 		campo			= selecionar('[id$="campo-cpf-cnpj"]')
 		conteudo	= documento
 	}
 
-	alterarValorDeCampo(campo,conteudo)
+	if(placa){
+		campo			= selecionar('[id$="campo-placa"]')
+		conteudo	= placa
+	}
 
-	clicar('[id$="botao-pesquisar"]')
-
-	esforcosPoupados(3,3,contarCaracteres(conteudo))
+	if(conteudo){
+		alterarValorDeCampo(campo,conteudo)
+		clicar('[id$="botao-pesquisar"]')
+		esforcosPoupados(3,3,contarCaracteres(conteudo))
+	}
 
 }
 

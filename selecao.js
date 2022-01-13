@@ -27,6 +27,7 @@ function assistenteDeSelecao(){
 		}
 
 		let caracteres									= contarCaracteres(texto)
+		let chassi											= obterChassi(texto)
 		let cnpj												= obterCNPJ(texto)
 		let cpf													= obterCPF(texto)
 		let documento										= obterDocumento(texto)
@@ -35,6 +36,7 @@ function assistenteDeSelecao(){
 		let numero											= numeros(texto)
 		let pjeNumeroDoProcessoParcial	= obterNumeroDoProcessoParcial(texto)
 		let pjeNumeroDoProcessoCompleto	= obterNumeroDoProcessoPadraoCNJ(texto)
+		let placa												=	obterPlacaDeVeiculoAutomotor(texto)
 		let valor												= obterValorMonetario(texto)
 		let uri													= encodeURI(texto)
 
@@ -66,6 +68,24 @@ function assistenteDeSelecao(){
 				'',
 				'Consultar / Inserir Restrição no RENAJUD',
 				() => renajudInserirRestricao({documento})
+			)
+		}
+
+		if(chassi){
+			criarBotao(
+				'renajud',
+				'',
+				'Consultar / Inserir Restrição no RENAJUD',
+				() => renajudInserirRestricao({chassi})
+			)
+		}
+
+		if(placa){
+			criarBotao(
+				'renajud',
+				'',
+				'Consultar / Inserir Restrição no RENAJUD',
+				() => renajudInserirRestricao({placa})
 			)
 		}
 
