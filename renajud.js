@@ -6,11 +6,13 @@ function renajud(){
 	if(!JANELA.includes('restricoes-insercao.jsf'))
 		return
 
-	let chassi		= obterParametroDeUrl('chassi')
-	let documento	= obterParametroDeUrl('documento')
-	let placa			= obterParametroDeUrl('placa')
-	let campo			= ''
-	let conteudo	= ''
+	let chassi			= obterParametroDeUrl('chassi')
+	let documento		= obterParametroDeUrl('documento')
+	let placa				= obterParametroDeUrl('placa')
+	let processo		= obterParametroDeUrl('processo')
+	let campo				= ''
+	let conteudo		= ''
+	let formulario	= selecionar('[id^="form-incluir-restricao"]')
 
 	if(chassi){
 		campo			= selecionar('[id$="campo-chassi"]')
@@ -27,10 +29,70 @@ function renajud(){
 		conteudo	= placa
 	}
 
+	if(processo){
+		preencherCampoNumeroDoProcessoSelecionarMagistrado()
+	}
+
 	if(conteudo){
 		alterarValorDeCampo(campo,conteudo)
 		clicar('[id$="botao-pesquisar"]')
-		esforcosPoupados(3,3,contarCaracteres(conteudo))
+		esforcosPoupados(4,7,4)
+	}
+
+
+	function preencherCampoNumeroDoProcessoSelecionarMagistrado(){
+
+		let observador = new MutationObserver(
+			() => {
+				let observado = selecionar('[id$="campo-numero-processo"]')
+				if(observado){
+					let desabilitado = observado.disabled
+					if(!desabilitado){
+						observador.disconnect()
+						clicar('[id$=fieldset-tipo-restricao] label')
+						alterarValorDeCampo(observado,numeros(processo))
+						clicar('[id$="campo-magistrado_label"]')
+						selecionarMagistrado()
+					}
+				}
+			}
+		)
+		observador.observe(
+			formulario,
+			{
+				childList:	true,
+				subtree:		true
+			}
+		)
+
+	}
+
+	function selecionarMagistrado(){
+
+		let selecao = selecionar('li[data-label="Selecione o magistrado"]')
+		if(!selecao)
+			return
+		let lista = selecao?.parentElement
+		if(!lista)
+			return
+
+		let observador = new MutationObserver(
+			() => {
+				let observado = lista.childNodes
+				if(observado.length > 1){
+					observado[1].click()
+					observador.disconnect()
+				}
+			}
+		)
+		observador.observe(
+			formulario,
+			{
+				childList:	true,
+				subtree:		true
+			}
+		)
+
 	}
 
 }
@@ -44,7 +106,9 @@ function renajudInserirRestricao(consulta = {}){
 	let campo			= Object.keys(consulta)[0]
 	let conteudo	= consulta[campo]
 
-	let url = LINK.renajud.inserir + '?' + campo + '=' + conteudo
+	let processo	= PROCESSO?.numero || ''
+
+	let url = LINK.renajud.inserir + encodeURI('?' + campo + '=' + conteudo + '&processo=' + processo)
 
 	let janela			= CONFIGURACAO?.janela?.renajud || ''
 

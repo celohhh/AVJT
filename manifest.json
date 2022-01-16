@@ -1,9 +1,9 @@
 {
-  "name":							"Assistente Virtual da Justiça do Trabalho",
+	"name":							"Assistente Virtual da Justiça do Trabalho",
 	"short_name":				"AVJT",
 	"description":			"Otimiza as rotinas de tarefas inerentes aos sistemas da Justiça do Trabalho",
 	"manifest_version":	2,
-	"version":					"66.7",
+	"version":					"68.5",
 	"author":						"Sisenando Calixto",
 	"homepage_url":			"https://github.com/SisenandoCalixto/avjt/",
 
@@ -18,82 +18,87 @@
 		"url":						"https://github.com/SisenandoCalixto/"
 	},
 
-  "icons":{
-    "16":		"imagens/icones/extensao/colorido.svg",
-    "24":		"imagens/icones/extensao/colorido.svg",
-    "32":		"imagens/icones/extensao/colorido.svg",
-    "48":		"imagens/icones/extensao/colorido.svg",
-    "128":	"imagens/icones/extensao/colorido.svg"
-  },
+	"icons":{
+		"16":		"imagens/icones/extensao/colorido.svg",
+		"24":		"imagens/icones/extensao/colorido.svg",
+		"32":		"imagens/icones/extensao/colorido.svg",
+		"48":		"imagens/icones/extensao/colorido.svg",
+		"128":	"imagens/icones/extensao/colorido.svg"
+	},
 
-  "background":{
-    "scripts":[
-      "publicas/definicoes.js",
-      "publicas/gerais.js",
-      "publicas/dom.js",
-      "publicas/esforcos.js",
-      "publicas/navegador.js",
-      "publicas/whatsapp.js",
-      "navegador/navegador.js",
-      "navegador/sandbox.js"
-    ]
-  },
+	"background":{
+		"scripts":[
+			"publicas/definicoes.js",
+			"publicas/gerais.js",
+			"publicas/dom.js",
+			"publicas/esforcos.js",
+			"publicas/navegador.js",
+			"publicas/whatsapp.js",
+			"navegador/navegador.js",
+			"navegador/sandbox.js"
+		]
+	},
 
-  "content_scripts":[
-    {
-      "matches":[
-        "<all_urls>"
-      ],
-      "css":[
-        "css/animacoes.css",
-        "css/cores.css",
-        "css/selecao.css",
-        "css/icones.css",
-        "css/pje.css"
-      ],
-      "js":[
-        "publicas/definicoes.js",
-        "publicas/gerais.js",
-        "publicas/dom.js",
-        "publicas/esforcos.js",
-        "publicas/extenso.js",
-        "publicas/navegador.js",
-        "publicas/pje.js",
-        "publicas/whatsapp.js",
-        "iniciar.js",
-        "selecao.js",
-        "pje.js",
-        "planilha.js",
-        "renajud.js"
-      ],
-      "all_frames":					true,
-      "match_about_blank":	true,
-      "run_at":							"document_end"
-    }
-  ],
+	"content_scripts":[
+		{
+			"matches":[
+				"<all_urls>"
+			],
+			"css":[
+				"css/animacoes.css",
+				"css/cores.css",
+				"css/icones.css",
+				"css/informacoes.css",
+				"css/selecao.css",
+				"css/pje.css",
+				"css/planilha.css"
+			],
+			"js":[
+				"publicas/definicoes.js",
+				"publicas/gerais.js",
+				"publicas/dom.js",
+				"publicas/esforcos.js",
+				"publicas/extenso.js",
+				"publicas/navegador.js",
+				"publicas/pje.js",
+				"publicas/whatsapp.js",
+				"iniciar.js",
+				"selecao.js",
+				"infojud.js",
+				"penhora.js",
+				"pje.js",
+				"planilha.js",
+				"renajud.js",
+				"sinesp.js"
+			],
+			"all_frames":					true,
+			"match_about_blank":	true,
+			"run_at":							"document_end"
+		}
+	],
 
-  "permissions":[
-    "<all_urls>",
-    "activeTab",
-    "clipboardRead",
-    "clipboardWrite",
-    "contextMenus",
-    "storage",
-    "tabs",
-    "unlimitedStorage"
-  ],
+	"permissions":[
+		"<all_urls>",
+		"activeTab",
+		"clipboardRead",
+		"clipboardWrite",
+		"contextMenus",
+		"storage",
+		"tabs",
+		"unlimitedStorage"
+	],
 
-  "options_ui":{
+	"options_ui":{
 		"page": "navegador/configuracoes/configuracoes.htm",
 		"open_in_tab": false
 	},
 
-  "browser_action":{
-    "browser_style":	true,
-    "default_popup": 	"navegador/menu/menu.htm"
-  },
+	"browser_action":{
+		"browser_style":	true,
+		"default_popup": 	"navegador/menu/menu.htm"
+	},
 
-  "user_scripts": {
-    "api_script": "sandbox.js"
-  }
+	"user_scripts": {
+		"api_script": "sandbox.js"
+	}
 }

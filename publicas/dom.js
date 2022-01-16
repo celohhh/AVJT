@@ -204,7 +204,7 @@ function estilizar(
 	)
 
 	if(escopo)
-		elemento.scoped = true
+		elemento.setAttribute('scoped',true)
 
 	elemento.textContent = css
 
@@ -264,6 +264,7 @@ function criarLink(
  * @param  {string}	classe
  * @param  {object}	ancestral
  * @param  {array}	itens
+ * @param  {string}	estilo
  * @return dl
  * @example
  *
@@ -336,10 +337,10 @@ function criarBotao(
 	if(texto)
 		elemento.innerText	= texto
 
-	if(!titulo){
+	if(!titulo)
 		titulo = texto
-		elemento.setAttribute('aria-label',titulo)
-	}
+
+	elemento.setAttribute('aria-label',titulo)
 
 	if(aoClicar)
 		elemento.addEventListener('click',aoClicar)
@@ -348,5 +349,37 @@ function criarBotao(
 		estilizar(elemento,estilo)
 
 	return elemento
+
+}
+
+
+function selecionarOpcao(
+	seletor	= '',
+	texto		= ''
+){
+	
+	if(
+		!seletor
+		||
+		!texto
+	)
+		return
+		
+	let selecao = selecionar(seletor)
+	if(!selecao)
+		return
+
+	let lista = selecao?.children
+	if(vazio(lista))
+		return
+
+	let opcoes = [...lista].filter(opcoes => opcoes.innerText.includes(texto))
+	let opcao = opcoes[0] || ''
+	if(!opcao)
+		return			
+	
+	selecao.selectedIndex = opcao.index
+
+	esforcosPoupados(2,2,0)
 
 }

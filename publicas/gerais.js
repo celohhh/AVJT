@@ -261,6 +261,16 @@ function saudacao(){
 }
 
 
+function obterData(texto){
+
+	let data = texto.match(EXPRESSAO.data) || ''
+	if(!data)
+		return ''
+
+	return data.join()
+
+}
+
 
 function obterValorMonetario(texto){
 
@@ -343,16 +353,16 @@ function alterarValorDeCampo(
 	).set
 
 	propriedade.call(campo,texto)
-	
+
 	let evento = new Event(
 		'input',
 		{
 			bubbles:true
 		}
 	)
-		
+
 	campo.dispatchEvent(evento)
-		
+
 	esforcosPoupados(1,1,contarCaracteres(texto))
 
 }

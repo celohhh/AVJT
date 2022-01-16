@@ -15,6 +15,7 @@
 	--extensao-icone-dimensoes:								url(/imagens/icones/dimensoes.svg);
 	--extensao-icone-egestao:									url(/imagens/icones/egestao.svg);
 	--extensao-icone-engrenagem:							url(/imagens/icones/engrenagem.svg);
+	--extensao-icone-estrada:									url(/imagens/icones/estrada.svg);
 	--extensao-icone-extenso-numero:					url(/imagens/icones/extenso-numero.svg);
 	--extensao-icone-extenso-valor:						url(/imagens/icones/extenso-valor.svg);
 	--extensao-icone-gigs:										url(/imagens/icones/gigs.svg);
@@ -27,6 +28,7 @@
 	--extensao-icone-headset:									url(/imagens/icones/headset.svg);
 	--extensao-icone-html:										url(/imagens/icones/html.svg);
 	--extensao-icone-i:												url(/imagens/icones/i.svg);
+	--extensao-icone-infoseg:									url(/imagens/icones/infoseg.svg);
 	--extensao-icone-infojud:									url(/imagens/icones/receita-federal.svg);
 	--extensao-icone-intranet:								url(/imagens/icones/intranet.svg);
 	--extensao-icone-lupa:										url(/imagens/icones/lupa.svg);
@@ -40,14 +42,17 @@
 	--extensao-icone-operador-multiplicacao:	url(/imagens/icones/operador-multiplicacao.svg);
 	--extensao-icone-operador-subtracao:			url(/imagens/icones/operador-subtracao.svg);
 	--extensao-icone-painel:									url(/imagens/icones/painel.svg);
+	--extensao-icone-penhora:									url(/imagens/icones/penhora.svg);
 	--extensao-icone-pessoa:									url(/imagens/icones/pessoa.svg);
 	--extensao-icone-picareta:								url(/imagens/icones/picareta.svg);
+	--extensao-icone-pix:											url(/imagens/icones/pix.svg);
 	--extensao-icone-pje:											url(/imagens/icones/pje.svg);
 	--extensao-icone-processo:								url(/imagens/icones/processo.svg);
 	--extensao-icone-recarregar:							url(/imagens/icones/recarregar.svg);
 	--extensao-icone-renajud:									url(/imagens/icones/renajud.svg);
 	--extensao-icone-script:									url(/imagens/icones/script.svg);
 	--extensao-icone-sigeo:										url(/imagens/icones/sigeo.svg);
+	--extensao-icone-sinesp:									url(/imagens/icones/sinesp.svg);
 	--extensao-icone-sisbajud:								url(/imagens/icones/sisbajud.svg);
 	--extensao-icone-t:												url(/imagens/icones/t.svg);
 	--extensao-icone-tabela:									url(/imagens/icones/tabela.svg);

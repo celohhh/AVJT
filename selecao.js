@@ -29,6 +29,7 @@ function assistenteDeSelecao(){
 		let caracteres									= contarCaracteres(texto)
 		let chassi											= obterChassi(texto)
 		let cnpj												= obterCNPJ(texto)
+		let contexto										= pjeObterContexto()
 		let cpf													= obterCPF(texto)
 		let documento										= obterDocumento(texto)
 		let textoAparado								= texto.trim()
@@ -41,6 +42,7 @@ function assistenteDeSelecao(){
 		let uri													= encodeURI(texto)
 
 		let menu = criarMenu()
+
 
 
 		criarBotao(
@@ -60,33 +62,6 @@ function assistenteDeSelecao(){
 				() => pjeAbrirPainelDeConsultaProcessual({nomeParte:maiusculas(textoAparado)})
 			)
 
-		}
-
-		if(documento){
-			criarBotao(
-				'renajud',
-				'',
-				'Consultar / Inserir Restrição no RENAJUD',
-				() => renajudInserirRestricao({documento})
-			)
-		}
-
-		if(chassi){
-			criarBotao(
-				'renajud',
-				'',
-				'Consultar / Inserir Restrição no RENAJUD',
-				() => renajudInserirRestricao({chassi})
-			)
-		}
-
-		if(placa){
-			criarBotao(
-				'renajud',
-				'',
-				'Consultar / Inserir Restrição no RENAJUD',
-				() => renajudInserirRestricao({placa})
-			)
 		}
 
 		if(cnpj){
@@ -120,15 +95,99 @@ function assistenteDeSelecao(){
 				() => pjeAbrirPaginaDeConsultaProcessual(pjeNumeroDoProcessoParcial)
 			)
 
-			if(pjeNumeroDoProcessoCompleto)
-				criarBotao(
-					'pje-consultar',
-					'',
-					'Consultar Detalhes do Processo no PJe',
-					() => pjeConsultarDetalhesDoProcesso(pjeNumeroDoProcessoCompleto)
-				)
+		}
+
+		if(pjeNumeroDoProcessoCompleto){
+
+			criarBotao(
+				'pje-consultar',
+				'',
+				'Consultar Detalhes do Processo no PJe',
+				() => pjeConsultarDetalhesDoProcesso(pjeNumeroDoProcessoCompleto)
+			)
+
+		}
 
 
+		if(valor){
+			criarBotao(
+				'penhora-online',
+				'',
+				'Penhora Online',
+				() => {
+					let consulta = {}
+					if(contexto.includes('pje-mandados')){
+						consulta.mandado			= {}
+						consulta.mandado.id		= pjeObterDocumentoId()
+						consulta.mandado.data	= pjeObterDocumentoData()
+					}
+					consulta.valor = valor
+					penhoraOnlineRegistrar(consulta)
+					clicar('#avjt-botao-dados-do-processo')
+				}
+			)
+		}
+
+		if(documento){
+			criarBotao(
+				'infojud',
+				'',
+				'InfoJud - Registrar Solicitação',
+				() => {
+					let consulta				= {}
+					consulta.processo		= PROCESSO?.numero		|| ''
+					consulta.documento	= documento || ''
+					infojudRegistrarSolicitacao(consulta)
+				}
+			)
+			criarBotao(
+				'renajud',
+				'',
+				'Consultar / Inserir Restrição no RENAJUD',
+				() => renajudInserirRestricao({documento})
+			)
+			criarBotao(
+				'infoseg',
+				'',
+				'Consultar Documento no INFOSEG',
+				() => infosegPesquisarDocumento(documento)
+			)
+		}
+
+		if(chassi){
+			criarBotao(
+				'renajud',
+				'',
+				'Consultar / Inserir Restrição no RENAJUD',
+				() => renajudInserirRestricao({chassi})
+			)
+		}
+
+		if(placa){
+			criarBotao(
+				'renajud',
+				'',
+				'Consultar / Inserir Restrição no RENAJUD',
+				() => renajudInserirRestricao({placa})
+			)
+		}
+
+		if(valor){
+			criarBotao(
+				'valor-por-extenso',
+				'',
+				'Valor Monetário por Extenso',
+				escreverValorPorExtenso
+			)
+		}
+
+		if(numero){
+			criarBotao(
+				'numero-por-extenso',
+				'',
+				'Número Inteiro por Extenso',
+				escreverNumeroPorExtenso
+			)
 		}
 
 		if(letra){
@@ -154,25 +213,6 @@ function assistenteDeSelecao(){
 				converterTextoParaTitulo
 			)
 
-		}
-
-
-		if(valor){
-			criarBotao(
-				'valor-por-extenso',
-				'',
-				'Valor Monetário por Extenso',
-				escreverValorPorExtenso
-			)
-		}
-
-		if(numero){
-			criarBotao(
-				'numero-por-extenso',
-				'',
-				'Número Inteiro por Extenso',
-				escreverNumeroPorExtenso
-			)
 		}
 
 		criarBotao(

@@ -255,3 +255,43 @@ async function pjeApiConsultaPublicaObterProcessoId(numero){
 	return dados || ''
 
 }
+
+
+function pjeObterContexto(){
+
+	if(JANELA.match(/processo[/]\d+[/]detalhe/i))
+		return 'pje-detalhes'
+
+	if(JANELA.match(/centralmandados[/]mandados[/]\d+$/i))
+		return 'pje-mandados'
+
+	return ''
+
+}
+
+
+
+function pjeObterDocumentoCabecalhoTexto(){
+	let cabecalho = selecionar('.cabecalho-conteudo')
+	if(!cabecalho)
+		return ''
+	return cabecalho.innerText || ''
+}
+
+function pjeObterDocumentoId(){
+	let texto = pjeObterDocumentoCabecalhoTexto()
+	if(!texto)
+		return ''
+	let id = texto.match(/^Id\s.*?\s/g)
+	if(!id)
+		return ''
+	return id.join().replace(/Id/g,'').trim() || ''
+}
+
+
+function pjeObterDocumentoData(){
+	let texto = pjeObterDocumentoCabecalhoTexto()
+	if(!texto)
+		return ''
+	return obterData(texto) || ''
+}

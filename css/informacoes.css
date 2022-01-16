@@ -1,0 +1,22 @@
+botao.informacoes:hover::before{
+	background:
+		var(--extensao-gradiente-branco-preto),
+		var(--extensao-icone-branco) no-repeat 5px center / 25px,
+		rgba(var(--extensao-cor-primaria),0.95)
+	;
+	border-radius:0 15px 15px 15px;
+	box-shadow:0px 3px 3px 2px rgba(var(--extensao-cor-preto), 0.5);
+	color:rgba(var(--extensao-cor-branco),1);
+	content:attr(aria-label);
+	display:block;
+	font-size:14px;
+	font-weight:600;
+	left:50%;
+	line-height:18px;
+	position:absolute;
+	padding:10px 10px 10px 35px;
+	text-align:center;
+	top:100%;
+	width:200px;
+	z-index:9;
+}

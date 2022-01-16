@@ -111,7 +111,7 @@ function definirExpressoesRegulares(){
 	expressao.chassi										= new RegExp(/(?![IOQ])[A-Za-z0-9]{17}/g)
 	expressao.cnpj											= new RegExp(/\d{2}[.]\d{3}[.]\d{3}[/]\d{4}[-]\d{2}/g)
 	expressao.cpf												= new RegExp(/\d{3}[.]\d{3}[.]\d{3}[-]\d{2}/g)
-	expressao.data											= new RegExp(/\d{2}[/]\d{2}[/]d{4}/g)
+	expressao.data											= new RegExp(/\d{2}\D\d{2}\D\d{4}/g)
 	expressao.hora											= new RegExp(/\d{2}[:]\d{2}/g)
 	expressao.correios									= new RegExp(/[A-Za-z]{2}\d{9}[A-Za-z]{2}/gi)
 	expressao.pje												= new RegExp(/pje[.].*?[.]jus[.]br/gi)
@@ -135,8 +135,8 @@ function definirLinks(){
 	link.github					= EXTENSAO.homepage_url
 
 	link.egestao				= 'https://novoegestao.tst.jus.br'
-	link.infojud				= 'https://cav.receita.fazenda.gov.br/ecac/Aplicacao.aspx?id=5032'
 	link.maloteDigital	= 'https://malotedigital.jt.jus.br'
+	link.roadmap				= 'https://docs.google.com/spreadsheets/d/1dfHbdPGj2RxxtJJZnQiiZKTZw5HHRJPxvTSz_2vUPFM/'
 	link.sigeo					= 'https://portal.sigeo.jt.jus.br'
 	link.sisbajud				= 'https://sisbajud.cnj.jus.br'
 	link.telegram				= 'https://t.me/AssistenteVirtualPJeTrabalhista'
@@ -144,11 +144,14 @@ function definirLinks(){
 	link.wikivt					= 'https://fluxonacional.jt.jus.br'
 	link.youtube				= 'https://www.youtube.com/channel/UCG0r5f3lk6AqDsEaZqzFzxQ'
 	link.zoom						= 'https://zoom.us'
-	
+
 	link.bb							= obterLinkBancoDoBasil()
 	link.cef						= obterLinkCaixaEconomicaFederal()
 	link.google					= obterLinkGoogle()
+	link.infojud				= obterLinkInfojud()
 	link.renajud				= obterLinkRenajud()
+	link.penhora				= obterLinkPenhoraOnline()
+	link.sinesp					= obterLinkSinesp()
 	link.whatsapp				= obterLinkWhatsapp()
 
 	link.balcao					= CONFIGURACAO?.janela?.balcao?.url		|| obterLinkDaMemoria('balcao',		'https://meet.google.com')
@@ -230,6 +233,29 @@ function definirLinks(){
 
 	}
 
+	function obterLinkPenhoraOnline(){
+
+		let url				= {}
+		url.dominio		= 'penhoraonline.org.br'
+		url.raiz			= montarUrl(url)
+		url.solicitar	= montarUrl(url,'','frmHomeSolicitarCertidoes.aspx')
+
+		return url
+
+	}
+
+	function obterLinkSinesp(){
+
+		let url				= {}
+		url.dominio		= 'sinesp.gov.br'
+		url.raiz			= montarUrl(url)
+		url.infoseg		= montarUrl(url,'infoseg','infoseg2/?q=')
+		url.seguranca	= montarUrl(url,'seguranca')
+
+		return url
+
+	}
+
 
 	function obterLinkDaMemoria(
 		chave	= '',
@@ -260,6 +286,18 @@ function definirLinks(){
 	}
 
 
+	function obterLinkInfojud(){
+
+		let url				= {}
+		url.dominio		= 'cav.receita.fazenda.gov.br'
+		url.raiz			= montarUrl(url)
+		url.servicos	= montarUrl(url,'','ecac/Aplicacao.aspx?id=5032')
+		url.solicitar	= montarUrl(url,'','Servicos/ATSDR/Decjuiz/solicitacao.asp')
+		return url
+
+	}
+
+
 	function obterLinkRenajud(){
 
 		let url			= {}
@@ -270,6 +308,7 @@ function definirLinks(){
 		return url
 
 	}
+
 
 	function obterLinkBancoDoBasil(){
 

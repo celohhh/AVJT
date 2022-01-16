@@ -233,7 +233,7 @@ async function criarMenuDaBarraDeFerramentasDoNavegador(){
 		criarBotaoDoMenu(
 			'infojud',
 			'INFOJUD',
-			() => criarJanela(LINK.infojud,'infojud')
+			() => criarJanela(LINK.infojud.servicos,'infojud')
 		)
 		criarBotaoDoMenu(
 			'siscondj',
@@ -264,6 +264,21 @@ async function criarMenuDaBarraDeFerramentasDoNavegador(){
 			'pjeCalc',
 			'PJe Calc',
 			() => criarJanela(LINK.pje.calc,'pjeCalc')
+		)
+		criarBotaoDoMenu(
+			'sinesp',
+			'SINESP',
+			() => criarJanela(LINK.sinesp.seguranca,'sinesp')
+		)
+		criarBotaoDoMenu(
+			'penhora',
+			'Penhora Online',
+			() => criarJanela(LINK.penhora.raiz,'penhora')
+		)
+		criarBotaoDoMenu(
+			'infoseg',
+			'INFOSEG',
+			() => criarJanela(LINK.sinesp.infoseg,'infoseg')
 		)
 
 		function fecharMenu(){

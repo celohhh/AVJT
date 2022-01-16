@@ -31,6 +31,12 @@ function otimizar(){
 	//selecao.js
 	assistenteDeSelecao()
 
+	//infojud.js
+	infojud()
+
+	//penhora.js
+	penhora()
+
 	//pje.js
 	pje()
 
@@ -39,6 +45,9 @@ function otimizar(){
 
 	//renajud.js
 	renajud()
+
+	//sinesp.js
+	sinesp()
 
 	//publicas/esforcos.js
 	setInterval(contarEsforcosRepetitivosPoupados,1000)

@@ -128,19 +128,6 @@ function pjeOtimizarDetalhesDoProcesso(){
 }
 
 
-function pjeObterContexto(){
-
-	if(JANELA.match(/processo[/]\d+[/]detalhe/i))
-		return 'detalhes'
-
-	if(JANELA.match(/centralmandados[/]mandados[/]\d+$/i))
-		return 'mandados'
-
-	return ''
-
-}
-
-
 async function pjeObterDadosDoProcesso(id){
 
 	PROCESSO = await pjeApiObterProcessoDadosPrimarios(id)
@@ -222,13 +209,9 @@ function pjeCriarBotaoFixoDestacarDadosDoProcesso(){
 
 
 function pjeCriarBotaoFixo(
-	tag				= '',
+	id				= '',
 	legenda		= '',
 	aoClicar	= ''
 ){
-
-	let botao = criar(tag,'avjt'+tag,'avjt-botao-fixo')
-	botao.setAttribute('aria-label',legenda)
-	botao.addEventListener('click',aoClicar)
-
+	criarBotao('avjt-'+id,'avjt-botao-fixo informacoes','','',legenda,aoClicar)
 }

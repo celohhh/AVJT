@@ -127,6 +127,12 @@ function criarRodapeDePaginaDaExtensao(){
 				#pagina{
 					background:var(--extensao-icone-branco);
 				}
+				#pix{
+					background:var(--extensao-icone-pix);
+				}
+				#roadmap{
+					background:var(--extensao-icone-estrada);
+				}
 				#telegram{
 					background:var(--extensao-icone-telegram);
 				}
@@ -210,7 +216,9 @@ function criarRodapeDePaginaDaExtensao(){
 		criarLinkDoRodape('youtube', LINK.youtube, 'Canal no Youtube')
 		criarLinkDoRodape('telegram', LINK.telegram, 'Grupo de utilizadores no Telegram')
 		criarLinkDoRodape('whatsapp', LINK.whatsapp.grupo, 'Grupo de utilizadores no WhatsApp')
+		//criarLinkDoRodape('pix', 'https://nubank.com.br/pagar/1wdtw/PuXdDSMdok', 'PIX do Desenvolvedor')
 		criarLinkDoRodape('github', LINK.github, 'Código-Fonte desta Extensão no GitHub')
+		criarLinkDoRodape('roadmap', LINK.roadmap, 'Roadmap')
 		criarLinkDoRodape('configuracoes', '', 'Configurações da extensão', abrirPaginaOpcoesDaExtensao)
 
 		function criarLinkDoRodape(
