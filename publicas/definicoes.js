@@ -61,11 +61,19 @@ function definirModo(){
 
 function definirDatas(){
 
-	let agora	= new Date()
-	let data	= {}
+	let agora					= new Date()
+	let data					= {}
+	data.hoje					= {}
+	data.mesAnterior	= {}
 
-	data.hoje								= agora.toLocaleDateString()
-	data.hojeMaisTrintaDias	= somarDias(agora,30)
+
+	data.hoje.curta								= agora.toLocaleDateString()
+	data.hoje.dia									= agora.getDate()
+	data.hoje.ano									= agora.getFullYear()
+	data.hoje.mes									= Number(agora.getMonth()) + 1
+	data.hoje.mais30dias					= somarDias(agora,30)
+	data.mesAnterior.primeiroDia	= mesAnteriorPrimeiroDia(agora)
+	data.mesAnterior.ultimoDia		= mesAnteriorUltimoDia(agora)
 
 	return data
 
@@ -74,9 +82,39 @@ function definirDatas(){
 		let resultado = new Date(data)
 		resultado.setDate(resultado.getDate() + dias)
 
-		return resultado.toLocaleDateString() || ''
+		return resultado?.toLocaleDateString() || ''
 
 	}
+
+
+	function mesAnteriorPrimeiroDia(data=''){
+
+		if(!data)
+			data = new Date()
+		
+		let resultado = new Date(data)
+
+		resultado.setDate(0)
+		resultado.setDate(1)
+
+		return resultado?.toLocaleDateString() || ''
+
+	}
+
+
+	function mesAnteriorUltimoDia(data=''){
+
+		if(!data)
+			data = new Date()
+
+		let resultado = new Date(data)
+
+		resultado.setDate(0)
+
+		return resultado?.toLocaleDateString() || ''
+
+	}
+
 
 }
 
@@ -93,7 +131,7 @@ function definirEsforcosRepetitivos(){
 		['esforcos'],
 		armazenamento => {
 			if(vazio(armazenamento)){
-				esforcos.data = DATA.hoje
+				esforcos.data = DATA.hoje.curta
 				browser.storage.local.set({esforcos})
 			}
 		}

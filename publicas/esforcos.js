@@ -13,7 +13,7 @@ async function contarEsforcosRepetitivosPoupados(){
 	let cliques			= armazenamento?.esforcos?.cliques		|| 0
 	let movimentos	= armazenamento?.esforcos?.movimentos	|| 0
 	let teclas			= armazenamento?.esforcos?.teclas			|| 0
-	let data				= armazenamento?.esforcos?.data				|| DATA.hoje
+	let data				= armazenamento?.esforcos?.data				|| DATA.hoje.curta
 
 	let esforcos				= {}
 	esforcos.cliques		= Number(ESFORCOS.cliques)		+ Number(cliques)

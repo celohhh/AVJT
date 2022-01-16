@@ -177,7 +177,7 @@ function criarRodapeDePaginaDaExtensao(){
 			if(!p)
 				return
 
-			let data = CONFIGURACAO?.esforcos?.data || DATA.hoje
+			let data = CONFIGURACAO?.esforcos?.data || DATA.hoje.curta
 			criarLink('data', '', p, '', data, '',abrirPaginaContadorDeEsforcosRepetitivos)
 
 			let declaracao = document.createTextNode(', esta extensão já te poupou mais de ')

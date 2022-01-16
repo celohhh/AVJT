@@ -357,14 +357,14 @@ function selecionarOpcao(
 	seletor	= '',
 	texto		= ''
 ){
-	
+
 	if(
 		!seletor
 		||
 		!texto
 	)
 		return
-		
+
 	let selecao = selecionar(seletor)
 	if(!selecao)
 		return
@@ -376,8 +376,8 @@ function selecionarOpcao(
 	let opcoes = [...lista].filter(opcoes => opcoes.innerText.includes(texto))
 	let opcao = opcoes[0] || ''
 	if(!opcao)
-		return			
-	
+		return
+
 	selecao.selectedIndex = opcao.index
 
 	esforcosPoupados(2,2,0)

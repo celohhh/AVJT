@@ -135,7 +135,8 @@ function assistenteDeSelecao(){
 				'InfoJud - Registrar Solicitação',
 				() => {
 					let consulta				= {}
-					consulta.processo		= PROCESSO?.numero		|| ''
+					consulta.processo		= PROCESSO?.numero || ''
+					consulta.vara				= PROCESSO?.orgaoJulgador?.descricao || ''
 					consulta.documento	= documento || ''
 					infojudRegistrarSolicitacao(consulta)
 				}

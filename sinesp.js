@@ -2,7 +2,7 @@ function sinesp(){
 
 	if(!JANELA.includes(LINK.sinesp.dominio))
 		return
-	
+
 	autenticacao()
 
 	function autenticacao(){
@@ -19,7 +19,7 @@ function sinesp(){
 			!cpf
 		)
 			return
-		
+
 		alterarValorDeCampo(campoUsuario,cpf)
 
 	}
