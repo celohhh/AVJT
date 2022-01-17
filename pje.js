@@ -55,7 +55,6 @@ async function pjeOtimizarPerfilUsuario(){
 	if(id){
 
 		PROCESSO = await pjeObterDadosDoProcesso(id)
-		console.debug('PROCESSO',PROCESSO)
 
 		pjeOtimizarDetalhesDoProcesso()
 

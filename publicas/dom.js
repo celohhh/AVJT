@@ -383,3 +383,25 @@ function selecionarOpcao(
 	esforcosPoupados(2,2,0)
 
 }
+
+
+function dispararEvento(
+	tipo			= '',
+	elemento	= ''
+){
+
+	if(!elemento)
+		return
+
+	campo.focus()
+
+	let evento = new Event(
+		tipo,
+		{
+			bubbles:true
+		}
+	)
+
+	elemento.dispatchEvent(evento)
+
+}

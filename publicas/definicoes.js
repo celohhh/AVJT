@@ -91,7 +91,7 @@ function definirDatas(){
 
 		if(!data)
 			data = new Date()
-		
+
 		let resultado = new Date(data)
 
 		resultado.setDate(0)

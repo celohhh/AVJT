@@ -3,9 +3,6 @@ function infojud(){
 	if(!JANELA.includes(LINK.infojud.dominio))
 		return
 
-	console.debug('DATA',DATA)
-	
-
 	solicitar()
 
 	function solicitar(){
@@ -28,39 +25,95 @@ function infojud(){
 		selecionarOpcao('#siglavara',vara)
 
 		preencherDoi()
+		preencherDitr()
 
-		function preencherDoi(){
 
+		function preencherDirpf(){
 
-			if(verificarExistenciaDeSolicitacao(doi.inicio))
+			if(!cpf)
 				return
 
-			let observador = new MutationObserver(() => {
-				let observado = selecionar('#novaDataFim')
-				if(observado){
+			let lista = selecionar('#novotipo')
+			if(!lista)
+				return
+			let selecionada = lista.options[lista.selectedIndex].innerText || ''
 
-					selecionarOpcao('#novotipo','DOI')
-					console.debug('observado',observado)
-					
-					if(verificarExistenciaDeSolicitacao(doi.inicio)){
-						observador.disconnect()
-						return
+			if(!selecionada?.includes('DIRPF'))
+				selecionarOpcao('#novotipo','DIRPF')
+
+			let campoAno = selecionar('#novoano')
+
+			let ano1 = campoAno.options[1].innerText || ''
+			let ano2 = campoAno.options[2].innerText || ''
+			let ano3 = campoAno.options[3].innerText || ''
+
+			if(!verificarExistenciaDeSolicitacao('DIRPF.*?'+ano1)){
+				campoAno.selectedIndex = 1
+				clicar('[value="Incluir Pedido"]')
+				return
+			}
+
+			if(!verificarExistenciaDeSolicitacao('DIRPF.*?'+ano2)){
+				campoAno.selectedIndex = 2
+				clicar('[value="Incluir Pedido"]')
+				return
+			}
+
+			if(!verificarExistenciaDeSolicitacao('DIRPF.*?'+ano3)){
+				campoAno.selectedIndex = 3
+				clicar('[value="Incluir Pedido"]')
+				return
+			}
+
+		}
+
+
+		function preencherDitr(){
+
+			let lista = selecionar('#novotipo')
+			if(!lista)
+				return
+			let selecionada = lista.options[lista.selectedIndex].innerText || ''
+
+			if(!selecionada?.includes('DITR')){
+				setTimeout(
+					() => selecionarOpcao('#novotipo','DITR'),
+					2500
+				)
+				setTimeout(
+					() => window.wrappedJSObject.carregarExercicios(),
+					3000
+				)
+			}
+
+			let observador = new MutationObserver(
+				() => {
+
+					let observado = selecionar('#novoano')
+
+					if(observado){
+
+						let ano1 = observado.options[1].innerText || ''
+						let ano2 = observado.options[2].innerText || ''
+
+						if(!verificarExistenciaDeSolicitacao('DITR.*?'+ano1)){
+							observado.selectedIndex = 1
+							clicar('[value="Incluir Pedido"]')
+							observador.disconnect()
+							return
+						}
+
+						if(!verificarExistenciaDeSolicitacao('DITR.*?'+ano2)){
+							observado.selectedIndex = 2
+							clicar('[value="Incluir Pedido"]')
+							observador.disconnect()
+							return
+						}
+						preencherDirpf()
+
 					}
-
-					let campoDoiDataInicio	= selecionar('#novaDataInicio')
-					let campoDoiDataFim			= selecionar('#novaDataFim')
-
-					if(campoDoiDataInicio	&& campoDoiDataFim){
-						campoDoiDataInicio.removeAttribute('disabled')
-						campoDoiDataFim.removeAttribute('disabled')
-						alterarValorDeCampo(campoDoiDataInicio,	doi.inicio)
-						alterarValorDeCampo(campoDoiDataFim,		doi.fim)
-						clicar('[value="Incluir Pedido"]')
-						observador.disconnect()
-					}
-					
 				}
-			})
+			)
 
 			observador.observe(
 				document.body,
@@ -69,7 +122,49 @@ function infojud(){
 					subtree:		true
 				}
 			)
-	
+
+
+		}
+
+
+		function preencherDoi(){
+
+			let observador = new MutationObserver(
+				() => {
+					let observado = selecionar('#novaDataFim')
+					if(observado){
+
+						if(verificarExistenciaDeSolicitacao(doi.inicio)){
+							observador.disconnect()
+							return
+						}
+
+						selecionarOpcao('#novotipo','DOI')
+
+						let campoDoiDataInicio	= selecionar('#novaDataInicio')
+						let campoDoiDataFim			= selecionar('#novaDataFim')
+
+						if(campoDoiDataInicio	&& campoDoiDataFim){
+							campoDoiDataInicio.removeAttribute('disabled')
+							campoDoiDataFim.removeAttribute('disabled')
+							alterarValorDeCampo(campoDoiDataInicio,	doi.inicio)
+							alterarValorDeCampo(campoDoiDataFim,		doi.fim)
+							clicar('[value="Incluir Pedido"]')
+							observador.disconnect()
+						}
+
+					}
+				}
+			)
+
+			observador.observe(
+				document.body,
+				{
+					childList:	true,
+					subtree:		true
+				}
+			)
+
 		}
 
 		function verificarExistenciaDeSolicitacao(expressao=''){
@@ -80,9 +175,9 @@ function infojud(){
 			let solicitacoes = document.querySelectorAll('tr')
 			if(vazio(solicitacoes))
 				return ''
-						
+
 			let solicitacao = [...solicitacoes].filter(solicitacao => solicitacao.innerText.match(expressao))
-			
+
 			if(vazio(solicitacao))
 				return ''
 
