@@ -393,8 +393,6 @@ function dispararEvento(
 	if(!elemento)
 		return
 
-	campo.focus()
-
 	let evento = new Event(
 		tipo,
 		{

@@ -295,3 +295,8 @@ function pjeObterDocumentoData(){
 		return ''
 	return obterData(texto) || ''
 }
+
+
+function copiarDadosDoProcesso(){
+	copiar(JSON.stringify(PROCESSO))
+}

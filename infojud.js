@@ -27,7 +27,7 @@ function infojud(){
 		preencherDoi()
 		preencherDitr()
 
-
+		
 		function preencherDirpf(){
 
 			if(!cpf)
@@ -78,7 +78,7 @@ function infojud(){
 			if(!selecionada?.includes('DITR')){
 				setTimeout(
 					() => selecionarOpcao('#novotipo','DITR'),
-					2500
+					2000
 				)
 				setTimeout(
 					() => window.wrappedJSObject.carregarExercicios(),
@@ -140,6 +140,7 @@ function infojud(){
 						}
 
 						selecionarOpcao('#novotipo','DOI')
+						window.wrappedJSObject.carregarExercicios()
 
 						let campoDoiDataInicio	= selecionar('#novaDataInicio')
 						let campoDoiDataFim			= selecionar('#novaDataFim')
@@ -186,7 +187,6 @@ function infojud(){
 		}
 
 
-
 	}
 
 }
@@ -196,29 +196,66 @@ function infojudRegistrarSolicitacao(consulta = {}){
 	if(vazio(consulta))
 		return
 
-	let processo			= consulta?.processo	|| ''
-	let documento			= consulta?.documento	|| ''
-	let vara					= consulta?.vara			|| ''
-	let justificativa	= 'Cumprimento de Mandado de Penhora'
-
+	let processo = consulta?.processo	|| ''
+	let documento = consulta?.documento	|| ''
+	let vara = consulta?.vara	|| ''
+	let justificativa = 'Cumprimento de Mandado de Penhora'
 
 	let url = LINK.infojud.solicitar + encodeURI('?' + 'processo=' + numeros(processo) + '&novocpfcnpj=' + numeros(documento) + '&justificativa=' + justificativa + '&vara=' + vara)
 
-	let janela			= CONFIGURACAO?.janela?.infojud || ''
-
-	let largura			=	janela?.largura			|| 1200
-	let altura			= janela?.altura			|| 900
-	let horizontal	= janela?.horizontal	|| 0
-	let vertical		= janela?.vertical		|| 0
-
-	abrirPagina(
-		url,
-		largura,
-		altura,
-		horizontal,
-		vertical
-	)
-
+	abrirPagina(url,'','','','','infojud')
 	esforcosPoupados(3,3,contarCaracteres(processo + documento + justificativa))
+
+}
+
+
+function infojudConsultarDocumento(consulta = {}){
+
+	if(vazio(consulta))
+		return
+
+	let documento	= consulta?.documento	|| ''
+
+	let cpf = obterCPF(documento)
+	let cnpj = obterCNPJ(documento)
+
+	let tipo = 'detalheNI'
+	if(cpf)
+		tipo += 'CPF'
+	if(cnpj)
+		tipo += 'CNPJ'
+
+	let url = LINK.infojud.consultarDocumento + tipo + encodeURI('.asp?NI=' + numeros(documento))
+
+	abrirPagina(url,'','','','','infojud')
+	esforcosPoupados(3,3,contarCaracteres(documento))
+
+}
+
+
+function infojudConsultarNomePessoaFisica(consulta = {}){
+
+	if(vazio(consulta))
+		return
+
+	let nome = consulta?.nome	|| ''
+	let url = LINK.infojud.consultarNomePessoaFisica + encodeURI(nome)
+	
+	abrirPagina(url,'','','','','infojud')
+	esforcosPoupados(3,3,contarCaracteres(nome))
+
+}
+
+
+function infojudConsultarNomePessoaJuridica(consulta = {}){
+
+	if(vazio(consulta))
+		return
+
+	let nome = consulta?.nome	|| ''
+	let url = LINK.infojud.consultarNomePessoaJuridica + encodeURI(nome)
+
+	abrirPagina(url,'','','','','infojud')
+	esforcosPoupados(3,3,contarCaracteres(nome))
 
 }

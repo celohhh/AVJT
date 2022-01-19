@@ -67,6 +67,7 @@ function renajud(){
 
 	}
 
+
 	function selecionarMagistrado(){
 
 		let selecao = selecionar('li[data-label="Selecione o magistrado"]')
@@ -103,26 +104,12 @@ function renajudInserirRestricao(consulta = {}){
 	if(vazio(consulta))
 		return
 
-	let campo			= Object.keys(consulta)[0]
-	let conteudo	= consulta[campo]
+	let campo = Object.keys(consulta)[0]
+	let conteudo = consulta[campo]
 
-	let processo	= PROCESSO?.numero || ''
-
+	let processo = PROCESSO?.numero || ''
 	let url = LINK.renajud.inserir + encodeURI('?' + campo + '=' + conteudo + '&processo=' + processo)
 
-	let janela			= CONFIGURACAO?.janela?.renajud || ''
-
-	let largura			=	janela?.largura			|| 1200
-	let altura			= janela?.altura			|| 900
-	let horizontal	= janela?.horizontal	|| 0
-	let vertical		= janela?.vertical		|| 0
-
-	abrirPagina(
-		url,
-		largura,
-		altura,
-		horizontal,
-		vertical
-	)
+	abrirPagina(url,'','','','','renajud')
 
 }

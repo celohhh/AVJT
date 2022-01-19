@@ -193,10 +193,24 @@ assistente-de-selecao #penhora-online{
 	;
 }
 
-assistente-de-selecao #infojud{
+
+assistente-de-selecao #infojud
+{
 	background:
 		var(--extensao-icone-infojud) no-repeat center / 70% 70%,
 		var(--extensao-gradiente-branco-preto),
+		rgba(var(--extensao-cor-vermelho),1)
+	;
+}
+
+assistente-de-selecao #infojud-nome,
+assistente-de-selecao #infojud-documento
+{
+	background:
+		var(--extensao-icone-infojud) no-repeat center / 70% 70%,
+		var(--extensao-gradiente-branco-preto),
+		var(--extensao-cor-escurecer),
+		var(--extensao-cor-escurecer),
 		var(--extensao-cor-escurecer),
 		rgba(var(--extensao-cor-vermelho),1)
 	;

@@ -34,21 +34,7 @@ function infosegPesquisarDocumento(documento=''){
 
 	let url = LINK.sinesp.infoseg + encodeURI(documento)
 
-	let janela			= CONFIGURACAO?.janela?.infoseg || ''
-
-	let largura			=	janela?.largura			|| 1200
-	let altura			= janela?.altura			|| 900
-	let horizontal	= janela?.horizontal	|| 0
-	let vertical		= janela?.vertical		|| 0
-
-	abrirPagina(
-		url,
-		largura,
-		altura,
-		horizontal,
-		vertical
-	)
-
+	abrirPagina(url,'','','','','infoseg')
 	esforcosPoupados(1,1,contarCaracteres(documento))
 
 }

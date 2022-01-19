@@ -152,6 +152,7 @@ function definirExpressoesRegulares(){
 	expressao.data											= new RegExp(/\d{2}\D\d{2}\D\d{4}/g)
 	expressao.hora											= new RegExp(/\d{2}[:]\d{2}/g)
 	expressao.correios									= new RegExp(/[A-Za-z]{2}\d{9}[A-Za-z]{2}/gi)
+	expressao.nomeCompleto							= new RegExp(/\b\w+\b\s.*/g)
 	expressao.pje												= new RegExp(/pje[.].*?[.]jus[.]br/gi)
 	expressao.prazo											= new RegExp(/(prazo).*?(de).*?((dia|hora)(s))/gi)
 	expressao.processoNumero						= new RegExp(/\d{7}\D\d{2}\D\d{4}\D\d{1}\D\d{2}\D\d{4}/)
@@ -326,11 +327,14 @@ function definirLinks(){
 
 	function obterLinkInfojud(){
 
-		let url				= {}
-		url.dominio		= 'cav.receita.fazenda.gov.br'
-		url.raiz			= montarUrl(url)
-		url.servicos	= montarUrl(url,'','ecac/Aplicacao.aspx?id=5032')
-		url.solicitar	= montarUrl(url,'','Servicos/ATSDR/Decjuiz/solicitacao.asp')
+		let url  = {}
+		url.dominio = 'cav.receita.fazenda.gov.br'
+		url.raiz = montarUrl(url)
+		url.consultarDocumento = montarUrl(url,'','Servicos/ATSDR/Decjuiz/')
+		url.consultarNomePessoaFisica = montarUrl(url,'','Servicos/ATSDR/Decjuiz/listaNICPF.asp?nome=')
+		url.consultarNomePessoaJuridica = montarUrl(url,'','Servicos/ATSDR/Decjuiz/listaNICNPJ.asp?nomeEmpresarial=')
+		url.servicos = montarUrl(url,'','ecac/Aplicacao.aspx?id=5032')
+		url.solicitar = montarUrl(url,'','Servicos/ATSDR/Decjuiz/solicitacao.asp')
 		return url
 
 	}

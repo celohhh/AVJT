@@ -154,10 +154,10 @@ function obterParametroDeUrl(parametro){
 
 function abrirPagina(
 	url,
-	largura			= 1000,
-	altura			= 700,
-	horizontal	= 0,
-	vertical		= 0,
+	largura			= '',
+	altura			= '',
+	horizontal	= '',
+	vertical		= '',
 	chave				= '_blank',
 	tipo				= 'normal'
 ){
@@ -165,10 +165,10 @@ function abrirPagina(
 	let opcoes				= {}
 	opcoes.chave			= chave
 	opcoes.url				= url
-	opcoes.largura		= largura
-	opcoes.altura			= altura
-	opcoes.horizontal	= horizontal
-	opcoes.vertical		= vertical
+	opcoes.largura		= largura || 1000
+	opcoes.altura			= altura || 700
+	opcoes.horizontal	= horizontal || 0
+	opcoes.vertical		= vertical || 0
 	opcoes.tipo				= tipo
 
 	relatar('Mensagem para o navegador:',opcoes)
@@ -335,11 +335,18 @@ function obterPlacaDeVeiculoAutomotor(texto){
 	return placa.join().replace(/(-|–|\s|[.])/,'')
 }
 
+function obterNomeCompleto(texto){
+	let nome = texto.match(EXPRESSAO.nomeCompleto) || ''
+	if(!nome)
+		return ''
+	return nome.join().trim()
+}
 
 
 function alterarValorDeCampo(
 	campo = '',
-	texto = ''
+	texto = '',
+	change = false
 ){
 
 	if(!campo)
@@ -354,14 +361,9 @@ function alterarValorDeCampo(
 
 	propriedade.call(campo,texto)
 
-	let evento = new Event(
-		'input',
-		{
-			bubbles:true
-		}
-	)
-
-	campo.dispatchEvent(evento)
+	if(change)
+		dispararEvento('change',campo)
+	dispararEvento('input',campo)
 
 	esforcosPoupados(1,1,contarCaracteres(texto))
 

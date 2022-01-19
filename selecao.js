@@ -31,9 +31,12 @@ function assistenteDeSelecao(){
 		let cnpj												= obterCNPJ(texto)
 		let contexto										= pjeObterContexto()
 		let cpf													= obterCPF(texto)
+		let data												= obterData(texto)
 		let documento										= obterDocumento(texto)
 		let textoAparado								= texto.trim()
 		let letra												= texto.match(/[A-Za-zÀ-ȕ]/)
+		let mandado											= texto.match(/mandado/gi)
+		let nomeCompleto								= obterNomeCompleto(texto)
 		let numero											= numeros(texto)
 		let pjeNumeroDoProcessoParcial	= obterNumeroDoProcessoParcial(texto)
 		let pjeNumeroDoProcessoCompleto	= obterNumeroDoProcessoPadraoCNJ(texto)
@@ -62,6 +65,30 @@ function assistenteDeSelecao(){
 				() => pjeAbrirPainelDeConsultaProcessual({nomeParte:maiusculas(textoAparado)})
 			)
 
+			if(nomeCompleto){
+
+				if(!texto.match(/(CPF|CNPJ)[:]/gi)){
+
+					let consulta = {}
+					consulta.nome = nomeCompleto || ''
+
+					criarBotao(
+						'infojud',
+						'',
+						'InfoJud - Consultar Nome de Pessoa Física',
+						() => infojudConsultarNomePessoaFisica(consulta)
+					)
+		
+					criarBotao(
+						'infojud-nome',
+						'',
+						'InfoJud - Consultar Nome de Pessoa Jurídica',
+						() => infojudConsultarNomePessoaJuridica(consulta)
+					)
+
+				}
+			}
+	
 		}
 
 		if(cnpj){
@@ -109,7 +136,7 @@ function assistenteDeSelecao(){
 		}
 
 
-		if(valor){
+		if(mandado || valor || data){
 			criarBotao(
 				'penhora-online',
 				'',
@@ -117,42 +144,59 @@ function assistenteDeSelecao(){
 				() => {
 					let consulta = {}
 					if(contexto.includes('pje-mandados')){
-						consulta.mandado			= {}
-						consulta.mandado.id		= pjeObterDocumentoId()
-						consulta.mandado.data	= pjeObterDocumentoData()
+						consulta.mandado = {}
+						consulta.mandado.id = pjeObterDocumentoId()
+						consulta.mandado.data = pjeObterDocumentoData()
 					}
-					consulta.valor = valor
+					consulta.valor = valor || ''
 					penhoraOnlineRegistrar(consulta)
+					copiarDadosDoProcesso()
 					clicar('#avjt-botao-dados-do-processo')
+
 				}
 			)
 		}
 
+
 		if(documento){
+
+			let consulta = {}
+			consulta.documento = documento || ''
+
+			criarBotao(
+				'infojud-documento',
+				'',
+				'InfoJud - Consultar Documento',
+				() => {
+					infojudConsultarDocumento(consulta)
+				}
+			)
+
 			criarBotao(
 				'infojud',
 				'',
 				'InfoJud - Registrar Solicitação',
 				() => {
-					let consulta				= {}
-					consulta.processo		= PROCESSO?.numero || ''
-					consulta.vara				= PROCESSO?.orgaoJulgador?.descricao || ''
-					consulta.documento	= documento || ''
+					consulta.processo = PROCESSO?.numero || ''
+					consulta.vara = PROCESSO?.orgaoJulgador?.descricao || ''
 					infojudRegistrarSolicitacao(consulta)
 				}
 			)
+
 			criarBotao(
 				'renajud',
 				'',
 				'Consultar / Inserir Restrição no RENAJUD',
 				() => renajudInserirRestricao({documento})
 			)
+
 			criarBotao(
 				'infoseg',
 				'',
 				'Consultar Documento no INFOSEG',
 				() => infosegPesquisarDocumento(documento)
 			)
+
 		}
 
 		if(chassi){
