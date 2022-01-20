@@ -124,6 +124,24 @@ async function pjeApiObterProcessoPartes(id){
 
 }
 
+
+async function pjeApiObterProcessoTarefaMaisRecente(id){
+
+	let url = LINK.pje.api.comum + 'processos/id/' + id + '/tarefas?maisRecente=true'
+
+	relatar('Consultando API do PJe:',url)
+
+	let resposta  = await fetch(url)
+	let dados     = await resposta.json()
+
+	return dados
+
+}
+
+
+
+
+
 async function pjeApiCentralDeMandadosObterMandadoDadosPrimarios(id){
 
 	let url = LINK.pje.api.mandados + 'mandados/' + id + '/detalhamentos'
@@ -261,6 +279,9 @@ function pjeObterContexto(){
 
 	if(JANELA.match(/processo[/]\d+[/]detalhe/i))
 		return 'pje-detalhes'
+
+	if(JANELA.match(/processo[/]\d+[/]tarefa/i))
+		return 'pje-tarefa'
 
 	if(JANELA.match(/centralmandados[/]mandados[/]\d+$/i))
 		return 'pje-mandados'

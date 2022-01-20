@@ -3,9 +3,33 @@ function penhora(){
 	if(!JANELA.includes(LINK.penhora.dominio))
 		return
 
+	consultarRespostasDeCertidao()
+	consultarRespostasDePenhora()
 	cadastrarMandado()
 	cadastrarProcesso()
 	cadastrarPartes()
+
+	function consultarRespostasDeCertidao(){
+		if(!JANELA.includes('consultarpedidosdecertidao'))
+			return
+		let processo = obterParametroDeUrl('processo')
+		let campo = selecionar('#txtProcesso')
+		alterarValorDeCampo(campo,processo)
+		if(campo && processo)
+			focar('#filtrar')
+
+	}
+
+	function consultarRespostasDePenhora(){
+		if(!JANELA.includes('consultarpedidosdepenhora'))
+			return
+		let processo = obterParametroDeUrl('processo')
+		let campo = selecionar('#txtProcesso')
+		alterarValorDeCampo(campo,processo)
+		if(campo && processo)
+			focar('#filtrar')
+
+	}
 
 	function cadastrarPartes(){
 
@@ -180,6 +204,28 @@ function penhoraOnlineRegistrar(consulta = {}){
 	let mandadoData = consulta?.mandado?.data || ''
 
 	let url = LINK.penhora.solicitar + encodeURI('?' + 'valor=' + valor + '&mandadoId=' + mandadoId + '&mandadoData=' + mandadoData)
+
+	abrirPagina(url,'','','','','penhora')
+
+}
+
+function penhoraOnlineConsultarRespostasDePenhora(processo=''){
+
+	if(!processo)
+		return
+
+	let url = LINK.penhora.respostas + encodeURI(processo)
+
+	abrirPagina(url,'','','','','penhora')
+
+}
+
+function penhoraOnlineConsultarRespostasDeCertidoes(processo=''){
+
+	if(!processo)
+		return
+
+	let url = LINK.penhora.certidoes + encodeURI(processo)
 
 	abrirPagina(url,'','','','','penhora')
 

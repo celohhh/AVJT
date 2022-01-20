@@ -278,6 +278,8 @@ function definirLinks(){
 		url.dominio		= 'penhoraonline.org.br'
 		url.raiz			= montarUrl(url)
 		url.solicitar	= montarUrl(url,'','frmHomeSolicitarCertidoes.aspx')
+		url.respostas	= montarUrl(url,'','Penhora/frmListaRespostasPenhora.aspx?ModuloChamado=consultarpedidosdepenhora&processo=')
+		url.certidoes	= montarUrl(url,'','Penhora/frmListaRespostasCertidoes.aspx?ModuloChamado=consultarpedidosdecertidao&processo=')
 
 		return url
 

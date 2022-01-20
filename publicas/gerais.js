@@ -363,6 +363,7 @@ function alterarValorDeCampo(
 
 	if(change)
 		dispararEvento('change',campo)
+
 	dispararEvento('input',campo)
 
 	esforcosPoupados(1,1,contarCaracteres(texto))

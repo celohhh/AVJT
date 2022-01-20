@@ -56,9 +56,8 @@ async function pjeOtimizarPerfilUsuario(){
 
 		PROCESSO = await pjeObterDadosDoProcesso(id)
 
-		console.debug('PROCESSO',PROCESSO)
-		
 		pjeOtimizarDetalhesDoProcesso()
+		//pjeOtimizarTarefaDoProcesso()
 
 	}
 
@@ -96,62 +95,6 @@ function pjeOtimizarDetalhesDoMandado(){
 }
 
 
-function pjeOtimizarDetalhesDoProcesso(){
-
-	let contexto	= pjeObterContexto()
-	if(!contexto.includes('detalhes'))
-		return
-
-	pjeRedimensionarJanela()
-	pjeCriarBotoesFixos()
-
-	function pjeRedimensionarJanela(){
-
-		if(!CONFIGURACAO?.aoAbrirDetalhesDoProcesso?.redimensionar)
-			return
-
-		let janela			= CONFIGURACAO?.janela?.pjeDetalhes || ''
-
-		let largura			=	janela?.largura			|| 1200
-		let altura			= janela?.altura			|| 900
-		let horizontal	= janela?.horizontal	|| 0
-		let vertical		= janela?.vertical		|| 0
-
-		destacarJanela(
-			CONFIGURACAO.aoAbrirDetalhesDoProcesso.redimensionar,
-			'separarAbaDetalhesDoProcesso',
-			largura,
-			altura,
-			horizontal,
-			vertical
-		)
-
-	}
-
-}
-
-
-async function pjeObterDadosDoProcesso(id){
-
-	PROCESSO = await pjeApiObterProcessoDadosPrimarios(id)
-
-	Object.assign(
-		PROCESSO,
-		obterDadosDoNumeroDoProcesso(PROCESSO.numero)
-	)
-
-	PROCESSO.data		= {}
-	PROCESSO.valor	= pjeObterValoresDoProcesso()
-	PROCESSO.tarefa = await pjeApiObterProcessoTarefa(id)
-	PROCESSO.partes = await pjeApiObterProcessoPartes(id)
-
-	pjeSalvarDadosDoProcesso()
-
-	return PROCESSO
-
-}
-
-
 function pjeObterValoresDoProcesso(){
 
 	let valor = {}
@@ -178,19 +121,28 @@ function pjeCriarBotaoFixoConfigurarDimensoesDaJanela(){
 		'botao-dimensoes',
 		'Definir dimensões padrão para a janela',
 		() => {
+
 			let descricao	= ''
 			let editar		= ''
 			let contexto	= pjeObterContexto()
+
 			if(contexto.includes('detalhes')){
 				descricao	= 'Detalhes do Processo'
 				editar		= 'pjeDetalhes'
 			}
 
+			if(contexto.includes('tarefa')){
+				descricao	= 'Tarefa do Processo'
+				editar		= 'pjeTarefa'
+			}
+
 			abrirPagina(caminho(`navegador/link/link.htm?editar=${editar}&descricao=${descricao}`),800,500,0,0,'link','popup')
+
 		}
 	)
 
 }
+
 
 function pjeCriarBotaoFixoDestacarDadosDoProcesso(){
 
@@ -201,25 +153,23 @@ function pjeCriarBotaoFixoDestacarDadosDoProcesso(){
 			
 			let dados = {}
 			dados.mandado = {}
+			dados.orgaoJulgador = {}
+
 			dados.mandado.id = pjeObterDocumentoId()
 			dados.mandado.data = pjeObterDocumentoData()
-			dados.orgaoJulgador = {}
+
 			dados.orgaoJulgador.descricao = PROCESSO?.orgaoJulgador?.descricao || ''
+
 			dados.id			= PROCESSO?.id || ''
 			dados.numero	= PROCESSO?.numero || ''
 			dados.partes	= PROCESSO?.partes || ''
 			dados.valor		= PROCESSO?.valor || ''
 
 			abrirPagina(caminho('navegador/processo/processo.htm')+'?processo='+encodeURIComponent(JSON.stringify(dados)),450,700,0,0,'processo','popup')
+
 		}
 	)
 
-}
-let consulta = {}
-if(contexto.includes('pje-mandados')){
-	consulta.mandado = {}
-	consulta.mandado.id = pjeObterDocumentoId()
-	consulta.mandado.data = pjeObterDocumentoData()
 }
 
 
@@ -229,4 +179,95 @@ function pjeCriarBotaoFixo(
 	aoClicar	= ''
 ){
 	criarBotao('avjt-'+id,'avjt-botao-fixo informacoes','','',legenda,aoClicar)
+}
+
+
+function pjeOtimizarDetalhesDoProcesso(){
+
+	let contexto	= pjeObterContexto()
+	if(!contexto.includes('detalhes'))
+		return
+
+	pjeCriarBotoesFixos()
+	aoAbrir()
+		
+	function aoAbrir(){
+		redimensionarJanela()
+		abrirTarefa()
+	}
+	
+	function abrirTarefa(){
+
+		if(!CONFIGURACAO?.aoAbrirDetalhesDoProcesso?.abrirTarefa)
+			return
+			
+		abrirPagina(LINK.pje.tarefa,'','','','','pjeTarefa')
+
+	}
+
+	function redimensionarJanela(){
+
+		if(!CONFIGURACAO?.aoAbrirDetalhesDoProcesso?.redimensionar)
+			return
+
+		let janela			= CONFIGURACAO?.janela?.pjeDetalhes || ''
+
+		let largura			=	janela?.largura			|| 1200
+		let altura			= janela?.altura			|| 900
+		let horizontal	= janela?.horizontal	|| 0
+		let vertical		= janela?.vertical		|| 0
+
+		destacarJanela(
+			CONFIGURACAO.aoAbrirDetalhesDoProcesso.redimensionar,
+			'separarAbaDetalhesDoProcesso',
+			largura,
+			altura,
+			horizontal,
+			vertical
+		)
+
+	}
+
+}
+
+
+function pjeOtimizarTarefaDoProcesso(){
+
+	let contexto	= pjeObterContexto()
+	if(!contexto.includes('tarefa'))
+		return
+
+	pjeCriarBotoesFixos()
+	aoAbrir()
+
+	function aoAbrir(){
+		return
+	}
+
+}
+
+
+async function pjeObterDadosDoProcesso(id){
+
+	PROCESSO = await pjeApiObterProcessoDadosPrimarios(id)
+
+	if(!PROCESSO?.numero)
+		return
+
+	Object.assign(
+		PROCESSO,
+		obterDadosDoNumeroDoProcesso(PROCESSO.numero)
+	)
+
+	PROCESSO.data		= {}
+	PROCESSO.valor	= pjeObterValoresDoProcesso()
+	PROCESSO.tarefa = await pjeApiObterProcessoTarefa(id)
+	PROCESSO.partes = await pjeApiObterProcessoPartes(id)
+
+	LINK.pje.tarefa = LINK.pje.processo + id + '/tarefa/' + PROCESSO.tarefa.idTarefa
+
+	pjeSalvarDadosDoProcesso()
+
+	return PROCESSO
+
 }

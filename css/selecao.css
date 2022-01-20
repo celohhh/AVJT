@@ -188,6 +188,19 @@ assistente-de-selecao #penhora-online{
 	background:
 		var(--extensao-icone-penhora) no-repeat center / 70% 70%,
 		var(--extensao-gradiente-branco-preto),
+		rgba(var(--extensao-cor-indigo),1)
+	;
+}
+
+assistente-de-selecao #penhora-respostas{
+	background:
+		var(--extensao-icone-penhora) no-repeat center / 70% 70%,
+		var(--extensao-gradiente-branco-preto),
+		var(--extensao-cor-escurecer),
+		var(--extensao-cor-escurecer),
+		var(--extensao-cor-escurecer),
+		var(--extensao-cor-escurecer),
+		var(--extensao-cor-escurecer),
 		var(--extensao-cor-escurecer),
 		rgba(var(--extensao-cor-indigo),1)
 	;

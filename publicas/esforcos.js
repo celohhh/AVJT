@@ -1,7 +1,7 @@
 /**
  * Contabiliza as propriedades da variável global ${ESFORCOS} e armazena em ${browser.storage.local.esforcos}
  */
-async function contarEsforcosRepetitivosPoupados(){
+ async function contarEsforcosRepetitivosPoupados(){
 
 	let total = ESFORCOS.cliques + ESFORCOS.movimentos + ESFORCOS.teclas
 

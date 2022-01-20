@@ -46,8 +46,6 @@ function assistenteDeSelecao(){
 
 		let menu = criarMenu()
 
-
-
 		criarBotao(
 			'copiar',
 			'solido',
@@ -124,18 +122,6 @@ function assistenteDeSelecao(){
 
 		}
 
-		if(pjeNumeroDoProcessoCompleto){
-
-			criarBotao(
-				'pje-consultar',
-				'',
-				'Consultar Detalhes do Processo no PJe',
-				() => pjeConsultarDetalhesDoProcesso(pjeNumeroDoProcessoCompleto)
-			)
-
-		}
-
-
 		if(mandado || valor || data){
 			criarBotao(
 				'penhora-online',
@@ -156,6 +142,32 @@ function assistenteDeSelecao(){
 				}
 			)
 		}
+
+		if(pjeNumeroDoProcessoCompleto){
+
+			criarBotao(
+				'pje-consultar',
+				'',
+				'Consultar Detalhes do Processo no PJe',
+				() => pjeConsultarDetalhesDoProcesso(pjeNumeroDoProcessoCompleto)
+			)
+
+			criarBotao(
+				'penhora-online',
+				'',
+				'Consultar Respostas de Penhora',
+				() => penhoraOnlineConsultarRespostasDePenhora(pjeNumeroDoProcessoCompleto)
+			)
+
+			criarBotao(
+				'penhora-respostas',
+				'',
+				'Consultar Respostas de Certidões',
+				() => penhoraOnlineConsultarRespostasDeCertidoes(pjeNumeroDoProcessoCompleto)
+			)
+
+		}
+
 
 
 		if(documento){

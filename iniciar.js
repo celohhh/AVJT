@@ -12,6 +12,8 @@ browser.storage.local.get(
 		CONFIGURACAO			= armazenamento
 
 
+		console.debug('CONFIGURACAO',CONFIGURACAO)
+		
 		//publicas/gerais.js
 		relatar('CONFIGURAÇÃO: ', CONFIGURACAO)
 
@@ -50,6 +52,6 @@ function otimizar(){
 	sinesp()
 
 	//publicas/esforcos.js
-	setInterval(contarEsforcosRepetitivosPoupados,1000)
+	setInterval(contarEsforcosRepetitivosPoupados,100)
 
 }
