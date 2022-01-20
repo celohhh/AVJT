@@ -56,8 +56,6 @@ async function pjeOtimizarPerfilUsuario(){
 
 		PROCESSO = await pjeObterDadosDoProcesso(id)
 
-		console.debug('PROCESSO',PROCESSO)
-		
 		pjeOtimizarDetalhesDoProcesso()
 
 	}
@@ -198,28 +196,18 @@ function pjeCriarBotaoFixoDestacarDadosDoProcesso(){
 		'botao-dados-do-processo',
 		'Destacar dados do processo em uma nova janela',
 		() => {
-			
 			let dados = {}
-			dados.mandado = {}
-			dados.mandado.id = pjeObterDocumentoId()
-			dados.mandado.data = pjeObterDocumentoData()
 			dados.orgaoJulgador = {}
+			dados.id			= PROCESSO.id
+			dados.numero	= PROCESSO.numero
+			dados.partes	= PROCESSO.partes
+			dados.valor		= PROCESSO.valor
 			dados.orgaoJulgador.descricao = PROCESSO?.orgaoJulgador?.descricao || ''
-			dados.id			= PROCESSO?.id || ''
-			dados.numero	= PROCESSO?.numero || ''
-			dados.partes	= PROCESSO?.partes || ''
-			dados.valor		= PROCESSO?.valor || ''
 
 			abrirPagina(caminho('navegador/processo/processo.htm')+'?processo='+encodeURIComponent(JSON.stringify(dados)),450,700,0,0,'processo','popup')
 		}
 	)
 
-}
-let consulta = {}
-if(contexto.includes('pje-mandados')){
-	consulta.mandado = {}
-	consulta.mandado.id = pjeObterDocumentoId()
-	consulta.mandado.data = pjeObterDocumentoData()
 }
 
 

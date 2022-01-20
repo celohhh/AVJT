@@ -11,9 +11,7 @@ function penhora(){
 
 		if(!JANELA.includes('Penhora/frmCadastroPartes.aspx'))
 			return
-		let campoDocumento = selecionar('#txtDocumento')
-		let campoNome = selecionar('#txtNome')
-
+		
 		navigator.clipboard.readText().then(
 			texto => {
 				if(!texto)
@@ -23,86 +21,115 @@ function penhora(){
 				let poloAtivo = PROCESSO?.partes?.ATIVO || {}
 				let poloPassivo = PROCESSO?.partes?.PASSIVO || {}
 
-				cadastrarParte(poloAtivo)
-				cadastrarParte(poloPassivo)
+				poloAtivo.forEach(
+					(parte,indice,partes) => {
 
-				function cadastrarParte(polo={}){
+						let documento = parte?.documento || ''
+						let nome = parte?.nome?.trim() || ''
+						
+						if(!documento)
+							return
+						
+						if(verificaParteCadastrada(documento))
+							return
+						
+						let parteAnterior = partes[indice-1] || ''
 
-					if(vazio(polo))
-						return
-		
-					polo.forEach(
-						(parte,indice,partes) => {
-		
-							let documento = parte?.documento || ''
-							let nome = parte?.nome?.trim() || ''
-							let polo = parte?.polo?.trim() || ''
-							let parteAnterior = partes[indice-1] || ''
-		
-							if(
-								!documento
-								||
-								verificaParteCadastrada(documento)
-							)
+						if(parteAnterior){
+							if(!verificaParteCadastrada(parteAnterior.documento))
 								return
-		
-							if(polo.includes('passivo')){
-								if(!verificaParteCadastrada(poloAtivo[poloAtivo.length -1].documento))
-									return
-							}
-		
-							if(parteAnterior){
-								if(!verificaParteCadastrada(parteAnterior.documento))
-									return
-							}				
-		
-							let cpf = obterCPF(documento)
-							let cnpj = obterCNPJ(documento)
-							if(cpf)
-								selecionarOpcao('#dplTipoPessoa','Pessoa Física')
-							if(cnpj)
-								selecionarOpcao('#dplTipoPessoa','Pessoa Jurídica')
-
-							if(polo.includes('ativo')){
-								selecionarOpcao('#dplPassivoPenhora','Não')
-								selecionarOpcao('#dplClassificacao','Exequente')
-							}
-							
-							if(polo.includes('passivo')){
-								selecionarOpcao('#dplClassificacao','Executado')
-							}
-
-							if(campoDocumento){
-								alterarValorDeCampo(campoDocumento,documento)
-								campoDocumento.blur()
-							}
-		
-							if(campoDocumento){
-								alterarValorDeCampo(campoDocumento,documento)
-								campoDocumento.blur()
-							}
-		
-							if(campoNome){
-								alterarValorDeCampo(campoNome,nome)
-								campoNome.addEventListener(
-									'focus',
-									() => {
-										if(!campoNome.value)
-											alterarValorDeCampo(campoNome,nome)
-									}
-								)
-							}
-		
 						}
-					)
-		
-				}
+						
+						let cpf = obterCPF(documento)
+						let cnpj = obterCNPJ(documento)
+						let campoDocumento = selecionar('#txtDocumento')
+						let campoNome = selecionar('#txtNome')
+						if(cpf)
+							selecionarOpcao('#dplTipoPessoa','Pessoa Física')
+						if(cnpj)
+							selecionarOpcao('#dplTipoPessoa','Pessoa Jurídica')
+						
+						selecionarOpcao('#dplClassificacao','Exequente')
+						selecionarOpcao('#dplPassivoPenhora','Não')
+						if(campoDocumento){
+							alterarValorDeCampo(campoDocumento,documento)
+							campoDocumento.blur()
+						}
+
+						if(campoNome){
+							alterarValorDeCampo(campoNome,nome)
+							campoNome.addEventListener(
+								'focus',
+								() => {
+									if(!campoNome.value)
+										alterarValorDeCampo(campoNome,nome)
+								}
+							)
+						}
+
+					}
+
+				)
+
+				poloPassivo.forEach(
+					(parte,indice,partes) => {
+
+						let documento = parte?.documento || ''
+						let nome = parte?.nome?.trim() || ''
+					
+						if(!documento)
+							return
+						
+						if(verificaParteCadastrada(documento))
+							return
+						
+						let parteAnterior = partes[indice-1] || ''
+
+						if(!verificaParteCadastrada(poloAtivo[poloAtivo.length -1].documento))
+							return
+
+						if(parteAnterior){
+							if(!verificaParteCadastrada(parteAnterior.documento))
+								return
+						}
+							
+						let cpf = obterCPF(documento)
+						let cnpj = obterCNPJ(documento)
+						let campoDocumento = selecionar('#txtDocumento')
+						let campoNome = selecionar('#txtNome')
+
+						if(cpf)
+							selecionarOpcao('#dplTipoPessoa','Pessoa Física')
+						if(cnpj)
+							selecionarOpcao('#dplTipoPessoa','Pessoa Jurídica')
+						
+						selecionarOpcao('#dplClassificacao','Executado')
+						
+						if(campoDocumento){
+							alterarValorDeCampo(campoDocumento,documento)
+						}
+
+						if(campoNome){
+							campoNome.focus()
+							alterarValorDeCampo(campoNome,nome)
+							campoNome.addEventListener(
+								'focus',
+								() => {
+									if(!campoNome.value)
+										alterarValorDeCampo(campoNome,nome)
+								}
+							)
+						}
+
+					}
+
+				)
 
 			}
 
 		)
 
-
+		
 		function verificaParteCadastrada(expressao=''){
 
 			if(!expressao)

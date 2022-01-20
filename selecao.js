@@ -31,11 +31,9 @@ function assistenteDeSelecao(){
 		let cnpj												= obterCNPJ(texto)
 		let contexto										= pjeObterContexto()
 		let cpf													= obterCPF(texto)
-		let data												= obterData(texto)
 		let documento										= obterDocumento(texto)
 		let textoAparado								= texto.trim()
 		let letra												= texto.match(/[A-Za-zÀ-ȕ]/)
-		let mandado											= texto.match(/mandado/gi)
 		let nomeCompleto								= obterNomeCompleto(texto)
 		let numero											= numeros(texto)
 		let pjeNumeroDoProcessoParcial	= obterNumeroDoProcessoParcial(texto)
@@ -136,7 +134,7 @@ function assistenteDeSelecao(){
 		}
 
 
-		if(mandado || valor || data){
+		if(valor){
 			criarBotao(
 				'penhora-online',
 				'',
@@ -148,7 +146,7 @@ function assistenteDeSelecao(){
 						consulta.mandado.id = pjeObterDocumentoId()
 						consulta.mandado.data = pjeObterDocumentoData()
 					}
-					consulta.valor = valor || ''
+					consulta.valor = valor
 					penhoraOnlineRegistrar(consulta)
 					copiarDadosDoProcesso()
 					clicar('#avjt-botao-dados-do-processo')
