@@ -345,7 +345,8 @@ function obterNomeCompleto(texto){
 
 function alterarValorDeCampo(
 	campo = '',
-	texto = ''
+	texto = '',
+	change = false
 ){
 
 	if(!campo)
@@ -360,7 +361,8 @@ function alterarValorDeCampo(
 
 	propriedade.call(campo,texto)
 
-	dispararEvento('change',campo)
+	if(change)
+		dispararEvento('change',campo)
 	dispararEvento('input',campo)
 
 	esforcosPoupados(1,1,contarCaracteres(texto))
