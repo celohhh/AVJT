@@ -14,6 +14,7 @@ function pjeObterProcessoId(){
 
 }
 
+
 function pjeObterMandadoId(){
 
 	EXPRESSAO.mandadoId = new RegExp(/(centralmandados[/]mandados[/]\d+$)/,'gi')
@@ -83,93 +84,6 @@ function pjeSalvarDadosDoProcesso(){
 }
 
 
-async function pjeApiObterProcessoDadosPrimarios(id){
-
-	let url = LINK.pje.api.comum + 'processos/id/' + id
-
-	relatar('Consultando API do PJe:',url)
-
-	let resposta  = await fetch(url)
-	let dados     = await resposta.json()
-
-	return dados
-
-}
-
-
-async function pjeApiObterProcessoTarefa(id){
-
-	let url = LINK.pje.api.comum + 'processos/id/' + id + '/tarefas'
-
-	relatar('Consultando API do PJe:',url)
-
-	let resposta = await fetch(url)
-	let dados = await resposta.json()
-
-	return dados[0]
-
-}
-
-
-async function pjeApiObterProcessoPartes(id){
-
-	let url = LINK.pje.api.comum + 'processos/id/' + id + '/partes'
-
-	relatar('Consultando API do PJe:',url)
-
-	let resposta  = await fetch(url)
-	let dados     = await resposta.json()
-
-	return dados
-
-}
-
-
-async function pjeApiObterProcessoTarefaMaisRecente(id){
-
-	let url = LINK.pje.api.comum + 'processos/id/' + id + '/tarefas?maisRecente=true'
-
-	relatar('Consultando API do PJe:',url)
-
-	let resposta  = await fetch(url)
-	let dados     = await resposta.json()
-
-	return dados
-
-}
-
-
-
-
-
-async function pjeApiCentralDeMandadosObterMandadoDadosPrimarios(id){
-
-	let url = LINK.pje.api.mandados + 'mandados/' + id + '/detalhamentos'
-
-	relatar('Consultando API do PJe:',url)
-
-	let resposta  = await fetch(url)
-	let dados     = await resposta.json()
-
-	return dados
-
-}
-
-
-async function pjeApiCentralDeMandadosObterProcessoId(id){
-
-	let url = LINK.pje.api.comum + 'processos/id/' + id + '/partes'
-
-	relatar('Consultando API do PJe:',url)
-
-	let resposta  = await fetch(url)
-	let dados     = await resposta.json()
-
-	return dados
-
-}
-
-
 async function pjeConsultarDetalhesDoProcesso(numero=''){
 
 	if(!numero)
@@ -193,19 +107,9 @@ async function pjeConsultarDetalhesDoProcesso(numero=''){
 
 	let url = LINK.pje.processo + id + '/detalhe?janela=destacada'
 
-	let janela			= CONFIGURACAO?.janela?.pjeDetalhes || ''
-	let largura			=	janela?.largura			|| 1200
-	let altura			= janela?.altura			|| 900
-	let horizontal	= janela?.horizontal	|| 0
-	let vertical		= janela?.vertical		|| 0
+	abrirPagina(url,'','','','','pjeDetalhes')
 
-	abrirPagina(
-		url,
-		largura,
-		altura,
-		horizontal,
-		vertical
-	)
+	esforcosPoupados(4,4,contarCaracteres(numero))
 
 }
 
@@ -220,20 +124,7 @@ function pjeAbrirPainelDeConsultaProcessual(consulta = {}){
 
 	let url = LINK.pje.consulta.processos + '?' + campo + '=' + conteudo
 
-	let janela			= CONFIGURACAO?.janela?.pjePainel || ''
-
-	let largura			=	janela?.largura			|| 1200
-	let altura			= janela?.altura			|| 900
-	let horizontal	= janela?.horizontal	|| 0
-	let vertical		= janela?.vertical		|| 0
-
-	abrirPagina(
-		url,
-		largura,
-		altura,
-		horizontal,
-		vertical
-	)
+	abrirPagina(url,'','','','','pjePainel')
 
 	esforcosPoupados(3,3,contarCaracteres(conteudo))
 
@@ -247,38 +138,23 @@ function pjeAbrirPaginaDeConsultaProcessual(numero=''){
 
 	let url = LINK.pje.painel.global + '?processo=' + numero
 
-	abrirPagina(url)
+	abrirPagina(url,'','','','','pjePainel')
 
-}
-
-
-async function pjeApiConsultaPublicaObterProcessoId(numero){
-
-	let url = LINK.pje.api.consulta + 'processos/dadosbasicos/' + numero
-
-	let resposta = 	await fetch(
-		url,
-		{
-			"credentials": "include",
-			"headers": {
-					"X-Grau-Instancia": CONFIGURACAO?.instituicao?.instancia || 1
-			},
-			"method": "GET",
-			"mode": "cors"
-		}
-	)
-
-	let dados = await resposta.json()
-
-	return dados || ''
+	esforcosPoupados(3,3,contarCaracteres(conteudo))
 
 }
 
 
 function pjeObterContexto(){
 
+	if(JANELA.match(/navegador[/]processo[/]processo[.]htm/i))
+		return 'pje-dados-do-processo'
+
 	if(JANELA.match(/processo[/]\d+[/]detalhe/i))
 		return 'pje-detalhes'
+
+	if(JANELA.match(/pjekz.gigs.abrir-gigs/i))
+		return 'pje-gigs'
 
 	if(JANELA.match(/processo[/]\d+[/]tarefa/i))
 		return 'pje-tarefa'
@@ -291,13 +167,13 @@ function pjeObterContexto(){
 }
 
 
-
 function pjeObterDocumentoCabecalhoTexto(){
 	let cabecalho = selecionar('.cabecalho-conteudo')
 	if(!cabecalho)
 		return ''
 	return cabecalho.innerText || ''
 }
+
 
 function pjeObterDocumentoId(){
 	let texto = pjeObterDocumentoCabecalhoTexto()
@@ -320,4 +196,89 @@ function pjeObterDocumentoData(){
 
 function copiarDadosDoProcesso(){
 	copiar(JSON.stringify(PROCESSO))
+}
+
+
+function pjeCriarBotaoFixoConfigurarDimensoesDaJanela(){
+
+	pjeCriarBotaoFixo(
+		'botao-dimensoes',
+		'Definir dimensões padrão para a janela',
+		() => {
+
+			let descricao	= ''
+			let editar		= ''
+			let contexto	= pjeObterContexto()
+
+			if(contexto.includes('pje-dados-do-processo')){
+				descricao	= 'Dados do Processo'
+				editar		= 'pjeDados'
+			}
+
+			if(contexto.includes('pje-detalhes')){
+				descricao	= 'Detalhes do Processo'
+				editar		= 'pjeDetalhes'
+			}
+
+			if(contexto.includes('pje-gigs')){
+				descricao	= 'GIGS'
+				editar		= 'pjeGigs'
+			}
+
+			if(contexto.includes('pje-tarefa')){
+				descricao	= 'Tarefa do Processo'
+				editar		= 'pjeTarefa'
+			}
+
+			abrirPagina(caminho(`navegador/link/link.htm?editar=${editar}&descricao=${descricao}`),800,500,0,0,'link','popup')
+
+		}
+	)
+
+}
+
+
+function pjeCriarBotaoFixoDestacarDadosDoProcesso(){
+
+	pjeCriarBotaoFixo(
+		'botao-dados-do-processo',
+		'Destacar dados do processo em uma nova janela',
+		() => {
+			
+			let dados = {}
+			dados.mandado = {}
+			dados.orgaoJulgador = {}
+
+			dados.mandado.id = pjeObterDocumentoId()
+			dados.mandado.data = pjeObterDocumentoData()
+
+			dados.orgaoJulgador.descricao = PROCESSO?.orgaoJulgador?.descricao || ''
+
+			dados.id			= PROCESSO?.id || ''
+			dados.numero	= PROCESSO?.numero || ''
+			dados.partes	= PROCESSO?.partes || ''
+			dados.valor		= PROCESSO?.valor || ''
+
+			abrirPagina(caminho('navegador/processo/processo.htm')+'?processo='+encodeURIComponent(JSON.stringify(dados)),'','','','','pjeDados')
+
+		}
+	)
+
+}
+
+
+function pjeCriarBotaoFixo(
+	id				= '',
+	legenda		= '',
+	aoClicar	= ''
+){
+	criarBotao('avjt-'+id,'avjt-botao-fixo informacoes','','',legenda,aoClicar)
+}
+
+
+function obterPoloPassivo(texto){
+	let polo = texto.replace(/^.*?\sx\s/gi,'') || ''
+	if(polo)
+		polo = maiusculas(polo.trim())
+	return polo
 }

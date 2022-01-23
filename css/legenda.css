@@ -110,7 +110,7 @@ informacoes a:hover::before
 	border:rgba(var(--extensao-cor-vermelho),1) 3px solid;
 	border-radius:25px 0 25px 25px;
 	box-shadow:0px 2px 2px 2px rgba(var(--extensao-cor-preto), 0.3);
-	content:attr(aria-label);
+	content:"Playlist do Youtube com vídeos relevantes sobre esta seção";
 	padding:20px;
 	position:absolute;
 	right:calc(1rem + 25px);

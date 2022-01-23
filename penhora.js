@@ -8,6 +8,32 @@ function penhora(){
 	cadastrarMandado()
 	cadastrarProcesso()
 	cadastrarPartes()
+	selecionarComarcas()
+	marcarTermoDeAceite()
+
+	function marcarTermoDeAceite(){
+
+		if(!JANELA.includes('frmEscolhaCidadePenhora'))
+			return
+
+		let caixa = selecionar('#chkHabilitar')
+		if(!caixa.checked)
+			clicar('#chkHabilitar')		
+
+	}
+
+	function selecionarComarcas(){
+
+		if(!JANELA.includes('frmEscolhaCidadePenhora'))
+			return
+
+		let checar = selecionar('[name$="chkCidade"]')
+		if(checar.checked)
+			return
+
+		clicar('a[href*="javascript:"]')
+
+	}
 
 	function consultarRespostasDeCertidao(){
 		if(!JANELA.includes('consultarpedidosdecertidao'))
@@ -35,6 +61,7 @@ function penhora(){
 
 		if(!JANELA.includes('Penhora/frmCadastroPartes.aspx'))
 			return
+
 		let campoDocumento = selecionar('#txtDocumento')
 		let campoNome = selecionar('#txtNome')
 

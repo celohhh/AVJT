@@ -89,3 +89,9 @@ parte{
 	padding:5px 10px 10px 10px;
 	width:95%;
 }
+
+botao#avjt-botao-dimensoes{
+	height:11px !important;
+	width:11px !important;
+	z-index:9 !important;
+}

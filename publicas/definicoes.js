@@ -149,7 +149,7 @@ function definirExpressoesRegulares(){
 	expressao.chassi										= new RegExp(/(?![IOQ])[A-Za-z0-9]{17}/g)
 	expressao.cnpj											= new RegExp(/\d{2}[.]\d{3}[.]\d{3}[/]\d{4}[-]\d{2}/g)
 	expressao.cpf												= new RegExp(/\d{3}[.]\d{3}[.]\d{3}[-]\d{2}/g)
-	expressao.data											= new RegExp(/\d{2}\D\d{2}\D\d{4}/g)
+	expressao.data											= new RegExp(/\d{2}[/]\d{2}[/]\d{4}/g)
 	expressao.hora											= new RegExp(/\d{2}[:]\d{2}/g)
 	expressao.correios									= new RegExp(/[A-Za-z]{2}\d{9}[A-Za-z]{2}/gi)
 	expressao.nomeCompleto							= new RegExp(/\b\w+\b\s.*/g)

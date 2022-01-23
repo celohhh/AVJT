@@ -92,7 +92,7 @@ function minusculas(texto){
 function titularizar(texto){
 
 	if(!texto)
-		return
+		return ''
 
 	let textoEmMinusculas = minusculas(texto)
 
@@ -207,8 +207,8 @@ function copiar(texto){
 
 	navigator.clipboard.writeText(texto).then(
 		() => {
-			relatar('Conteúdo copiado:',texto)
 			esforcosPoupados(1,2,2)
+			relatar('Conteúdo copiado:',texto)
 			return
 		},
 		erro => {
@@ -267,7 +267,18 @@ function obterData(texto){
 	if(!data)
 		return ''
 
-	return data.join()
+	return data[0]
+
+}
+
+
+function obterHora(texto){
+
+	let hora = texto.match(EXPRESSAO.hora) || ''
+	if(!hora)
+		return ''
+
+	return hora[0]
 
 }
 
@@ -278,7 +289,7 @@ function obterValorMonetario(texto){
 	if(!valor)
 		return ''
 
-	return valor.join()
+	return valor[0]
 
 }
 
@@ -287,14 +298,14 @@ function obterCPF(texto){
 	let cpf = texto.match(EXPRESSAO.cpf) || ''
 	if(!cpf)
 		return ''
-	return cpf.join()
+	return cpf[0]
 }
 
 function obterCNPJ(texto){
 	let cnpj = texto.match(EXPRESSAO.cnpj) || ''
 	if(!cnpj)
 		return ''
-	return cnpj.join()
+	return cnpj[0]
 }
 
 function obterRaizCNPJ(texto){
@@ -311,42 +322,43 @@ function obterNumeroDoProcessoPadraoCNJ(texto){
 	let numero = texto.match(EXPRESSAO.processoNumero) || ''
 	if(!numero)
 		return ''
-	return numero.join() || ''
+	return numero[0] || ''
 }
 
 function obterNumeroDoProcessoParcial(texto){
 	let numero = texto.match(EXPRESSAO.processoNumeroParcial) || ''
 	if(!numero)
 		return ''
-	return String(numero.join())?.padStart(15,'0') || ''
+	return String(numero[0])?.padStart(15,'0') || ''
 }
 
 function obterChassi(texto){
 	let chassi = texto.match(EXPRESSAO.chassi) || ''
 	if(!chassi)
 		return ''
-	return chassi.join()
+	return chassi[0]
 }
 
 function obterPlacaDeVeiculoAutomotor(texto){
 	let placa = texto.match(/[A-Za-z]{3}\d{4}/gi) || texto.match(/[A-Za-z]{3}(-|–|\s|[.])\d{4}/gi) || texto.match(/[A-Za-z]{3}\d{1}[A-Za-z]\d{2}/gi) || ''
 	if(!placa)
 		return ''
-	return placa.join().replace(/(-|–|\s|[.])/,'')
+	return placa[0].replace(/(-|–|\s|[.])/,'')
 }
 
 function obterNomeCompleto(texto){
 	let nome = texto.match(EXPRESSAO.nomeCompleto) || ''
 	if(!nome)
 		return ''
-	return nome.join().trim()
+	return nome[0].trim()
 }
 
 
 function alterarValorDeCampo(
 	campo = '',
 	texto = '',
-	change = false
+	change = false,
+	input = true
 ){
 
 	if(!campo)
@@ -364,7 +376,8 @@ function alterarValorDeCampo(
 	if(change)
 		dispararEvento('change',campo)
 
-	dispararEvento('input',campo)
+	if(input)
+		dispararEvento('input',campo)
 
 	esforcosPoupados(1,1,contarCaracteres(texto))
 

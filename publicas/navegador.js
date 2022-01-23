@@ -97,6 +97,8 @@ function destacarJanela(
 		}
 	}
 
+	esforcosPoupados(2,4)
+
 }
 
 

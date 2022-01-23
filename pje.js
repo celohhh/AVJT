@@ -1,32 +1,20 @@
 //publicas/pje.js
+//publicas/pje-api.js
+//publicas/pje-listas.js
 
 function pje(){
 
 	if(!JANELA.includes(LINK.pje.dominio))
 		return
 
+	pjePesquisarProcesso()
 	pjeRedirecionarPaginaAcessoNegado()
+	pjeOtimizarPainelInicial()
 	pjeOtimizarPainelGlobal()
 	pjeOtimizarPerfilUsuario()
 	pjeOtimizarPerfilOficialDeJustica()
+	pjeOtimizarGigs()
 
-}
-
-
-function pjeRedirecionarPaginaAcessoNegado(){
-
-	esperar('pje-acesso-negado').then(redirecionar)
-
-	function redirecionar(){
-		window.location = LINK.pje.raiz
-	}
-
-}
-
-
-function pjeOtimizarPainelGlobal(){
-
-	pjePesquisarProcesso()
 
 	function pjePesquisarProcesso(){
 
@@ -46,7 +34,41 @@ function pjeOtimizarPainelGlobal(){
 
 	}
 
+
 }
+
+
+function pjeRedirecionarPaginaAcessoNegado(){
+
+	esperar('pje-acesso-negado').then(redirecionar)
+
+	esforcosPoupados(2,2,2)
+
+	function redirecionar(){
+		window.location = LINK.pje.raiz
+	}
+
+}
+
+
+function pjeOtimizarPainelInicial(){
+
+	esperar('pje-menu-acesso-rapido').then(pjeListarProcessos)
+	
+}
+
+
+function pjeOtimizarPainelGlobal(){
+
+	if(
+		!JANELA.match(/global.todos.lista.processos/gi)
+		||
+		JANELA.href.match(EXPRESSAO.processoNumero)
+	)
+		return
+
+}
+
 
 async function pjeOtimizarPerfilUsuario(){
 
@@ -57,7 +79,7 @@ async function pjeOtimizarPerfilUsuario(){
 		PROCESSO = await pjeObterDadosDoProcesso(id)
 
 		pjeOtimizarDetalhesDoProcesso()
-		//pjeOtimizarTarefaDoProcesso()
+		pjeOtimizarTarefaDoProcesso()
 
 	}
 
@@ -95,97 +117,12 @@ function pjeOtimizarDetalhesDoMandado(){
 }
 
 
-function pjeObterValoresDoProcesso(){
-
-	let valor = {}
-
-	if(PROCESSO?.valorDaCausa)
-		valor.causa = Number(PROCESSO.valorDaCausa).toLocaleString('pt-BR',{minimumFractionDigits:2}) || ''
-
-	return valor
-
-}
-
-
-function pjeCriarBotoesFixos(){
-
-	pjeCriarBotaoFixoDestacarDadosDoProcesso()
-	pjeCriarBotaoFixoConfigurarDimensoesDaJanela()
-
-}
-
-
-function pjeCriarBotaoFixoConfigurarDimensoesDaJanela(){
-
-	pjeCriarBotaoFixo(
-		'botao-dimensoes',
-		'Definir dimensões padrão para a janela',
-		() => {
-
-			let descricao	= ''
-			let editar		= ''
-			let contexto	= pjeObterContexto()
-
-			if(contexto.includes('detalhes')){
-				descricao	= 'Detalhes do Processo'
-				editar		= 'pjeDetalhes'
-			}
-
-			if(contexto.includes('tarefa')){
-				descricao	= 'Tarefa do Processo'
-				editar		= 'pjeTarefa'
-			}
-
-			abrirPagina(caminho(`navegador/link/link.htm?editar=${editar}&descricao=${descricao}`),800,500,0,0,'link','popup')
-
-		}
-	)
-
-}
-
-
-function pjeCriarBotaoFixoDestacarDadosDoProcesso(){
-
-	pjeCriarBotaoFixo(
-		'botao-dados-do-processo',
-		'Destacar dados do processo em uma nova janela',
-		() => {
-			
-			let dados = {}
-			dados.mandado = {}
-			dados.orgaoJulgador = {}
-
-			dados.mandado.id = pjeObterDocumentoId()
-			dados.mandado.data = pjeObterDocumentoData()
-
-			dados.orgaoJulgador.descricao = PROCESSO?.orgaoJulgador?.descricao || ''
-
-			dados.id			= PROCESSO?.id || ''
-			dados.numero	= PROCESSO?.numero || ''
-			dados.partes	= PROCESSO?.partes || ''
-			dados.valor		= PROCESSO?.valor || ''
-
-			abrirPagina(caminho('navegador/processo/processo.htm')+'?processo='+encodeURIComponent(JSON.stringify(dados)),450,700,0,0,'processo','popup')
-
-		}
-	)
-
-}
-
-
-function pjeCriarBotaoFixo(
-	id				= '',
-	legenda		= '',
-	aoClicar	= ''
-){
-	criarBotao('avjt-'+id,'avjt-botao-fixo informacoes','','',legenda,aoClicar)
-}
 
 
 function pjeOtimizarDetalhesDoProcesso(){
 
 	let contexto	= pjeObterContexto()
-	if(!contexto.includes('detalhes'))
+	if(!contexto.includes('pje-detalhes'))
 		return
 
 	pjeCriarBotoesFixos()
@@ -194,14 +131,28 @@ function pjeOtimizarDetalhesDoProcesso(){
 	function aoAbrir(){
 		redimensionarJanela()
 		abrirTarefa()
+		setTimeout(abrirGigs,500)
 	}
 	
+	function abrirGigs(){
+
+		if(!CONFIGURACAO?.aoAbrirDetalhesDoProcesso?.abrirGigs)
+			return
+			
+		abrirPagina(LINK.pje.gigs,'','','','','pjeGigs')
+
+		esforcosPoupados(1,1)
+
+	}
+
 	function abrirTarefa(){
 
 		if(!CONFIGURACAO?.aoAbrirDetalhesDoProcesso?.abrirTarefa)
 			return
 			
 		abrirPagina(LINK.pje.tarefa,'','','','','pjeTarefa')
+
+		esforcosPoupados(1,1)
 
 	}
 
@@ -234,7 +185,7 @@ function pjeOtimizarDetalhesDoProcesso(){
 function pjeOtimizarTarefaDoProcesso(){
 
 	let contexto	= pjeObterContexto()
-	if(!contexto.includes('tarefa'))
+	if(!contexto.includes('pje-tarefa'))
 		return
 
 	pjeCriarBotoesFixos()
@@ -244,6 +195,19 @@ function pjeOtimizarTarefaDoProcesso(){
 		return
 	}
 
+}
+
+
+function pjeOtimizarGigs(){
+
+	console.debug('gigs')
+	let contexto	= pjeObterContexto()
+	
+	if(!contexto.includes('pje-gigs'))
+		return
+
+	pjeCriarBotaoFixoConfigurarDimensoesDaJanela()
+	
 }
 
 
@@ -264,10 +228,31 @@ async function pjeObterDadosDoProcesso(id){
 	PROCESSO.tarefa = await pjeApiObterProcessoTarefa(id)
 	PROCESSO.partes = await pjeApiObterProcessoPartes(id)
 
+	LINK.pje.gigs = LINK.pje.kz + 'gigs/abrir-gigs/' + id
 	LINK.pje.tarefa = LINK.pje.processo + id + '/tarefa/' + PROCESSO.tarefa.idTarefa
 
 	pjeSalvarDadosDoProcesso()
 
 	return PROCESSO
+
+}
+
+
+function pjeObterValoresDoProcesso(){
+
+	let valor = {}
+
+	if(PROCESSO?.valorDaCausa)
+		valor.causa = Number(PROCESSO.valorDaCausa).toLocaleString('pt-BR',{minimumFractionDigits:2}) || ''
+
+	return valor
+
+}
+
+
+function pjeCriarBotoesFixos(){
+
+	pjeCriarBotaoFixoDestacarDadosDoProcesso()
+	pjeCriarBotaoFixoConfigurarDimensoesDaJanela()
 
 }

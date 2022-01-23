@@ -1,20 +1,24 @@
-botao.avjt-botao-fixo{
+botao{
 	cursor:pointer;
 	display:block;
 	opacity:0.8;
+}
+botao:hover{
+	opacity:1;
+}
+botao:active{
+	opacity:0.7;
+}
+
+
+
+botao.avjt-botao-fixo{
 	position:fixed;
 	z-index:1;
 }
-botao.avjt-botao-fixo:hover{
-	opacity:1;
-}
-botao.avjt-botao-fixo:active{
-	opacity:0.7;
-}
+
 botao#avjt-botao-dimensoes{
-	background:
-		var(--extensao-icone-dimensoes) no-repeat center
-	;
+	background:var(--extensao-icone-dimensoes) no-repeat center;
 	height:13px;
 	left:0;
 	position:fixed;
@@ -22,10 +26,9 @@ botao#avjt-botao-dimensoes{
 	width:13px;
 	z-index:1;
 }
+
 botao#avjt-botao-dados-do-processo{
-	background:
-		var(--extensao-icone-processo) no-repeat center
-	;
+	background:var(--extensao-icone-processo) no-repeat center;
 	height:20px;
 	left:80px;
 	position:fixed;
@@ -33,6 +36,68 @@ botao#avjt-botao-dados-do-processo{
 	width:30px;
 	z-index:1;
 }
+
 botao.avjt-botao-fixo:hover::before{
 	animation:aparecer 0.3s ease-out 0s 1 both;
+}
+
+
+listar#avjt-listar-processos{
+	display:flex;
+	left:200px;
+	position:fixed;
+	top:0;
+	min-width:250px;
+	z-index:9;
+}
+
+listar botao.informacoes:hover::before{
+	border-radius:15px 0 15px 15px;
+	left:-195px;
+	width:150px;
+	top:50%;
+}
+
+.avjt-listar-processos-botao{
+	filter:drop-shadow(0px 3px 3px rgba(var(--extensao-cor-preto),1));
+	height:25px;
+	margin:5px 0 0 0;
+	position:relative;
+	width:25px;
+}
+
+listar #avjt-botao-listar{
+	background:var(--extensao-icone-lista) no-repeat center;
+}
+
+listar #avjt-botao-listar.copiado{
+	background:var(--extensao-icone-copiado) no-repeat center;
+}
+
+listar #avjt-botao-limpar{
+	background:var(--extensao-icone-prancheta) no-repeat center;
+	display:none;
+}
+
+listar #avjt-listar-processos-texto{
+	background:
+		linear-gradient(
+			rgba(var(--extensao-cor-branco),0.95)   0%,
+			rgba(var(--extensao-cor-branco),0.95) 100%
+		),
+		var(--extensao-icone-colorido) no-repeat center / 70% 70%,
+		rgba(var(--extensao-cor-branco),1)
+	;
+	border:rgba(var(--extensao-cor-primaria),0.9) solid 1px;
+	box-shadow:0 3px 6px 2px rgba(var(--extensao-cor-preto),0.5);
+	box-sizing:border-box;
+	clear:both;
+	color:rgba(var(--extensao-cor-preto),0.9);
+	display:none;
+	font-size:10px;
+	height:0;
+	margin:5px 0 0 0;
+	resize:both;
+	white-space:pre;
+	min-width:300px;
 }

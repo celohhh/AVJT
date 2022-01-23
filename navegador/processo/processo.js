@@ -2,6 +2,8 @@ window.addEventListener('load',criarMenuDadosDoProcesso)
 
 async function criarMenuDadosDoProcesso(){
 
+	pjeCriarBotaoFixoConfigurarDimensoesDaJanela()
+
 	let armazenamento = await browser.storage.local.get()
 
 	CONFIGURACAO = armazenamento
