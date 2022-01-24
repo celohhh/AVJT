@@ -154,6 +154,21 @@ function abrirPaginaDesenvolvimento(){
 }
 
 
+function abrirPaginaContribuir(){
+
+	criarJanela(
+		caminho('navegador/contribuir/contribuir.htm'),
+		'',
+		700,
+		600,
+		0,
+		0,
+		'detached_panel'
+	)
+
+}
+
+
 function abrirPaginaContadorDeEsforcosRepetitivos(){
 
 	criarJanela(

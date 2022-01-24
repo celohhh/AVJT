@@ -121,6 +121,9 @@ function criarRodapeDePaginaDaExtensao(){
 				#configuracoes{
 					background:var(--extensao-icone-engrenagem);
 				}
+				#contribuir{
+					background:var(--extensao-icone-ajuda);
+				}
 				#github{
 					background:var(--extensao-icone-github);
 				}
@@ -213,12 +216,13 @@ function criarRodapeDePaginaDaExtensao(){
 
 		criarLinkDoRodape('pagina', LINK.extensao, 'Página desta extensão')
 		criarLinkDoRodape('termos', '', 'Termos de Uso',abrirPaginaTermosDeUso)
+		criarLinkDoRodape('roadmap', LINK.roadmap, 'Lista de Funcionalidades')
 		criarLinkDoRodape('youtube', LINK.youtube, 'Canal no Youtube')
 		criarLinkDoRodape('telegram', LINK.telegram, 'Grupo de utilizadores no Telegram')
 		criarLinkDoRodape('whatsapp', LINK.whatsapp.grupo, 'Grupo de utilizadores no WhatsApp')
+		criarLinkDoRodape('contribuir', '', 'Desejo Contribuir',abrirPaginaContribuir)
 		//criarLinkDoRodape('pix', 'https://nubank.com.br/pagar/1wdtw/PuXdDSMdok', 'PIX do Desenvolvedor')
 		criarLinkDoRodape('github', LINK.github, 'Código-Fonte desta Extensão no GitHub')
-		criarLinkDoRodape('roadmap', LINK.roadmap, 'Roadmap')
 		criarLinkDoRodape('configuracoes', '', 'Configurações da extensão', abrirPaginaOpcoesDaExtensao)
 
 		function criarLinkDoRodape(

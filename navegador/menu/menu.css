@@ -230,7 +230,7 @@ botao-fixo:active{
 
 #pje-modelos-de-documentos{
 	background:
-		var(--extensao-icone-html) no-repeat center / 70% 70%,
+		var(--extensao-icone-codigo) no-repeat center / 70% 70%,
 		var(--extensao-gradiente-branco-preto),
 		var(--extensao-cor-escurecer),
 		var(--extensao-cor-escurecer),

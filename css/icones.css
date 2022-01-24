@@ -5,12 +5,18 @@
 
 	--extensao-icone-advogado:								url(/imagens/icones/advogado.svg);
 	--extensao-icone-agenda:									url(/imagens/icones/agenda.svg);
+	--extensao-icone-ajuda:										url(/imagens/icones/ajuda.svg);
+	--extensao-icone-apoio:										url(/imagens/icones/apoio.svg);
 	--extensao-icone-arroba:									url(/imagens/icones/arroba.svg);
 	--extensao-icone-bb:											url(/imagens/icones/bb.svg);
 	--extensao-icone-bug:											url(/imagens/icones/bug.svg);
+	--extensao-icone-cafe:										url(/imagens/icones/cafe.svg);
+	--extensao-icone-chope:										url(/imagens/icones/chope.svg);
+	--extensao-icone-codigo:									url(/imagens/icones/codigo.svg);
 	--extensao-icone-cef:											url(/imagens/icones/cef.svg);
 	--extensao-icone-copiar:									url(/imagens/icones/copiar.svg);
 	--extensao-icone-copiado:									url(/imagens/icones/copiado.svg);
+	--extensao-icone-coracao:									url(/imagens/icones/coracao.svg);
 	--extensao-icone-correios:								url(/imagens/icones/correios.svg);
 	--extensao-icone-dimensoes:								url(/imagens/icones/dimensoes.svg);
 	--extensao-icone-egestao:									url(/imagens/icones/egestao.svg);
@@ -25,8 +31,8 @@
 	--extensao-icone-google-drive:						url(/imagens/icones/google-drive.svg);
 	--extensao-icone-google-meet:							url(/imagens/icones/google-meet.svg);
 	--extensao-icone-google-tradutor:					url(/imagens/icones/google-tradutor.svg);
+	--extensao-icone-hamburguer:							url(/imagens/icones/hamburguer.svg);
 	--extensao-icone-headset:									url(/imagens/icones/headset.svg);
-	--extensao-icone-html:										url(/imagens/icones/html.svg);
 	--extensao-icone-i:												url(/imagens/icones/i.svg);
 	--extensao-icone-infoseg:									url(/imagens/icones/infoseg.svg);
 	--extensao-icone-infojud:									url(/imagens/icones/receita-federal.svg);
@@ -34,10 +40,11 @@
 	--extensao-icone-lista:										url(/imagens/icones/lista.svg);
 	--extensao-icone-lupa:										url(/imagens/icones/lupa.svg);
 	--extensao-icone-lupa-interrogacao:				url(/imagens/icones/lupa-interrogacao.svg);
-	--extensao-icone-maiusculas:							url(/imagens/icones/maiusculas.svg);
-	--extensao-icone-minusculas:							url(/imagens/icones/minusculas.svg);
 	--extensao-icone-malote:									url(/imagens/icones/malote.svg);
+	--extensao-icone-maiusculas:							url(/imagens/icones/maiusculas.svg);
+	--extensao-icone-mao:											url(/imagens/icones/mao.svg);
 	--extensao-icone-martelo:									url(/imagens/icones/martelo.svg);
+	--extensao-icone-minusculas:							url(/imagens/icones/minusculas.svg);
 	--extensao-icone-operador-adicao:					url(/imagens/icones/operador-adicao.svg);
 	--extensao-icone-operador-divisao:				url(/imagens/icones/operador-divisao.svg);
 	--extensao-icone-operador-multiplicacao:	url(/imagens/icones/operador-multiplicacao.svg);
@@ -47,8 +54,10 @@
 	--extensao-icone-pessoa:									url(/imagens/icones/pessoa.svg);
 	--extensao-icone-picareta:								url(/imagens/icones/picareta.svg);
 	--extensao-icone-pix:											url(/imagens/icones/pix.svg);
+	--extensao-icone-pizza:										url(/imagens/icones/pizza.svg);
 	--extensao-icone-pje:											url(/imagens/icones/pje.svg);
 	--extensao-icone-prancheta:								url(/imagens/icones/prancheta.svg);
+	--extensao-icone-presente:								url(/imagens/icones/presente.svg);
 	--extensao-icone-processo:								url(/imagens/icones/processo.svg);
 	--extensao-icone-recarregar:							url(/imagens/icones/recarregar.svg);
 	--extensao-icone-renajud:									url(/imagens/icones/renajud.svg);
