@@ -32,39 +32,77 @@ function pjeListarProcessosExistentesNaPagina(){
 	JANELA = window.location.href
 
 	let data = DATA.hoje.curta
-
 	let linhas = document.querySelectorAll('tr')
 
 	if(vazio(linhas))
 		return
 
 	switch(true){
+		case(JANELA.includes('gigs/meu-painel')):
+			pjeCopiarProcessosListaPainelPessoal()
+			break
 		case(JANELA.includes('gigs/relatorios/atividades')):
 			pjeCopiarProcessosListaPainelRelatorioAtividades()
 			break
 		case(JANELA.includes('gigs/relatorios/comentarios')):
 			pjeCopiarProcessosListaPainelRelatorioComentarios()
 			break
-		case(JANELA.includes('painel/global')):
+		case(JANELA.includes('painel/global/todos')):
 			pjeCopiarProcessosListaPainelGlobal()
 			break
 		default:
 			alert('Funcionalidade não disponível para esta página.')
 			return
-
 	}
 
 	alterarIconeBotaoCopiar()
 
-	function alterarIconeBotaoCopiar(){
 
-		let botao = selecionar('#avjt-botao-listar')
-		alternar()
-		setTimeout(alternar,1000)
+	function pjeCopiarProcessosListaPainelPessoal(){
 
-		function alternar(){
-			botao.classList.toggle('copiado')
-		}
+		exibirLista()
+
+		console.debug('linhas',linhas)
+
+		let processos = ''
+		
+		linhas.forEach(
+			linha => {
+
+				let processo = obterNumeroDoProcessoPadraoCNJ(linha.textContent)
+				if(!processo)
+					return
+
+				if(processos.includes(processo))
+					return
+
+				if(listaDeProcessosContem(processo))
+					return
+
+				let desde = obterData(linha?.cells[4]?.textContent) || data
+				let poloPassivo = obterPoloPassivo(linha?.cells[1]?.textContent)
+				let fase = obterFase(linha.cells[2]) || ''
+				let tarefa = obterTarefa(linha.cells[2]) || ''
+				let responsavel = CONFIGURACAO?.usuario?.nome || ''
+				
+				processos += tabularLinha(data,responsavel,processo,tarefa,desde,fase,'','',poloPassivo)
+
+			}
+		)
+
+		if(!processos)
+			return
+
+		console.debug('processos',processos)
+		
+		obterLista(processos)
+
+		document.querySelectorAll('[aria-label="Próximo"]').forEach(
+			botao => {
+				botao.click()
+				esforcosPoupados(1,1)
+			}
+		)
 
 	}
 
@@ -80,6 +118,12 @@ function pjeListarProcessosExistentesNaPagina(){
 				if(!processo)
 					return
 
+				if(lista.includes(processo))
+					return
+
+				if(listaDeProcessosContem(processo))
+					return
+
 				let desde = obterData(linha?.cells[6]?.textContent)
 				let poloPassivo = obterPoloPassivo(linha?.cells[1]?.textContent)
 				let audiencia = obterDataHoraDaAudiencia(linha?.cells[1]?.textContent)
@@ -87,7 +131,7 @@ function pjeListarProcessosExistentesNaPagina(){
 				let tarefa = obterTarefa(linha.cells[3]) || ''
 				let responsavel = linha?.querySelector('input[type="text"]')?.value?.trim() || CONFIGURACAO?.usuario?.nome || ''
 
-				return lista + data + '	' + titularizar(responsavel) + '	' + processo + '	' + tarefa + '	' + desde + '	' + fase + '	' + audiencia + '	' + poloPassivo + '\r\n'
+				return lista + tabularLinha(data,responsavel,processo,tarefa,desde,fase,audiencia,'',poloPassivo)
 
 			},[]
 		) || ''
@@ -109,12 +153,18 @@ function pjeListarProcessosExistentesNaPagina(){
 				if(!processo)
 					return
 
+				if(lista.includes(processo))
+					return
+
+				if(listaDeProcessosContem(processo))
+					return
+
 				let desde = obterData(linha.textContent)
 				let poloPassivo = obterPoloPassivo(linha?.cells[1]?.textContent)
-				let descricao = obterDescricao(linha?.cells[4]?.textContent)
+				let detalhes = obterDetalhes(linha?.cells[4]?.textContent)
 				let responsavel = linha?.cells[5]?.textContent?.trim() || ''
 			
-				return lista + data + '	' + titularizar(responsavel) + '	' + processo + '		' + desde + '		' + descricao + '	' + poloPassivo + '\r\n'
+				return lista + tabularLinha(data,responsavel,processo,'',desde,'','',detalhes,poloPassivo)
 
 			},[]
 		) || ''
@@ -136,18 +186,52 @@ function pjeListarProcessosExistentesNaPagina(){
 				if(!processo)
 					return
 
+				if(lista.includes(processo))
+					return
+
+				if(listaDeProcessosContem(processo))
+					return
+
 				let desde = obterData(linha.textContent)
 				let poloPassivo = obterPoloPassivo(linha?.cells[1]?.textContent)
-				let descricao = obterDescricao(linha?.cells[2]?.textContent)
+				let detalhes = obterDetalhes(linha?.cells[2]?.textContent)
 				let responsavel = linha?.cells[4]?.textContent?.trim() || ''
 			
-				return lista + data + '	' + titularizar(responsavel) + '	' + processo + '		' + desde + '		' + descricao + '	' + poloPassivo + '\r\n'
+				return lista + tabularLinha(data,responsavel,processo,'',desde,'','',detalhes,poloPassivo)
 
 			},[]
 		) || ''
 
 		obterLista(processos)
 		clicar('[aria-label="Próximo"]')
+
+	}
+
+
+	function tabularLinha(
+		data = '',
+		responsavel = '',
+		processo = '',
+		tarefa = '',
+		desde = '',
+		fase = '',
+		audiencia = '',
+		detalhes = '',
+		poloPassivo = ''
+	){
+		return data + '	' + titularizar(responsavel) + '	' + processo + '	' + tarefa + '	' + desde + '	' + fase + '	' + audiencia+detalhes + '	' + poloPassivo + '\r\n'
+	}
+
+
+	function alterarIconeBotaoCopiar(){
+
+		let botao = selecionar('#avjt-botao-listar')
+		alternar()
+		setTimeout(alternar,1000)
+
+		function alternar(){
+			botao.classList.toggle('copiado')
+		}
 
 	}
 
@@ -169,6 +253,20 @@ function pjeListarProcessosExistentesNaPagina(){
 
 	}
 
+	function listaDeProcessosContem(processo){
+
+		let textarea = selecionar('#avjt-listar-processos-texto')
+		if(!textarea)
+			return false
+
+		let lista = textarea.textContent || ''
+		if(lista.includes(processo))
+			return true
+
+		return false
+
+	}
+
 	function obterLista(processos){
 		let textarea = selecionar('#avjt-listar-processos-texto')
 		if(!textarea)
@@ -181,7 +279,7 @@ function pjeListarProcessosExistentesNaPagina(){
 		copiar(lista)
 	}
 
-	function obterDescricao(texto){
+	function obterDetalhes(texto){
 		if(!texto)
 			return ''
 		return texto?.replace(EXPRESSAO.quebraDeLinha,' - ')?.replace(/\t/gi,' ')?.trim() || ''
@@ -192,29 +290,24 @@ function pjeListarProcessosExistentesNaPagina(){
 		let audienciaData	= obterData(texto)
 		let audienciaHora	= obterHora(texto)
 		if(audienciaData && audienciaHora)
-			audiencia = 'Audiência: '+audienciaData+' - '+audienciaHora
+			audiencia = 'Audiência: ' + audienciaData + ' - ' + audienciaHora + ' - '
 		return audiencia || ''
 	}
 
 	function obterFase(elemento=''){
 		if(!elemento)
 			return ''
-		let fase = elemento.querySelector('a div') || ''
-		if(fase)
-			fase = fase?.textContent?.replace(/.*?Fase../gi,'')?.trim() || ''
-		return fase || ''
+		let fase = elemento.textContent.match(/Fase.*/gi) || ''
+		if(!fase)
+			return ''
+		return fase?.join()?.replace(/Fase../gi,'')?.trim() || ''
 	}
 
 	function obterTarefa(elemento=''){
 		if(!elemento)
 			return ''
-		let tarefa = elemento.querySelector('a') || ''
-		if(tarefa)
-			tarefa = tarefa?.textContent?.replace(/Fase.*|Abrir a tarefa/gi,'')?.trim() || ''
+		let tarefa = elemento?.textContent?.replace(/Fase.*|Abrir a tarefa/gi,'')?.trim() || ''
 		return tarefa || ''
 	}
-
-
-
 
 }

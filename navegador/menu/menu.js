@@ -94,7 +94,7 @@ async function criarMenuDaBarraDeFerramentasDoNavegador(){
 		criarBotaoDoMenu(
 			'pje-instancia-1',
 			'PJe - Painel -  1º Grau',
-			() => criarJanela(LINK.pje.primeirograu,'pjePainel')
+			() => criarJanela(LINK.pje.raiz,'pjePainel')
 		)
 		criarBotaoDoMenu(
 			'pje1',

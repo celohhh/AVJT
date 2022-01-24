@@ -220,8 +220,7 @@ function criarRodapeDePaginaDaExtensao(){
 		criarLinkDoRodape('youtube', LINK.youtube, 'Canal no Youtube')
 		criarLinkDoRodape('telegram', LINK.telegram, 'Grupo de utilizadores no Telegram')
 		criarLinkDoRodape('whatsapp', LINK.whatsapp.grupo, 'Grupo de utilizadores no WhatsApp')
-		criarLinkDoRodape('contribuir', '', 'Desejo Contribuir',abrirPaginaContribuir)
-		//criarLinkDoRodape('pix', 'https://nubank.com.br/pagar/1wdtw/PuXdDSMdok', 'PIX do Desenvolvedor')
+//		criarLinkDoRodape('contribuir', '', 'Desejo Contribuir',abrirPaginaContribuir)
 		criarLinkDoRodape('github', LINK.github, 'Código-Fonte desta Extensão no GitHub')
 		criarLinkDoRodape('configuracoes', '', 'Configurações da extensão', abrirPaginaOpcoesDaExtensao)
 
