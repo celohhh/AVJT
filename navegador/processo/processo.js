@@ -4,23 +4,21 @@ async function criarMenuDadosDoProcesso(){
 
 	pjeCriarBotaoFixoConfigurarDimensoesDaJanela()
 
-	let armazenamento = await browser.storage.local.get()
-
-	CONFIGURACAO = armazenamento
-
 	let processo = obterParametroDeUrl('processo')
 
 	PROCESSO = JSON.parse(processo)
+
+	CONFIGURACAO = await browser.storage.local.get(null)
+	CONFIGURACAO.assistenteDeSelecao.copiar = true
 
 	definicoesGlobais()
 	criarCabecalhoDePaginaDaExtensao()
 	selecionar('h1').innerText = 'DADOS DO PROCESSO'
 
-	listarDadosDoProcesso()
-	listarPartes()
+	let lgpd = CONFIGURACAO?.lgpd?.ativado || false
 
-	CONFIGURACAO = await browser.storage.local.get(['assistenteDeSelecao'])
-	CONFIGURACAO.assistenteDeSelecao.copiar = true
+	listarDadosDoProcesso()
+	listarPartes()	
 
 	assistenteDeSelecao()
 
@@ -72,18 +70,31 @@ async function criarMenuDadosDoProcesso(){
 
 					if(!parte?.nome)
 						return
-					criarCampo('Nome:','largura100',parte.nome,subsecao)
+
+					let nome = parte.nome
+					if(lgpd)
+						nome = 'NOME DA PARTE'
+					
+					criarCampo('Nome:','largura100',nome,subsecao)
 
 					let classe = 'largura49'
 
 					if(parte?.documento){
-						let cnpj = obterCNPJ(parte.documento)
+						let documento = parte.documento
+						let cnpj = obterCNPJ(documento)
 						if(cnpj)
 							classe = 'largura32'
-						criarCampo('Documento:',classe,parte.documento,subsecao)
+						
+						if(lgpd){
+							if(cnpj)
+								documento = '00.000.000/0000-00'
+							else
+								documento = '000.000.000-00'
+						}
+						criarCampo('Documento:',classe,documento,subsecao)
 						if(cnpj)
-							criarCampo('Raiz do CNPJ:',classe,obterRaizCNPJ(parte.documento),subsecao)
-						criarCampo('Sem separadores:',classe,numeros(parte.documento),subsecao)
+							criarCampo('Raiz do CNPJ:',classe,obterRaizCNPJ(documento),subsecao)
+						criarCampo('Sem separadores:',classe,numeros(documento),subsecao)
 					}
 
 				}

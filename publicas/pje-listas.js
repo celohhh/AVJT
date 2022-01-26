@@ -39,13 +39,12 @@ function pjeListarProcessosExistentesNaPagina(){
 	
 	if(vazio(linhas))
 		return
-	
-	console.debug('linhas',linhas)
+
 	switch(true){
 		case(JANELA.includes('gigs/meu-painel')):
 			pjeCopiarProcessosListaPainelPessoal()
 			break
-		case(JANELA.includes('painel/global/todos')):
+		case(obterPainelGlobal().includes('global')):
 			pjeCopiarProcessosListaPainelGlobal()
 			break
 		case(JANELA.includes('escaninho/peticoes-juntadas')):
@@ -74,6 +73,9 @@ function pjeListarProcessosExistentesNaPagina(){
 			break
 		case(JANELA.includes('gigs/relatorios/comentarios')):
 			pjeCopiarProcessosListaPainelRelatorioComentarios()
+			break
+		case(JANELA.includes('comunicacoesprocessuais')):
+			pjeCopiarProcessosListaPainelComunicacoesProcessuais()
 			break
 		case(JANELA.includes('administracao/consulta/processo')):
 			pjeCopiarProcessosListaPainelConsultaProcesso()
@@ -420,10 +422,10 @@ function pjeListarProcessosExistentesNaPagina(){
 
 	}
 
-	function pjeCopiarProcessosListaPainelConsultaProcesso(){
+	function pjeCopiarProcessosListaPainelRelatorioComentarios(){
 
 		exibirLista()
-		
+
 		let processos = [].reduce.call(
 			linhas,
 			(lista='',linha) => {
@@ -437,13 +439,38 @@ function pjeListarProcessosExistentesNaPagina(){
 
 				if(listaDeProcessosContem(processo))
 					return
-				
-				let poloPassivo = obterPoloPassivo(linha?.querySelectorAll('mat-cell')[3]?.textContent) || ''
-				let tarefa = linha?.querySelectorAll('mat-cell')[5]?.textContent || ''
-				let fase = linha?.querySelectorAll('mat-cell')[6]?.textContent || ''
-				let responsavel = CONFIGURACAO?.usuario?.nome || ''
 
-				return lista + tabularLinha(data,responsavel,processo,tarefa,'',fase,'','',poloPassivo)
+				let desde = obterData(linha.textContent)
+				let poloPassivo = obterPoloPassivo(linha?.cells[1]?.textContent)
+				let detalhes = obterDetalhes(linha?.cells[2]?.textContent)
+				let responsavel = linha?.cells[4]?.textContent?.trim() || ''
+
+				return lista + tabularLinha(data,responsavel,processo,'',desde,'','',detalhes,poloPassivo)
+
+			},[]
+		) || ''
+
+		obterLista(processos)
+		clicar('[aria-label="Próximo"]')
+
+	}
+
+	function pjeCopiarProcessosListaPainelComunicacoesProcessuais(){
+
+		exibirLista()
+		
+		let processos = [].reduce.call(
+			linhas,
+			(lista='',linha) => {
+
+				let processo = obterNumeroDoProcessoPadraoCNJ(linha.textContent)
+				if(!processo)
+					return
+
+				let desde = obterData(linha.textContent)
+				let responsavel = linha?.cells[6]?.textContent?.trim() || CONFIGURACAO?.usuario?.nome || ''
+
+				return lista + tabularLinha(data,responsavel,processo,'Impressão de Expedientes e Correspondências',desde)
 
 			},[]
 		) || ''
@@ -554,6 +581,13 @@ function pjeListarProcessosExistentesNaPagina(){
 			return ''
 		let tarefa = elemento?.textContent?.replace(/Fase.*|Abrir a tarefa/gi,'')?.trim() || ''
 		return tarefa || ''
+	}
+
+	function obterPainelGlobal(){
+		let painel = JANELA.match(/painel[/]global[/](todos|.*?lista-processos)/gi) || ''
+		if(!painel)
+			return ''
+		return painel.join()
 	}
 
 }

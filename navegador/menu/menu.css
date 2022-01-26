@@ -11,6 +11,15 @@ main{
 	z-index: 0;
 }
 
+label[aria-label]:hover::before{
+	font-size:12px;
+	line-height:18px;
+	left:0;
+	width:auto;
+	bottom:calc(100%);
+	top:unset;
+}
+
 
 #links-uteis{
 	align-items:center;
