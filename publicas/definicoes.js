@@ -178,7 +178,7 @@ function definirLinks(){
 	link.roadmap				= 'https://docs.google.com/spreadsheets/d/1dfHbdPGj2RxxtJJZnQiiZKTZw5HHRJPxvTSz_2vUPFM/'
 	link.sigeo					= 'https://portal.sigeo.jt.jus.br'
 	link.sisbajud				= 'https://sisbajud.cnj.jus.br'
-	link.telegram				= 'https://t.me/AssistenteVirtualPJeTrabalhista'
+	link.telegram				= 'https://t.me/+MHR4lGArgvM1NDYx'
 	link.tst						= 'https://tst.jus.br'
 	link.wikivt					= 'https://fluxonacional.jt.jus.br'
 	link.youtube				= 'https://www.youtube.com/channel/UCG0r5f3lk6AqDsEaZqzFzxQ'

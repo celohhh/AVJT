@@ -9,6 +9,7 @@ function pje(){
 
 	pjePesquisarProcesso()
 	pjeRedirecionarPaginaAcessoNegado()
+	pjeOtimizarPainelConsultaProcessos()
 	pjeOtimizarPainelInicial()
 	pjeOtimizarPainelGlobal()
 	pjeOtimizarPerfilUsuario()
@@ -54,7 +55,15 @@ function pjeRedirecionarPaginaAcessoNegado(){
 function pjeOtimizarPainelInicial(){
 
 	esperar('pje-menu-acesso-rapido').then(pjeListarProcessos)
-	
+
+}
+
+
+function pjeOtimizarPainelConsultaProcessos(){
+
+	if(JANELA.includes('administracao/consulta/processo'))
+		pjeListarProcessos()
+
 }
 
 
@@ -127,18 +136,18 @@ function pjeOtimizarDetalhesDoProcesso(){
 
 	pjeCriarBotoesFixos()
 	aoAbrir()
-		
+
 	function aoAbrir(){
 		redimensionarJanela()
 		abrirTarefa()
 		setTimeout(abrirGigs,500)
 	}
-	
+
 	function abrirGigs(){
 
 		if(!CONFIGURACAO?.aoAbrirDetalhesDoProcesso?.abrirGigs)
 			return
-			
+
 		abrirPagina(LINK.pje.gigs,'','','','','pjeGigs')
 
 		esforcosPoupados(1,1)
@@ -149,7 +158,7 @@ function pjeOtimizarDetalhesDoProcesso(){
 
 		if(!CONFIGURACAO?.aoAbrirDetalhesDoProcesso?.abrirTarefa)
 			return
-			
+
 		abrirPagina(LINK.pje.tarefa,'','','','','pjeTarefa')
 
 		esforcosPoupados(1,1)
@@ -200,14 +209,13 @@ function pjeOtimizarTarefaDoProcesso(){
 
 function pjeOtimizarGigs(){
 
-	console.debug('gigs')
 	let contexto	= pjeObterContexto()
-	
+
 	if(!contexto.includes('pje-gigs'))
 		return
 
 	pjeCriarBotaoFixoConfigurarDimensoesDaJanela()
-	
+
 }
 
 

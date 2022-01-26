@@ -11,9 +11,6 @@ browser.storage.local.get(
 		EXTENSAO.ativada	= armazenamento.ativada
 		CONFIGURACAO			= armazenamento
 
-
-		console.debug('CONFIGURACAO',CONFIGURACAO)
-		
 		//publicas/gerais.js
 		relatar('CONFIGURAÇÃO: ', CONFIGURACAO)
 
@@ -35,6 +32,9 @@ function otimizar(){
 
 	//infojud.js
 	infojud()
+
+	//lgpd.js
+	lgpd()
 
 	//penhora.js
 	penhora()

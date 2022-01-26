@@ -244,7 +244,7 @@ function pjeCriarBotaoFixoDestacarDadosDoProcesso(){
 		'botao-dados-do-processo',
 		'Destacar dados do processo em uma nova janela',
 		() => {
-			
+
 			let dados = {}
 			dados.mandado = {}
 			dados.orgaoJulgador = {}
@@ -276,9 +276,16 @@ function pjeCriarBotaoFixo(
 }
 
 
-function obterPoloPassivo(texto){
-	let polo = texto.replace(/^.*?\sx\s/gi,'') || ''
+function obterPoloAtivo(texto){
+	let polo = texto.replace(/\s+x\s+.*/gi,'') || ''
 	if(polo)
-		polo = maiusculas(polo.trim())
-	return polo
+		polo = maiusculas(polo)
+	return polo.trim()
+}
+
+function obterPoloPassivo(texto){
+	let polo = texto.replace(/^.*?\s+x\s+/gi,'') || ''
+	if(polo)
+		polo = maiusculas(polo)
+	return polo.trim()
 }

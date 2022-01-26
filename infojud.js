@@ -27,7 +27,7 @@ function infojud(){
 		preencherDoi()
 		preencherDitr()
 
-		
+
 		function preencherDirpf(){
 
 			if(!cpf)
@@ -240,7 +240,7 @@ function infojudConsultarNomePessoaFisica(consulta = {}){
 
 	let nome = consulta?.nome	|| ''
 	let url = LINK.infojud.consultarNomePessoaFisica + encodeURI(nome)
-	
+
 	abrirPagina(url,'','','','','infojud')
 	esforcosPoupados(3,3,contarCaracteres(nome))
 

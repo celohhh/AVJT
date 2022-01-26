@@ -76,7 +76,7 @@ function assistenteDeSelecao(){
 						'InfoJud - Consultar Nome de Pessoa Física',
 						() => infojudConsultarNomePessoaFisica(consulta)
 					)
-		
+
 					criarBotao(
 						'infojud-nome',
 						'',
@@ -86,7 +86,7 @@ function assistenteDeSelecao(){
 
 				}
 			}
-	
+
 		}
 
 		if(cnpj){

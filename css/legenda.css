@@ -74,7 +74,7 @@ informacoes i:hover::after
 	position:absolute;
 	transition:all 0.5s ease-out;
 	top:3px;
-	width:70vw;
+	width:85vw;
 	z-index:9;
 }
 informacoes i:hover::before{

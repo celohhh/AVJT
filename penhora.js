@@ -18,7 +18,7 @@ function penhora(){
 
 		let caixa = selecionar('#chkHabilitar')
 		if(!caixa.checked)
-			clicar('#chkHabilitar')		
+			clicar('#chkHabilitar')
 
 	}
 
@@ -81,32 +81,32 @@ function penhora(){
 
 					if(vazio(polo))
 						return
-		
+
 					polo.forEach(
 						(parte,indice,partes) => {
-		
+
 							let documento = parte?.documento || ''
 							let nome = parte?.nome?.trim() || ''
 							let polo = parte?.polo?.trim() || ''
 							let parteAnterior = partes[indice-1] || ''
-		
+
 							if(
 								!documento
 								||
 								verificaParteCadastrada(documento)
 							)
 								return
-		
+
 							if(polo.includes('passivo')){
 								if(!verificaParteCadastrada(poloAtivo[poloAtivo.length -1].documento))
 									return
 							}
-		
+
 							if(parteAnterior){
 								if(!verificaParteCadastrada(parteAnterior.documento))
 									return
-							}				
-		
+							}
+
 							let cpf = obterCPF(documento)
 							let cnpj = obterCNPJ(documento)
 							if(cpf)
@@ -118,7 +118,7 @@ function penhora(){
 								selecionarOpcao('#dplPassivoPenhora','Não')
 								selecionarOpcao('#dplClassificacao','Exequente')
 							}
-							
+
 							if(polo.includes('passivo')){
 								selecionarOpcao('#dplClassificacao','Executado')
 							}
@@ -127,12 +127,12 @@ function penhora(){
 								alterarValorDeCampo(campoDocumento,documento)
 								campoDocumento.blur()
 							}
-		
+
 							if(campoDocumento){
 								alterarValorDeCampo(campoDocumento,documento)
 								campoDocumento.blur()
 							}
-		
+
 							if(campoNome){
 								alterarValorDeCampo(campoNome,nome)
 								campoNome.addEventListener(
@@ -143,10 +143,10 @@ function penhora(){
 									}
 								)
 							}
-		
+
 						}
 					)
-		
+
 				}
 
 			}
@@ -179,7 +179,7 @@ function penhora(){
 
 		if(!JANELA.includes('Penhora/frmCadastroProcesso.aspx'))
 			return
-				
+
 		selecionarOpcao('#dplNomeAcaoPenhora','EXECUÇÃO TRABALHISTA')
 
 		navigator.clipboard.readText().then(
@@ -194,7 +194,7 @@ function penhora(){
 			}
 
 		)
-		
+
 	}
 
 

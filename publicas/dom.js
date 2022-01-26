@@ -93,10 +93,6 @@ function selecionar(
 }
 
 
-/**
- * Remove um elemento elemento pelo id:
- * @param {string} id
- */
 function remover(id=''){
 
 	if(!id)
@@ -212,17 +208,7 @@ function estilizar(
 
 }
 
-/**
- * Cria um <a> e insere no ${document.body} ou em um ancestral específico:
- * @param  {string}	id
- * @param  {string}	classe
- * @param  {object}	ancestral
- * @param  {string}	endereco	URL
- * @param  {string} texto
- * @param  {string}	titulo
- * @param  {method}	aoClicar	Função a ser executada ao clicar
- * @return a
- */
+
 function criarLink(
 	id				= '',
 	classe		= '',
@@ -311,17 +297,6 @@ function criarListaDeDefinicoes(
 }
 
 
-/**
- * Cria um <botao> e insere no ${document.body} ou em um ancestral específico:
- * @param  {string}	id
- * @param  {string}	classe
- * @param  {object}	ancestral
- * @param  {string} texto
- * @param  {string}	titulo
- * @param  {method}	aoClicar	Função a ser executada ao clicar
- * @param  {string}	estilo
- * @return elemento
- */
 function criarBotao(
 	id				= '',
 	classe		= '',
