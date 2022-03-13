@@ -1,0 +1,138 @@
+{
+	"name":							"Assistente Virtual da Justiça do Trabalho",
+	"short_name":				"AVJT",
+	"description":			"Otimiza as rotinas de tarefas inerentes aos sistemas da Justiça do Trabalho",
+	"manifest_version":	2,
+	"version":					"103.8",
+	"author":						"Sisenando Calixto",
+	"homepage_url":			"https://github.com/SisenandoCalixto/avjt/",
+
+	"applications":{
+		"gecko":{
+			"id":						"{fcaf8e22-fd89-4a3f-99a0-c49fff1c4ac4}"
+		}
+	},
+
+	"developer":{
+		"name":						"Sisenando Gomes Calixto de Sousa",
+		"url":						"https://github.com/SisenandoCalixto/"
+	},
+
+	"icons":{
+		"16":		"imagens/icones/extensao/azul.svg",
+		"24":		"imagens/icones/extensao/azul.svg",
+		"32":		"imagens/icones/extensao/azul.svg",
+		"48":		"imagens/icones/extensao/azul.svg",
+		"128":	"imagens/icones/extensao/azul.svg"
+	},
+
+	"background":{
+		"scripts":[
+			"publicas/definicoes.js",
+			"publicas/gerais.js",
+			"publicas/relatar.js",
+			"publicas/dom.js",
+			"publicas/esforcos.js",
+			"publicas/navegador.js",
+			"publicas/whatsapp.js",
+			"navegador/navegador.js",
+			"navegador/sandbox.js"
+		]
+	},
+
+	"content_scripts":[
+		{
+			"matches":[
+				"<all_urls>"
+			],
+			"css":[
+				"css/animacoes.css",
+				"css/avjt.css",
+				"css/cores.css",
+				"css/icones.css",
+				"css/informacoes.css",
+				"css/selecao.css",
+				"css/maispje.css",
+				"css/pje.css",
+				"css/pje-paineis.css",
+				"css/pje-gigs.css",
+				"css/planilha.css",
+				"css/rolagem.css"
+			],
+			"js":[
+				"publicas/definicoes.js",
+				"publicas/gerais.js",
+				"publicas/relatar.js",
+				"publicas/dom.js",
+				"publicas/email.js",
+				"publicas/esforcos.js",
+				"publicas/extenso.js",
+				"publicas/navegador.js",
+				"publicas/pje.js",
+				"publicas/pje-api.js",
+				"publicas/pje-anexar.js",
+				"publicas/pje-certidoes.js",
+				"publicas/pje-conclusao-magistrado.js",
+				"publicas/pje-gigs.js",
+				"publicas/pje-editor.js",
+				"publicas/pje-legado.js",
+				"publicas/pje-listas.js",
+				"publicas/pje-paginas.js",
+				"publicas/pje-paineis.js",
+				"publicas/pje-painel-superior.js",
+				"publicas/pje-processo-detalhes.js",
+				"publicas/pje-rolagem.js",
+				"publicas/pje-tarefas.js",
+				"publicas/whatsapp.js",
+				"publicas/youtube.js",
+				"iniciar.js",
+				"bb.js",
+				"cef.js",
+				"chamado.js",
+				"correios.js",
+				"infojud.js",
+				"lgpd.js",
+				"penhora.js",
+				"pje.js",
+				"planilha.js",
+				"renajud.js",
+				"sinesp.js",
+				"sigeo.js",
+				"sisbajud.js",
+				"siscondj.js",
+				"trt.js",
+				"trt15.js",
+				"tst.js",
+				"selecao.js"
+			],
+			"all_frames":					true,
+			"match_about_blank":	true,
+			"run_at":							"document_end"
+		}
+	],
+
+	"permissions":[
+		"<all_urls>",
+		"activeTab",
+		"clipboardRead",
+		"clipboardWrite",
+		"contextMenus",
+		"storage",
+		"tabs",
+		"unlimitedStorage"
+	],
+
+	"options_ui":{
+		"page": "navegador/configuracoes/configuracoes.htm",
+		"open_in_tab": true
+	},
+
+	"browser_action":{
+		"browser_style":	true,
+		"default_popup": 	"navegador/menu/menu.htm"
+	},
+
+	"user_scripts": {
+		"api_script": "sandbox.js"
+	}
+}
